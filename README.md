@@ -4,9 +4,16 @@ Nordic Game Jame 2015 Game
 
 ## Getting Started
 
-### [Vagrant](https://www.vagrantup.com/)
-You don't need to install this, but it will make your life easier.
+1. Install Github for Windows (You can slo just install Git if you like.)
 
-### Gulp
+You can choose not to use vagrant, by doing this you'll need to setup nodejs ect on your own machine. The smart thing is that we all will have the same environment.
 
-### NodeJS
+### Using vagrant
+
+2. Install VirtualBox: https://www.virtualbox.org/wiki/Downloads
+3. Install Vagrant: http://www.vagrantup.com
+4. Open Git Shell
+5. Clone the project: `git clone https://github.com/Saturate/NGJ15`
+5. Type `vagrant up` followed by `vagrant ssh`
+
+You are now in the vagrant environment, you can edit files with your normal computer, the VM has mounted this folder. Neat.
