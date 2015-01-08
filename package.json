@@ -1,0 +1,22 @@
+{
+  "name": "NGJ15",
+  "version": "0.0.1",
+  "description": "Nordic Game Jam",
+  "main": "Gulpfile.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Saturate/NGJ15.git"
+  },
+  "keywords": [
+    "NGJ"
+  ],
+  "author": "Allan Kimmer Jensen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Saturate/NGJ15/issues"
+  },
+  "homepage": "https://github.com/Saturate/NGJ15"
+}
