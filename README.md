@@ -4,7 +4,7 @@ Nordic Game Jame 2015 Game
 
 ## Getting Started
 
-1. Install Github for Windows (You can slo just install Git if you like.)
+1. Install Github for Windows (You can also just install Git if you like.)
 
 You can choose not to use vagrant, by doing this you'll need to setup nodejs ect on your own machine. The smart thing is that we all will have the same environment.
 
