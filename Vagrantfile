@@ -10,7 +10,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, inline: "sudo npm config set registry http://registry.npmjs.org/"
   config.vm.provision :shell, inline: "sudo npm install -g supervisor"
   config.vm.provision :shell, inline: "sudo npm install -g gulp --no-bin-link"
-  config.vm.provision :shell, inline: "sudo npm install -g bower --no-bin-link"
   config.vm.provision :shell, inline: "sudo npm update npm -g --no-bin-link"
   config.vm.provision :shell, inline: "sudo npm install /vagrant --no-bin-links"
   config.vm.provision :shell, inline: "sudo cp /vagrant/node-server.conf /etc/init/node-server.conf"
