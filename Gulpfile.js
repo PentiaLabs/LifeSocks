@@ -7,7 +7,7 @@ gulp.task('default', ['browser-sync'], function () {
 
     // add browserSync.reload to the tasks array to make
     // all browsers reload after tasks are complete.
-    gulp.watch("client/scripts/*.js", ['js', browserSync.reload]);
+    gulp.watch("client/scripts/*.js", ['bs-reload']);
     gulp.watch("client/styles/*.scss", ['sass']);
 });
 
@@ -17,6 +17,10 @@ gulp.task('browser-sync', function() {
             baseDir: "./client/"
         }
     });
+});
+
+gulp.task('bs-reload', function () {
+    browserSync.reload();
 });
 
 // Sass task, will run when any SCSS files change & BrowserSync
