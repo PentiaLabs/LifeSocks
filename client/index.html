@@ -20,17 +20,22 @@
         <!-- Add your site or application content here -->
         <h1>GAME!</h1>
         <span class="onlineUsers"></span> online right now.</p>
+        
+        <script type="text/javascript" src="js/libs/phaser.min.js"></script>
+        <script type="text/javascript" src="js/game.js"></script>
+        
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>
+            var socket = io();
 
-		<script>
-			var socket = io();
-
-			// Socket example
-			socket.on('connectedCount', function(msg){
-				$('.onlineUsers').text(msg);
-			});
-		</script>
+            // Socket example
+            socket.on('connectedCount', function(msg){
+                $('.onlineUsers').text(msg);
+            });
+        </script>
+        
+        
     </body>
 </html>
