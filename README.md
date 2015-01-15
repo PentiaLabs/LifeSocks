@@ -1,5 +1,4 @@
-# NGJ15
-[![Build Status](https://travis-ci.org/Saturate/NGJ15.svg)](https://travis-ci.org/Saturate/NGJ15)   
+# NGJ15 [![Build Status](https://travis-ci.org/Saturate/NGJ15.svg)](https://travis-ci.org/Saturate/NGJ15)   
 Nordic Game Jame 2015 Game
 
 ## Getting Started
