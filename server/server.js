@@ -5,10 +5,10 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.get('/', function(req, res){
-	res.sendFile(path.resolve(__dirname + '/../client/index.html'));
+	res.sendFile(path.join(__dirname + '/../client/index.html'));
 });
-
-app.use(express.static(path.resolve(__dirname, '/../client'))); //  "public" off of current is root
+console.log(path.resolve(__dirname, '/../client'));
+app.use(express.static(path.join(__dirname, '/../client'))); //  "public" off of current is root
 
 // Count how many are online
 var connectedCount = 0;
@@ -17,6 +17,7 @@ io.on("connection", function(s){
 	console.log('a user connected');
 	io.emit('connectedCount', connectedCount);
 	s.on("disconnect", function(){
+		console.log('a user disconnected');
 		connectedCount -= 1;
 		io.emit('connectedCount', connectedCount);
 	});

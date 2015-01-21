@@ -1,26 +1,30 @@
 var gulp = require('gulp');
-var browserSync = require("browser-sync");
+var livereload = require('gulp-livereload');
 var sass = require('gulp-sass');
+var nodemon = require('gulp-nodemon');
 
-// use default task to launch BrowserSync and watch JS files
-gulp.task('default', ['browser-sync'], function () {
-
-    // add browserSync.reload to the tasks array to make
-    // all browsers reload after tasks are complete.
-    gulp.watch("client/scripts/*.js", ['bs-reload']);
-    gulp.watch("client/styles/*.scss", ['sass']);
+gulp.task('watch', function () {
+    gulp.watch('client/scripts/*.js', ['scripts']);
+    gulp.watch('client/**/*.html', ['html']);
+    gulp.watch('scss/**/*.scss', ['sass']);
 });
 
-gulp.task('browser-sync', function() {
-    browserSync({
-        server: {
-            baseDir: "./client/"
-        }
-    });
+gulp.task('changed', function () {
+  console.log('Something has changed on the server...');
 });
 
-gulp.task('bs-reload', function () {
-    browserSync.reload();
+gulp.task('scripts', function() {
+    gulp.src('client/js/*.js')
+    .pipe(
+        livereload()
+    );
+});
+
+gulp.task('html', function() {
+    gulp.src('client/**/*.html')
+    .pipe(
+        livereload()
+    );
 });
 
 // Sass task, will run when any SCSS files change & BrowserSync
@@ -28,10 +32,19 @@ gulp.task('bs-reload', function () {
 gulp.task('sass', function () {
     return gulp.src('scss/**/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest('css'))
-        .pipe(reload({stream:true}));
+        .pipe(gulp.dest('client/styles'))
+        .pipe(livereload());
 });
 
 gulp.task('test', function() {
   console.log('Eh, good luck mates! We need to make some awesome stuff for this gulpfile!');
+});
+
+// use default task to launch livereload and watch JS and SASS files
+gulp.task('default', ['watch'], function () {
+  nodemon({ script: 'server/server.js' })
+    .on('change', ['changed'])
+    .on('restart', function () {
+        console.log('server restarted!');
+    })
 });
