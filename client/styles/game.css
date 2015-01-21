@@ -1,2 +1,10 @@
 body {
-  background-color: salmon; }
+  background-color: #000;
+  color: white;
+  font-family: 'Roboto Slab'; }
+
+#me {
+  font-family: 'Gloria Hallelujah'; }
+
+canvas {
+  border: 1px solid lime; }

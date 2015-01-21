@@ -5,22 +5,34 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.get('/', function(req, res){
-	res.sendFile(path.join(__dirname + '/../client/index.html'));
+	res.sendFile(path.join(__dirname + '/../client/multi.html'));
 });
-console.log(path.resolve(__dirname, '/../client'));
+
 app.use(express.static(path.join(__dirname, '/../client'))); //  "public" off of current is root
 
 // Count how many are online
-var connectedCount = 0;
-io.on("connection", function(s){ 
-	connectedCount += 1;
-	console.log('a user connected');
-	io.emit('connectedCount', connectedCount);
-	s.on("disconnect", function(){
-		console.log('a user disconnected');
-		connectedCount -= 1;
-		io.emit('connectedCount', connectedCount);
+var sockets = {};
+var others = {};
+
+io.on('connection', function(socket){
+	socket.emit('welcome', {
+		others : others
 	});
+
+	socket.on('newPlayer', function(player) {
+		others[socket.id] = player;
+		others[socket.id].clientid = socket.id;
+
+		socket.broadcast.emit('changePos', {
+			clientid: socket.id,
+			player : others[socket.id]
+		});
+	});
+
+	socket.on('disconnect', function(){
+		// todo : remove player from game
+	});
+
 });
 
 http.listen(3000, function(){

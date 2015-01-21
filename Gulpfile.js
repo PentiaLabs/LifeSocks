@@ -4,6 +4,8 @@ var sass = require('gulp-sass');
 var nodemon = require('gulp-nodemon');
 
 gulp.task('watch', function () {
+    livereload.listen();
+
     gulp.watch('client/scripts/*.js', ['scripts']);
     gulp.watch('client/**/*.html', ['html']);
     gulp.watch('scss/**/*.scss', ['sass']);
