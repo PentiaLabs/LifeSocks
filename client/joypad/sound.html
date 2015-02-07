@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Joypad</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link type="text/css" rel="stylesheet" media="all" href="../styles/joypad/vendor/bootstrap/bootstrap.css">
+</head>
+<body>
+    <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div class="container">
+        <h1>Life of Brian!</h1>
+        <div class="jumbotron">
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Play sound</a></p>
+        </div>
+    </div>
+
+
+
+
+    <script src="../scripts/libs/howler.core.min.js"></script>
+    <script>
+    console.log("hest");
+    var sound = new Howl({
+        src: ["../assets/sounds/fart.ogg"],
+        onload: function() {
+            console.log('Loaded!');
+        },
+        onend: function() {
+            console.log('Finished!');
+        }
+    });
+
+    sound.play();
+    </script>
+
+
+</body>
+</html>
