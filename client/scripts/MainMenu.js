@@ -1,9 +1,15 @@
 LifeSocks.MainMenu = function(game) {};
 LifeSocks.MainMenu.prototype = {
 	create: function() {
-		this.startButton = this.add.button(400, 400, 'button-start', this.startGame, this, 2, 1, 0);
+
+	    var text = "Life Socks";
+	    var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+
+	    var t = this.add.text(this.world.centerX-300, 0, text, style);
+		this.game.state.start('Lobby');
+
 	},
 	startGame: function() {
-		this.game.state.start('Game');
+		this.game.state.start('Lobby');
 	}
 };
