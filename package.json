@@ -7,9 +7,8 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "start": "gulp",
-    "test": "gulp test",
-    "postinstall": "gulp"
+    "start": "node server/server.js",
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
