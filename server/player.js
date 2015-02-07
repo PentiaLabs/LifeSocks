@@ -9,7 +9,8 @@ var player = {
 			speed: 0,
 			killed: false
 		}
-	}
+	},
+	remove: function (playerid) {}
 };
 
 module.exports = player;

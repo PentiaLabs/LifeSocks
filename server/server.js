@@ -15,6 +15,7 @@ var sockets = {};
 var others = {};
 
 var player = require('./player.js');
+var room = require('./room.js');
 
 console.dir(player);
 
@@ -35,12 +36,7 @@ io.on('connection', function(socket){
 
 	socket.on('disconnect', function(){
 		// todo : remove player from game
-		if (hasJoined(socket.id)) {
-			removePlayer(socket.id);
-		}
-		delete clientSockets[socket.id];
-		logDebug('WS connection ended');
-
+		player.remove();
 	});
 
 });
