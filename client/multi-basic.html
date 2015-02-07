@@ -19,11 +19,8 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <h1>Player</h1>
-
-        <div id="me"></div>
-
-
+        <h1>Player - <span id="me"></div></h1>
+        
         <button id="moveRight">Right</button>
         <button id="moveLeft">Left</button>
 
@@ -41,8 +38,9 @@
         <script>
         var socket = io.connect(document.location.origin + '/users');
 
-        socket.on('onlinePlayers', function(arg) {
-            console.log('online:', arg);
+        socket.on('playerData', function(arg) {
+            console.log('playerData:', arg);
+            $('#me').html(arg.nickname);
         });
 
         var el = document.getElementById("action");

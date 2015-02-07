@@ -41,7 +41,7 @@ var users = io.of('/users').on('connection', function(socket){
 
 	socket.on('action', function(msg){
 		console.log(msg);
-	    board.emit('commands', msg);
+	    board.emit('commands', msg, currentPlayer);
 	});
 
 	socket.on('disconnect', function(){
@@ -58,7 +58,6 @@ var board = io
 	});
 
 var port = process.env.PORT || 3000;
-var port = 80;
 
 http.listen(port, function(){
 	console.log('listening on *:' + port);
