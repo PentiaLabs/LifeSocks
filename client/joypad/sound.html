@@ -22,7 +22,7 @@
     <div class="container">
         <h1>Life of Brian!</h1>
         <div class="jumbotron">
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Play sound</a></p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button" onclick="unlock()">Play sound</a></p>
         </div>
     </div>
 
@@ -31,7 +31,6 @@
 
     <script src="../scripts/libs/howler.core.min.js"></script>
     <script>
-    console.log("hest");
     var sound = new Howl({
         src: ["../assets/sounds/fart.ogg"],
         onload: function() {
@@ -43,6 +42,11 @@
     });
 
     sound.play();
+
+    function unlock() {
+        var unlock = true;
+        console.log(unlock);
+    }
     </script>
 
 
