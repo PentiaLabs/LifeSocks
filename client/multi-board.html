@@ -72,9 +72,9 @@
 
         // Viewport logic
         var board = io.connect(document.location.origin + '/board');
-        board.on('commands', function (command) {
+        board.on('commands', function (command, player) {
             console.log('Recive:', command);
-            $('#log').append(JSON.stringify(command) + '<br />');
+            $('#log').append(JSON.stringify(command) + '- by '+player.nickname+'<br />');
 
             if (command.moveLeft) {
                 ship.body.moveLeft(command.moveLeft);
