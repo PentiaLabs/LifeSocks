@@ -29,8 +29,9 @@ var users = io.of('/users').on('connection', function(socket){
 
 	var currentPlayer = player.create(socket.id);
 	addPlayer(currentPlayer);
+
+	socket.emit('addPlayer', currentPlayer);
 	
-	socket.emit('JOINED', 'A New player joined....');
 	io.emit('onlinePlayers', clientSockets.length);
 
 	// On Player Update, Change Board Data
