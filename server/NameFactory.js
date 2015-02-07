@@ -4,7 +4,7 @@ var NameFactory = function() {
 		'Bone',
 		'Cherry',
 		'Doc',
-		'Edelweise',
+		'Edelweiss',
 		'Fanny',
 		'Ginger',
 		'Herpy',
