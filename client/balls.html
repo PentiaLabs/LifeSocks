@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Game!</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <h1>GAME!</h1>
+
+        <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
+        <script type="text/javascript" src="scripts/libs/gyro.js"></script>
+        <script type="text/javascript">
+            // mods by Patrick OReilly 
+// Twitter: @pato_reilly Web: http://patricko.byethost9.com
+          var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+
+          function preload() {
+              game.stage.disableVisibilityChange = true;
+              game.load.image('ball', 'assets/ball.png');
+          }
+
+          var image;
+
+          function create() {
+              game.stage.backgroundColor = '#c8c8c8'
+              game.physics.startSystem(Phaser.Physics.ARCADE);
+
+              cursors = game.input.keyboard.createCursorKeys();
+              
+              //  This creates a simple sprite that is using our loaded image and
+              //  displays it on-screen
+              //  and assign it to a variable
+              ball1 = game.add.sprite(10, 10, 'ball');
+              ball2 = game.add.sprite(60, 510, 'ball');
+              ball3 = game.add.sprite(10, 300, 'ball');
+              ball4 = game.add.sprite(95, 20, 'ball');
+              ball5 = game.add.sprite(80, 80, 'ball');
+
+              game.physics.enable([
+                ball1,
+                ball2,
+                ball3,
+                ball4,
+                ball5
+              ], Phaser.Physics.ARCADE);
+
+              //  This gets it moving
+              ball1.body.velocity.setTo(200, 200);
+              ball2.body.velocity.setTo(200, 200);
+              ball3.body.velocity.setTo(200, 200);
+              ball4.body.velocity.setTo(200, 200);
+              ball5.body.velocity.setTo(200, 200);
+
+              //  This makes the game world bounce-able
+              ball1.body.collideWorldBounds = true;
+              ball2.body.collideWorldBounds = true;
+              ball3.body.collideWorldBounds = true;
+              ball4.body.collideWorldBounds = true;
+              ball5.body.collideWorldBounds = true;
+
+              //  This sets the image bounce energy for the horizontal 
+              //  and vertical vectors (as an x,y point). "1" is 100% energy return
+              ball1.body.bounce.setTo(0.7, 0.7);
+              ball2.body.bounce.setTo(0.7, 0.7);
+              ball3.body.bounce.setTo(0.7, 0.7);
+              ball4.body.bounce.setTo(0.7, 0.7);
+              ball5.body.bounce.setTo(0.7, 0.7);
+
+
+          }
+
+          //  Move the knocker with the arrow keys
+          function update () {
+
+              //  Enable physics between the knocker and the ball
+              game.physics.arcade.collide(ball1, ball2);
+              game.physics.arcade.collide(ball1, ball3);
+              game.physics.arcade.collide(ball1, ball4);
+              game.physics.arcade.collide(ball1, ball5);
+              
+              game.physics.arcade.collide(ball2, ball1);
+              game.physics.arcade.collide(ball2, ball3);
+              game.physics.arcade.collide(ball2, ball4);
+              game.physics.arcade.collide(ball2, ball5);
+
+              game.physics.arcade.collide(ball3, ball2);
+              game.physics.arcade.collide(ball3, ball1);
+              game.physics.arcade.collide(ball3, ball4);
+              game.physics.arcade.collide(ball3, ball5);
+
+              game.physics.arcade.collide(ball4, ball2);
+              game.physics.arcade.collide(ball4, ball3);
+              game.physics.arcade.collide(ball4, ball1);
+              game.physics.arcade.collide(ball4, ball5);
+
+              game.physics.arcade.collide(ball5, ball2);
+              game.physics.arcade.collide(ball5, ball3);
+              game.physics.arcade.collide(ball5, ball4);
+              game.physics.arcade.collide(ball5, ball1);
+          }
+
+          function render () {
+
+              //debug helper
+              game.debug.spriteInfo(ball1, 32, 32);
+              game.debug.spriteInfo(ball2, 32, 32);
+              game.debug.spriteInfo(ball3, 32, 32);
+              game.debug.spriteInfo(ball4, 32, 32);
+              game.debug.spriteInfo(ball5, 32, 32);
+
+          }
+        </script>
+        
+        
+    </body>
+</html>

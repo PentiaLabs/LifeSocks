@@ -7,4 +7,5 @@ body {
   font-family: 'Gloria Hallelujah'; }
 
 canvas {
-  border: 2px solid red; }
+  border: 0px solid red;
+  background-color: #fff; }
