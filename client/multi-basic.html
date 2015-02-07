@@ -24,7 +24,7 @@
         <button id="moveRight">Right</button>
         <button id="moveLeft">Left</button>
 
-        <input id="chosenAction" type="text" value='{"moveLeft": "200"}' />
+        <input id="chosenAction" type="text" value="besked" />
         <button id="action">Send action!</button>
 
 
@@ -46,8 +46,8 @@
 
         var el = document.getElementById("action");
         el.addEventListener("click", function(){
-            console.log('Send:', JSON.parse($('#chosenAction').val()));
-            socket.emit('action', JSON.parse($('#chosenAction').val()));
+            console.log('Send:', $('#chosenAction').val());
+            socket.emit('action', $('#chosenAction').val());
         }, false);
 
         var moveLeft = document.getElementById("moveLeft");
@@ -61,6 +61,17 @@
             console.log('Send:', { moveRight: 200 });
             socket.emit('action', { moveRight: 200 });
         }, false);
+
+
+        $( "#target" ).keydown(function( event ) {
+          if ( event.which == 13 ) {
+           event.preventDefault();
+          }
+          xTriggered++;
+          var msg = "Handler for .keydown() called " + xTriggered + " time(s).";
+          $.print( msg, "html" );
+          $.print( event );
+        });
         </script>
         
     </body>
