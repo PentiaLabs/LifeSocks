@@ -1,7 +1,10 @@
 body {
-  background-color: #000;
-  color: white;
-  font-family: 'Roboto Slab'; }
+	background-color: #000;
+	color: white;
+	font-family: 'Roboto Slab';
+    padding: 0;
+    margin: 0;
+}
 
 #me {
   font-family: 'Gloria Hallelujah'; }
