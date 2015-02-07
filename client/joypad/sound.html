@@ -22,7 +22,7 @@
     <div class="container">
         <h1>Life of Brian!</h1>
         <div class="jumbotron">
-            <p><a class="btn btn-primary btn-lg" href="#" role="button" onclick="unlock()">Play sound</a></p>
+            <p><a class="btn btn-primary btn-lg js-button-play-sound" href="#" role="button">Play sound (unlock)</a></p>
         </div>
     </div>
 
@@ -31,23 +31,26 @@
 
     <script src="../scripts/libs/howler.core.min.js"></script>
     <script>
-    var sound = new Howl({
+
+    var soundFart = new Howl({
         src: ["../assets/sounds/fart.ogg"],
-        onload: function() {
-            console.log('Loaded!');
-        },
-        onend: function() {
-            console.log('Finished!');
-        }
+    });
+
+    var soundBoing = new Howl({
+        src: ["../assets/sounds/boing.ogg"],
+    });
+
+    var playBoing = function() {
+        soundBoing.play();
+    }
+
+    var soundButton = document.querySelector(".js-button-play-sound");
+    soundButton.addEventListener("touchstart", function(event) {
+        soundFart.play();
+        setTimeout(playBoing, 7000);
     });
 
 
-
-    function unlock() {
-        var unlock = true;
-        console.log(unlock);
-        sound.play();
-    }
     </script>
 
 
