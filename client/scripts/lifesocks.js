@@ -12,13 +12,10 @@ function preload() {
 
 var image;
 var balls;
-var player;
-var cursors;
 var speed = 200;
 var dangerZone;
-var left, right;
-var die;
-var players = [];
+var players = {};
+var add = [];
 
 function create() {
     game.stage.backgroundColor = '#c8c8c8';
@@ -46,36 +43,43 @@ function create() {
 
 
     // The player and its settings
-    player = balls.create(randomRange(1200, 10), randomRange(768, 10), 'pinkball');
-    player.anchor.setTo(0.5, 0.5);
-
+   
     balls.setAll("body.velocity.x", 200);
     balls.setAll("body.velocity.y", 200);
     balls.setAll("body.bounce.y", 0.8);
     balls.setAll("body.bounce.x", 0.8);
     balls.setAll("body.collideWorldBounds", true);
 
-    //  Our controls.
-    cursors = game.input.keyboard.createCursorKeys();
 }
 
 function update() {
     game.physics.arcade.collide(balls);
-    game.physics.arcade.collide(player, balls);
     game.physics.arcade.overlap(balls, dangerZone, collision, null, this);
 
-    //if (cursors.left.isDown) {
-    if (left) {
-        player.angle -= 10;
+    for (var i = 0; i < add.length; i++)
+    {
+        var newPlayer = balls.create(randomRange(1200, 10), randomRange(768, 10), 'pinkball');
+        newPlayer.body.velocity.setTo(200, 200);
+        newPlayer.body.bounce.setTo(0.8, 0.8);
+        newPlayer.body.collideWorldBounds = true;
+        newPlayer.anchor.setTo(0.5, 0.5);
+        players[add[i]] = newPlayer;
     }
-    //else if (cursors.right.isDown) {
-    if (right) {
-        player.angle += 10;
-    }
+    add = [];
 
-    left = false;
-    right = false;
-    game.physics.arcade.velocityFromRotation(player.rotation, speed, player.body.velocity);
+    for (player in players) {
+        if (players[player].left) {
+            players[player].angle -= 10;
+            players[player].left = false;
+        }
+
+        if (players[player].right) {
+            players[player].angle += 10;
+            players[player].right = false;
+        }
+        game.physics.arcade.velocityFromRotation(players[player].rotation, speed, players[player].body.velocity);
+    }
+   
 }
 
 function render() {
@@ -125,15 +129,14 @@ board.on('commands', function (command, player) {
     console.log('Recive:', command);
     $('#log').append(JSON.stringify(command) + '- by ' + player.nickname + '<br />');
 
-    if (command.moveLeft) {
-        left = true;
+    if (command.rotateLeft) {
+        players[player.id].left = true;
     };
 
-    if (command.moveRight) {
-        right = true;
+    if (command.rotateRight) {
+        players[player.id].right = true;
     };
-
-    game.physics.arcade.velocityFromRotation(player.rotation, speed, player.body.velocity);
+    
 });
 board.on('onlinePlayers', function (onlineNumber) {
     console.log(onlineNumber);
@@ -141,8 +144,9 @@ board.on('onlinePlayers', function (onlineNumber) {
 
 board.on('addPlayer', function (player) {
     console.log('Player joined:', player);
-    //delete others[clientid];
-    //removeRemoteClient(clientid);
+    add.push(player.id);
+    players[player.id] = {};
+
 });
 
 board.on('removePlayer', function (clientid) {
