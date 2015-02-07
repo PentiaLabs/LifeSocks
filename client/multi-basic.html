@@ -40,14 +40,16 @@
       <script type="text/javascript" src="scripts/Controller/MainMenu.js"></script>
         <script>
         (function () {
+            var w = window.innerWidth * window.devicePixelRatio,
+                h = window.innerHeight * window.devicePixelRatio;
 
-          var game = new Phaser.Game(1280, 768, Phaser.AUTO, 'game');
-          game.state.add('Boot', LifeSocks.Boot);
-          game.state.add('Preloader', LifeSocks.Preloader);
-          game.state.add('MainMenu', LifeSocks.MainMenu);
-          game.state.add('Lobby', LifeSocks.Lobby);
-          game.state.add('Game', LifeSocks.Game);
-          game.state.start('Boot');
+            var game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'game');
+            game.state.add('Boot', LifeSocks.Boot);
+            game.state.add('Preloader', LifeSocks.Preloader);
+            game.state.add('MainMenu', LifeSocks.MainMenu);
+            game.state.add('Lobby', LifeSocks.Lobby);
+            game.state.add('Game', LifeSocks.Game);
+            game.state.start('Boot');
         })();
         </script>
 
@@ -78,16 +80,6 @@
                 socket.emit('action', { rotateRight: 200 });
             }, false);
 
-
-        $( "#target" ).keydown(function( event ) {
-          if ( event.which == 13 ) {
-           event.preventDefault();
-          }
-          xTriggered++;
-          var msg = "Handler for .keydown() called " + xTriggered + " time(s).";
-          $.print( msg, "html" );
-          $.print( event );
-        });
         </script>
 
         
