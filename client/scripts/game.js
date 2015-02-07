@@ -41,7 +41,9 @@ LifeSocks.Game = function(game) {
 
 LifeSocks.Game.prototype = {
     create: function () {
-        this.stage.backgroundColor = '#c8c8c8';
+        this.stage.backgroundColor = '#ffffff';
+        this.add.sprite(0, 0, 'game-bg');
+
         this.physics.startSystem(Phaser.Physics.ninja);
 
         //  The base of our sperm cell
