@@ -52,7 +52,7 @@
     var board = io.connect(document.location.origin + '/board');
     board.on('commands', function (command, player) {
       console.log('Recive:', command);
-      $('#log').append(JSON.stringify(command) + '- by ' + player.nickname + '<br />');
+      $('#log').prepend(JSON.stringify(command) + '- by ' + player.nickname + '<br />');
     });
 
     board.on('onlinePlayers', function (onlineNumber) {
