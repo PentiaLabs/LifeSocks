@@ -22,7 +22,7 @@
     <div class="container">
         <h1>Life of Brian!</h1>
         <div class="jumbotron">
-            <p><a class="btn btn-primary btn-lg js-button-play-sound" href="#" role="button">Play sound (unlock)</a></p>
+            <p><a class="btn btn-primary btn-lg js-button-play-sound" href="#" role="button">Play sound! (unlock)</a></p>
         </div>
     </div>
 
@@ -33,24 +33,25 @@
     <script>
 
     var soundFart = new Howl({
-        src: ["../assets/sounds/fart.acc", "../assets/sounds/fart.ogg"],
+        src: ["../assets/sounds/fart.m4a","../assets/sounds/fart.acc", "../assets/sounds/fart.ogg"],
     });
 
     var soundBoing = new Howl({
-        src: ["../assets/sounds/boing.acc", "../assets/sounds/boing.ogg"],
+        src: ["../assets/sounds/boing.m4a", "../assets/sounds/boing.ogg"],
     });
 
-    var playBoing = function() {
-        soundBoing.play();
+    var playFart = function() {
+        soundFart.play();
     }
 
     var soundButton = document.querySelector(".js-button-play-sound");
     soundButton.addEventListener("touchstart", function(event) {
-        event.target.text = "Touch!";
-        soundFart.play();
-        setTimeout(playBoing, 7000);
+        //soundFart.play();
+
+
     });
 
+    setTimeout(playFart, 10000);
 
     </script>
 
