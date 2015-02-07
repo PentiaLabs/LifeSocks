@@ -18,24 +18,22 @@ var room = require('./room.js');
 
 console.dir(player);
 
+var currentRoom = room.create('theOneAndOnly');
+
 io.on('connection', function(socket){
-	clientSockets[clientSocket.id] = clientSocket;
+	clientSockets[socket.id] = socket;
 
-	socket.emit('welcome', {
-		others : others
-	});
+	var player = player.create(socket.id);
+	
+	socket.emit('JOINED', 'A New player joined....');
+	io.emit('onlinePlayers', clientSockets.length);
 
-	socket.on('newPlayer', function(player) {
+	// On Player Update, Change Board Data
+	// Emit new board (maybe a interval?)
 
-		var player = player.create(clientSocket.id);
-		addPlayer(player);
-		clientSocket.emit('JOINED', { playerid: player.id, nickname: player.nickname });
-		logDebug("Player " + player.nickname + " (" + player.id + ") joined");
-
-		socket.broadcast.emit('changePos', {
-			clientid: socket.id,
-			player : others[socket.id]
-		});
+	socket.on('action', function(msg){
+		console.log(msg);
+	    io.emit('action', msg);
 	});
 
 	socket.on('disconnect', function(){
