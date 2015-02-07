@@ -19,33 +19,35 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <h1>Player</h1>
-
-        <div id="me"></div>
-
-
+        <h1>Player - <span id="me"></div></h1>
+        
         <button id="moveRight">Right</button>
         <button id="moveLeft">Left</button>
 
-        <input id="chosenAction" type="text" value='{"moveLeft": "200"}' />
+        <input id="chosenAction" type="text" value="besked" />
         <button id="action">Send action!</button>
+
+
+         <a href="javascript:location.reload()">reload!</button>
 
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
         <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
+        <script type="text/javascript" src="scripts/libs/gyro.min.js"></script>
         <script type="text/javascript" src="scripts/multi-basic.js"></script>
 
         <script>
         var socket = io.connect(document.location.origin + '/users');
 
-        socket.on('onlinePlayers', function(arg) {
-            console.log('online:', arg);
+        socket.on('playerData', function(arg) {
+            console.log('playerData:', arg);
+            $('#me').html(arg.nickname);
         });
 
         var el = document.getElementById("action");
         el.addEventListener("click", function(){
-            console.log('Send:',  $('#chosenAction').val());
-            socket.emit('action',  $('#chosenAction').val());
+            console.log('Send:', $('#chosenAction').val());
+            socket.emit('action', $('#chosenAction').val());
         }, false);
 
         var moveLeft = document.getElementById("moveLeft");
@@ -59,6 +61,17 @@
             console.log('Send:', { moveRight: 200 });
             socket.emit('action', { moveRight: 200 });
         }, false);
+
+
+        $( "#target" ).keydown(function( event ) {
+          if ( event.which == 13 ) {
+           event.preventDefault();
+          }
+          xTriggered++;
+          var msg = "Handler for .keydown() called " + xTriggered + " time(s).";
+          $.print( msg, "html" );
+          $.print( event );
+        });
         </script>
         
     </body>

@@ -14,11 +14,11 @@ app.use(express.static(path.join(__dirname, '/../client'))); //  "public" off of
 var clientSockets = {};
 
 var player = require('./player.js');
-var board = require('./room.js');
+var BoardClass = require('./room.js');
 
 console.dir(player);
 
-var currentRoom = board.create();
+var currentRoom = BoardClass.create();
 
 var addPlayer = function(player) {
 	currentRoom.players[player.id] = player;
@@ -30,33 +30,40 @@ var users = io.of('/users').on('connection', function(socket){
 	var currentPlayer = player.create(socket.id);
 	addPlayer(currentPlayer);
 
-	socket.emit('addPlayer', currentPlayer);
-	
-	io.emit('onlinePlayers', clientSockets.length);
+	board.emit('addPlayer', currentPlayer); 
+	socket.emit('playerData', currentPlayer);
+
+	board.emit('onlinePlayers', currentRoom.players.length);
+	console.log('onlinePlayers:', currentRoom.players.length, currentRoom.players);
 
 	// On Player Update, Change Board Data
 	// Emit new board (maybe a interval?)
 
 	socket.on('action', function(msg){
 		console.log(msg);
-	    board.emit('commands', msg);
+	    board.emit('commands', msg, currentPlayer);
 	});
 
-	console.log(currentRoom);
+	socket.on('dead', function(msg){
+		currentPlayer.dead = true;
+	});
 
 	socket.on('disconnect', function(){
 		// todo : remove player from game
-		player.remove();
+		board.emit('removePlayer', currentPlayer);
+		player.remove(currentPlayer);
 	});
 });
 
 var board = io
 	.of('/board')
 	.on('connection', function (socket) {
-    
+    	var currentBoard = BoardClass.create(socket.id);
+    	console.log('Board connected with ID:', currentBoard.id);
 	});
 
 var port = process.env.PORT || 3000;
+
 http.listen(port, function(){
 	console.log('listening on *:' + port);
 });
