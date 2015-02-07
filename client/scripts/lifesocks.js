@@ -53,14 +53,14 @@ function create() {
 }
 
 function update() {
-    // setting gyroscope update frequency
-    gyro.frequency = 10;
-    // start gyroscope detection
-    gyro.startTracking(function(o) {
-        // updating player velocity
-        player.body.velocity.x += o.gamma/20;
-        player.body.velocity.y += o.beta/20;
-    });
+    //// setting gyroscope update frequency
+    //gyro.frequency = 10;
+    //// start gyroscope detection
+    //gyro.startTracking(function(o) {
+    //    // updating player velocity
+    //    player.body.velocity.x += o.gamma/20;
+    //    player.body.velocity.y += o.beta/20;
+    //});
 
     game.physics.arcade.collide(balls);
     game.physics.arcade.overlap(balls, dangerZone, collision, null, this);
@@ -73,7 +73,6 @@ function update() {
         newPlayer.anchor.setTo(0.5, 0.5);
         players[add[i]] = newPlayer;
     }
-
 
     add = [];
 
@@ -154,7 +153,6 @@ board.on('onlinePlayers', function (onlineNumber) {
 board.on('addPlayer', function (player) {
     console.log('Player joined:', player);
     add.push(player.id);
-    players[player.id] = {};
 
 });
 
