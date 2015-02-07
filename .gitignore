@@ -31,3 +31,10 @@ bower_components
 
 # Vagrant
 .vagrant
+
+# Mac Crap
+.DS_Store
+
+.DS_Store
+
+client/.DS_Store
