@@ -14,11 +14,11 @@ app.use(express.static(path.join(__dirname, '/../client'))); //  "public" off of
 var clientSockets = {};
 
 var player = require('./player.js');
-var room = require('./room.js');
+var board = require('./room.js');
 
 console.dir(player);
 
-var currentRoom = room.create('theOneAndOnly');
+var currentRoom = board.create('theOneAndOnly');
 
 io.on('connection', function(socket){
 	clientSockets[socket.id] = socket;
@@ -42,6 +42,12 @@ io.on('connection', function(socket){
 	});
 
 });
+
+var board = io
+  .of('/board')
+  .on('connection', function (socket) {
+    socket.emit('item', { news: 'item' });
+  });
 
 http.listen(process.env.PORT || 3000, function(){
 	console.log('listening on *:' + process.env.PORT || 3000);

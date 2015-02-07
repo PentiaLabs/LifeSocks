@@ -46,11 +46,18 @@
             $('#log').append(arg);
         });
 
+        
+
         var el = document.getElementById("action");
         el.addEventListener("click", function(){
             socket.emit('action', 'Move or something.');
         }, false);
 
+        // Viewport logic
+        var board = io.connect('http://localhost/news');
+        board.on('commands', function () {
+            news.emit('commands!');
+        });
 
         </script>
         
