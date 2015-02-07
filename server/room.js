@@ -6,7 +6,8 @@ var room = {
 		return {
 			id: roomid,
 			width: 0,
-			height: 0
+			height: 0,
+			players: {}
 		}
 	}
 };
