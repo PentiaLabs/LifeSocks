@@ -81,6 +81,12 @@
             };
         });
 
+        socket.on('removePlayer', function(clientid) {
+            delete others[clientid];
+
+            removeRemoteClient(clientid);
+        });
+
         function update() {
 
             ship.body.setZeroVelocity();

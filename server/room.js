@@ -5,8 +5,8 @@ var room = {
 	create: function(roomid) {
 		return {
 			id: roomid,
-			width: 0,
-			height: 0,
+			width: 800,
+			height: 800,
 			players: {}
 		}
 	}
