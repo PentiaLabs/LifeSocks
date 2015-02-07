@@ -10,6 +10,8 @@ gulp.task('watch', function () {
     gulp.watch('client/scripts/*.js', ['scripts']);
     gulp.watch('client/**/*.html', ['html']);
     gulp.watch('scss/**/*.scss', ['sass']);
+    gulp.watch('less/**/*.less', ['less']);
+
 });
 
 gulp.task('changed', function () {
@@ -40,7 +42,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('less', function () {
-    return gulp.src('less/**/**/bootstrap.less')
+    return gulp.src(['less/**/**/bootstrap.less', 'less/joypad/*.less'])
         .pipe(less())
         .pipe(gulp.dest('client/styles/joypad'))
         .pipe(livereload());
