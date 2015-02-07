@@ -9,7 +9,7 @@
   "scripts": {
     "start": "gulp",
     "test": "gulp test",
-    "postinstall": "echo postinstall time; gulp"
+    "postinstall": "echo postinstall time; npm install; gulp"
   },
   "repository": {
     "type": "git",
