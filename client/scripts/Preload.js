@@ -26,10 +26,24 @@ LifeSocks.Preloader.prototype = {
 	    this.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');
 	    this.load.image('borderLong', 'assets/LifeSocks/Border_long.jpg');
 
+	    //Selection of possible assets
+	    this.load.image('logotype', 'assets/LifeSocks/logotype.png');
+	    this.load.image('mobilbackground', 'assets/LifeSocks/moilbackground.png');
+	    this.load.image('sock', 'assets/LifeSocks/sock.png');
+	    this.load.image('welcome-player', 'assets/LifeSocks/welcomeplayer-title.png');
+	    this.load.image('winner-player', 'assets/LifeSocks/winner-player-title.png');
+	    this.load.image('success-message', 'assets/LifeSocks/wsuccess-message.png');
+
+	    this.load.image('label-blue', 'assets/LifeSocks/Lables/label-blue.png');
+	    this.load.image('label-green', 'assets/LifeSocks/Lables/label-green.png');
+	    this.load.image('label-grey', 'assets/LifeSocks/Lables/label-grey.png');
+	    this.load.image('label-pink', 'assets/LifeSocks/Lables/label-pink.png');
+	    this.load.image('label-yellow', 'assets/LifeSocks/Lables/label-yellow.png');
+
 
 	    // Replace this :)
-	    this.load.image('button-start', 'assets/button-start.png');
-	    this.load.image('screen-bg', 'assets/screen-bg.png');
+	    this.load.image('button-start', 'assets/LifeSocks/startgamebutton.png');
+	    this.load.image('screen-bg', 'assets/LifeSocks/splashbaggrund.png');
 
 	},
 	create: function() {

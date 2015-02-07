@@ -6,10 +6,10 @@ LifeSocks.MainMenu.prototype = {
 	    var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
 
 	    var t = this.add.text(this.world.centerX-300, 0, text, style);
-		this.game.state.start('Lobby');
+	    this.add.sprite(0, 0, 'screen-bg');
 
 	},
 	startGame: function() {
-		this.game.state.start('Lobby');
+	  this.add.sprite(0, 0, 'screen-bg');
 	}
 };
