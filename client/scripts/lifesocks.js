@@ -53,11 +53,19 @@ function create() {
 }
 
 function update() {
+    // setting gyroscope update frequency
+    gyro.frequency = 10;
+    // start gyroscope detection
+    gyro.startTracking(function(o) {
+        // updating player velocity
+        player.body.velocity.x += o.gamma/20;
+        player.body.velocity.y += o.beta/20;
+    });
+
     game.physics.arcade.collide(balls);
     game.physics.arcade.overlap(balls, dangerZone, collision, null, this);
 
-    for (var i = 0; i < add.length; i++)
-    {
+    for (var i = 0; i < add.length; i++) {
         var newPlayer = balls.create(randomRange(1200, 10), randomRange(768, 10), 'pinkball');
         newPlayer.body.velocity.setTo(200, 200);
         newPlayer.body.bounce.setTo(0.8, 0.8);
@@ -65,6 +73,8 @@ function update() {
         newPlayer.anchor.setTo(0.5, 0.5);
         players[add[i]] = newPlayer;
     }
+
+
     add = [];
 
     for (player in players) {
@@ -121,7 +131,6 @@ function randomRange(max, min) {
 function randomIntRange(max, min) {
     return (min + Math.floor(Math.random() * (max - min + 1)));
 }
-
 
 // Viewport logic
 var board = io.connect(document.location.origin + '/board');
