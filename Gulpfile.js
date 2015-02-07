@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var livereload = require('gulp-livereload');
 var sass = require('gulp-sass');
+var less = require('gulp-less');
 var nodemon = require('gulp-nodemon');
 
 gulp.task('watch', function () {
@@ -35,6 +36,13 @@ gulp.task('sass', function () {
     return gulp.src('scss/**/*.scss')
         .pipe(sass())
         .pipe(gulp.dest('client/styles'))
+        .pipe(livereload());
+});
+
+gulp.task('less', function () {
+    return gulp.src('less/**/**/bootstrap.less')
+        .pipe(less())
+        .pipe(gulp.dest('client/styles/joypad'))
         .pipe(livereload());
 });
 
