@@ -10,6 +10,7 @@
   padding-top: 75%;
 }
 .game-wrapper .game-stages img {
+  z-index: -1;
   width: 100%;
   min-height: 100%;
   height: auto;
@@ -31,7 +32,17 @@
   display: block;
   padding-top: 75%;
 }
+.game-wrapper .game-splash ul li {
+  width: 5%;
+  height: auto;
+  background: white;
+  border-radius: 25px;
+  list-style-type: none;
+  float: left;
+  margin-right: 5px;
+}
 .game-wrapper .game-splash img {
+  z-index: -1;
   width: 100%;
   min-height: 100%;
   height: auto;
@@ -41,4 +52,7 @@
   bottom: 0;
   left: 0;
   border-radius: 10px 10px 0 0;
+}
+.game-wrapper .game-splash .game-stage-1 {
+  z-index: 1;
 }
