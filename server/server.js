@@ -14,6 +14,10 @@ app.use(express.static(path.join(__dirname, '/../client'))); //  "public" off of
 var sockets = {};
 var others = {};
 
+var player = require('./player.js');
+
+console.dir(player);
+
 io.on('connection', function(socket){
 	socket.emit('welcome', {
 		others : others
@@ -31,6 +35,12 @@ io.on('connection', function(socket){
 
 	socket.on('disconnect', function(){
 		// todo : remove player from game
+		if (hasJoined(socket.id)) {
+			removePlayer(socket.id);
+		}
+		delete clientSockets[socket.id];
+		logDebug('WS connection ended');
+
 	});
 
 });
