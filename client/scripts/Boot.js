@@ -6,6 +6,9 @@ LifeSocks.Boot.prototype = {
 		this.load.image('preloaderBar', 'assets/loading-bar.png');
 	},
 	create: function() {
+		// Stretch to fill
+    	this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+
 		this.game.state.start('Preloader');
 	}
 };

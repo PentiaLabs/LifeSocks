@@ -2,61 +2,75 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Multiplayer</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+ <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Multiplayer</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link type="text/css" rel="stylesheet" media="all" href="styles/game.css">
-    </head>
-    <body>
-        <div id="game"></div>
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link type="text/css" rel="stylesheet" media="all" href="styles/game.css">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="game"></div>
 
-        <div id="log"></div>
+  <div id="log"></div>
 
-        <script src="/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
-        <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
+  <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
 
-        <script type="text/javascript" src="scripts/Boot.js"></script>
-        <script type="text/javascript" src="scripts/Preload.js"></script>
-        <script type="text/javascript" src="scripts/MainMenu.js"></script>
-        <script type="text/javascript" src="scripts/Game.js"></script>
-        <script>
+  <script type="text/javascript" src="scripts/Boot.js"></script>
+  <script type="text/javascript" src="scripts/Preload.js"></script>
+  <script type="text/javascript" src="scripts/MainMenu.js"></script>
+  <script type="text/javascript" src="scripts/Lobby.js"></script>
+  <script type="text/javascript" src="scripts/Game.js"></script>
+  <script type="text/javascript" src="scripts/Lobby.js"></script>
+  <script>
 
-            (function() { 
-                var game = new Phaser.Game(1280, 768, Phaser.AUTO, 'game');
-                game.state.add('Boot', LifeSocks.Boot);
-                game.state.add('Preloader', LifeSocks.Preloader);
-                game.state.add('MainMenu', LifeSocks.MainMenu);
-                game.state.add('Lobby', LifeSocks.Lobby);
-                game.state.add('Game', LifeSocks.Game);
-                game.state.start('Boot');
-            })();
 
-            // Viewport logic
-            var board = io.connect(document.location.origin + '/board');
-            board.on('commands', function (command, player) {
-                console.log('Recive:', command);
-                $('#log').append(JSON.stringify(command) + '- by '+player.nickname+'<br />');        
-            });
 
-            board.on('onlinePlayers', function(onlineNumber) {
-                console.log(onlineNumber);
-            });
 
-            board.on('addPlayer', function(player) {
-                console.log('Player joined:', player);
-            });
+    (function () {
 
-            board.on('removePlayer', function(clientid) {
-            });
+      var game = new Phaser.Game(1280, 768, Phaser.AUTO, 'game');
+      game.state.add('Boot', LifeSocks.Boot);
+      game.state.add('Preloader', LifeSocks.Preloader);
+      game.state.add('MainMenu', LifeSocks.MainMenu);
+      game.state.add('Lobby', LifeSocks.Lobby);
+      game.state.add('Game', LifeSocks.Game);
+      game.state.start('Boot');
+    })();
 
-        </script>
-        
-    </body>
+    // Viewport logic
+    var board = io.connect(document.location.origin + '/board');
+    board.on('commands', function (command, player) {
+      console.log('Recive:', command);
+      $('#log').append(JSON.stringify(command) + '- by ' + player.nickname + '<br />');
+    });
+
+    board.on('onlinePlayers', function (onlineNumber) {
+      console.log(onlineNumber);
+    });
+
+    board.on('addPlayer', function (player) {
+      console.log('Player joined:', player);
+    });
+
+    board.on('removePlayer', function (clientid) {
+    });
+
+  </script>
+
+</body>
 </html>

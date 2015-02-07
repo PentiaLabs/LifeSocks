@@ -33,11 +33,11 @@
     <script>
 
     var soundFart = new Howl({
-        src: ["../assets/sounds/fart.ogg"],
+        src: ["../assets/sounds/fart.acc", "../assets/sounds/fart.ogg"],
     });
 
     var soundBoing = new Howl({
-        src: ["../assets/sounds/boing.ogg"],
+        src: ["../assets/sounds/boing.acc", "../assets/sounds/boing.ogg"],
     });
 
     var playBoing = function() {
@@ -46,6 +46,7 @@
 
     var soundButton = document.querySelector(".js-button-play-sound");
     soundButton.addEventListener("touchstart", function(event) {
+        event.target.text = "Touch!";
         soundFart.play();
         setTimeout(playBoing, 7000);
     });
