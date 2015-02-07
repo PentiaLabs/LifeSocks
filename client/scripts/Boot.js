@@ -6,9 +6,6 @@ LifeSocks.Boot.prototype = {
 		this.load.image('preloaderBar', 'assets/loading-bar.png');
 	},
 	create: function() {
-		this.game.input.maxPointers = 1;
-		this.game.stage.scale.pageAlignHorizontally = true;
-		this.game.stage.scale.pageAlignVertically = true;
 		this.game.state.start('Preloader');
 	}
 };
