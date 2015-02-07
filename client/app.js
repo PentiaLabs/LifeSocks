@@ -110,7 +110,7 @@ var nextFire = 0;
 function create() {
 
     //  Resize our game world to be a 2000 x 2000 square
-    game.world.setBounds(-1000, -1000, 2000, 2000);
+    //game.world.setBounds(-1000, -1000, 2000, 2000);
 
     //  Our tiled scrolling background
     land = game.add.tileSprite(0, 0, 800, 600, 'earth');
@@ -183,7 +183,7 @@ function create() {
 
     game.input.onDown.add(removeLogo, this);
 
-    game.camera.follow(tank);
+    //game.camera.follow(tank);
     game.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
     game.camera.focusOnXY(0, 0);
 

@@ -11,17 +11,26 @@ app.get('/', function(req, res){
 app.use(express.static(path.join(__dirname, '/../client'))); //  "public" off of current is root
 
 // Count how many are online
-var sockets = {};
-var others = {};
+var clientSockets = {};
+
+var player = require('./player.js');
+var room = require('./room.js');
+
+console.dir(player);
 
 io.on('connection', function(socket){
+	clientSockets[clientSocket.id] = clientSocket;
+
 	socket.emit('welcome', {
 		others : others
 	});
 
 	socket.on('newPlayer', function(player) {
-		others[socket.id] = player;
-		others[socket.id].clientid = socket.id;
+
+		var player = player.create(clientSocket.id);
+		addPlayer(player);
+		clientSocket.emit('JOINED', { playerid: player.id, nickname: player.nickname });
+		logDebug("Player " + player.nickname + " (" + player.id + ") joined");
 
 		socket.broadcast.emit('changePos', {
 			clientid: socket.id,
@@ -31,6 +40,7 @@ io.on('connection', function(socket){
 
 	socket.on('disconnect', function(){
 		// todo : remove player from game
+		player.remove();
 	});
 
 });
