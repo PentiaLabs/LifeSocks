@@ -154,12 +154,12 @@ LifeSocks.Game.prototype = {
 
         for (player in players) {
             if (players[player].left) {
-                players[player].angle -= 10;
+                players[player].angle -= 20;
                 players[player].left = false;
             }
 
             if (players[player].right) {
-                players[player].angle += 10;
+                players[player].angle += 20;
                 players[player].right = false;
             }
             this.physics.arcade.velocityFromRotation(players[player].rotation, -speed, players[player].body.velocity);

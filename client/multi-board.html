@@ -34,12 +34,12 @@
   <script type="text/javascript" src="scripts/Preload.js"></script>
   <script type="text/javascript" src="scripts/MainMenu.js"></script>
   <script type="text/javascript" src="scripts/Lobby.js"></script>
-  <script type="text/javascript" src="scripts/Game.js"></script>
+  <script type="text/javascript" src="scripts/game.js"></script>
   <script type="text/javascript" src="scripts/Lobby.js"></script>
   <script>
     (function () {
 
-      var game = new Phaser.Game(1920, 1200, Phaser.AUTO, 'game');
+      var game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'game');
       game.state.add('Boot', LifeSocks.Boot);
       game.state.add('Preloader', LifeSocks.Preloader);
       game.state.add('MainMenu', LifeSocks.MainMenu);
