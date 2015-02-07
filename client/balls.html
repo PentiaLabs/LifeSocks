@@ -27,38 +27,78 @@
 
           function preload() {
               game.stage.disableVisibilityChange = true;
-              game.load.image('ball', 'assets/ball.png');
+              game.load.image('ball', 'assets/LifeSocks/ball.png');
+              game.load.image('pinkball', 'assets/LifeSocks/pinkball.png');
+              game.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');
+              game.load.image('borderLong', 'assets/LifeSocks/Border_long.jpg');
           }
 
           var image;
           var balls;
+          var player;
+          var cursors;
+          var speed = 200;
+          var dangerZone;
+
 
           function create() {
               game.stage.backgroundColor = '#c8c8c8';
-              game.physics.startSystem(Phaser.Physics.ARCADE);
+              game.physics.startSystem(Phaser.Physics.ninja);
 
               balls = game.add.group();
-              game.physics.arcade.enable(balls);
+              dangerZone = game.add.group();
+
+              //game.physics.ninja.enable(balls);
               balls.enableBody = true;
-              
-              for (var i = 0; i < 6; i++) {
 
-                var ball = balls.create(Math.random() * 100 * i, Math.random() * 100 * i, 'ball');
+              var leftZone = dangerZone.create(0, 0, 'borderShort');
+              //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+              leftZone.scale.setTo(4, 1);
 
-                ball.body.velocity.setTo(200, 200);
+              var rightZone = dangerZone.create(0, 0, 'borderLong');
+              rightZone.rotate = 90;
+              //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+              rightZone.scale.setTo(1, 4);
 
-                ball.body.bounce.y = 1.0;
-                ball.body.bounce.x = 1.0;
-
-                ball.body.collideWorldBounds = true;
+              for (var i = 0; i < 20; i++) {
+                  balls.create(randomRange(1200, 10), randomRange(768, 10), 'ball');
               }
 
+
+              // The player and its settings
+              player = balls.create(randomRange(1200, 10), randomRange(768, 10), 'pinkball');
+              player.anchor.setTo(0.5, 0.5);
+
+              balls.setAll("body.velocity.x", 200);
+              balls.setAll("body.velocity.y", 200);
+              balls.setAll("body.bounce.y", 0.8);
+              balls.setAll("body.bounce.x", 0.8);
+              balls.setAll("body.collideWorldBounds", true);
+
+              //  Our controls.
+              cursors = game.input.keyboard.createCursorKeys();
+//  Player physics properties. Give the little guy a slight bounce.
+              //player.body.bounce.y = 0.2;
+              //player.body.gravity.y = 300;
+              //player.body.collideWorldBounds = true;
+
+  
           }
 
-          //  Move the knocker with the arrow keys
+
+//  Move the knocker with the arrow keys
           function update() {
-            game.physics.arcade.collide(balls);
+              game.physics.arcade.collide(balls);
+              game.physics.arcade.collide(player, balls);
             
+            if (cursors.left.isDown) {
+                player.angle -= 4;
+            }
+            else if (cursors.right.isDown) {
+                player.angle += 4;
+            }
+
+            game.physics.arcade.velocityFromRotation(player.rotation, speed, player.body.velocity);
           }
 
           function render () {
@@ -87,6 +127,14 @@
               } else {
                   game.scale.startFullScreen(false);
               }
+          }
+
+          function randomRange(max, min) {
+              return Math.random() * (max - min) + min;
+          }
+
+          function randomIntRange(max, min) {
+              return (min + Math.floor(Math.random() * (max - min + 1)));
           }
         </script>
         
