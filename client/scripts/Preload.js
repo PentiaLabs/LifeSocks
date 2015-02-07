@@ -24,11 +24,11 @@ LifeSocks.Preloader.prototype = {
     this.load.image('winner-player', 'assets/LifeSocks/winner-player-title.png');
     this.load.image('success-message', 'assets/LifeSocks/success-message.png');
 
-    this.load.image('label-blue', 'assets/LifeSocks/Lables/label-blue.png');
-    this.load.image('label-green', 'assets/LifeSocks/Lables/label-green.png');
-    this.load.image('label-grey', 'assets/LifeSocks/Lables/label-grey.png');
-    this.load.image('label-pink', 'assets/LifeSocks/Lables/label-pink.png');
-    this.load.image('label-yellow', 'assets/LifeSocks/Lables/label-yellow.png');
+    this.load.image('label-blue', 'assets/LifeSocks/label-blue.png');
+    this.load.image('label-green', 'assets/LifeSocks/label-green.png');
+    this.load.image('label-grey', 'assets/LifeSocks/label-grey.png');
+    this.load.image('label-pink', 'assets/LifeSocks/label-pink.png');
+    this.load.image('label-yellow', 'assets/LifeSocks/label-yellow.png');
 
     this.load.atlas('semen', 'assets/semen.png', 'assets/semen.json');
 
