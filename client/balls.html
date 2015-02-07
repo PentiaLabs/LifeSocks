@@ -50,6 +50,7 @@
 
               //game.physics.ninja.enable(balls);
               balls.enableBody = true;
+              dangerZone.enableBody = true;
 
               var leftZone = dangerZone.create(0, 0, 'borderShort');
               //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
@@ -77,6 +78,8 @@
 
               //  Our controls.
               cursors = game.input.keyboard.createCursorKeys();
+
+
 //  Player physics properties. Give the little guy a slight bounce.
               //player.body.bounce.y = 0.2;
               //player.body.gravity.y = 300;
@@ -90,6 +93,7 @@
           function update() {
               game.physics.arcade.collide(balls);
               game.physics.arcade.collide(player, balls);
+              game.physics.arcade.overlap(balls, dangerZone, collision, null, this);
             
             if (cursors.left.isDown) {
                 player.angle -= 4;
@@ -119,6 +123,10 @@
 
               game.input.onDown.add(gofull, this);
 
+          }
+
+          function collision(ball) {
+              ball.kill();
           }
 
           function gofull() {
