@@ -64,26 +64,26 @@ function create() {
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     rightZone.scale.setTo(1, 4);
 
-    for (var i = 0; i < 20; i++) {
-        var semen = balls.create(randomRange(1200, 10), randomRange(768, 10), 'semen', 'semen1');
-        //semen.scale.setTo(0.5, 0.5);
+    //for (var i = 0; i < 20; i++) {
+    //    var semen = balls.create(randomRange(1200, 10), randomRange(768, 10), 'semen', 'semen1');
+    //    semen.scale.setTo(0.9, 0.9);
 
-        semen.anchor.setTo(0.5, 0.5);
-        semen.animations.add('move', [
-            'semen1',
-            'semen2',
-            'semen3',
-            'semen4',
-            'semen5',
-            'semen6',
-            'semen7',
-            'semen6',
-            'semen5',
-            'semen4',
-            'semen3',
-            'semen2'], 18, true);
-        semen.animations.play('move', 18, true);
-    }
+    //    semen.anchor.setTo(0.5, 0.5);
+    //    semen.animations.add('move', [
+    //        'semen1',
+    //        'semen2',
+    //        'semen3',
+    //        'semen4',
+    //        'semen5',
+    //        'semen6',
+    //        'semen7',
+    //        'semen6',
+    //        'semen5',
+    //        'semen4',
+    //        'semen3',
+    //        'semen2'], 18, true);
+    //    semen.animations.play('move', 18, true);
+    //}
 
 
     // The player and its settings
@@ -93,8 +93,8 @@ function create() {
     balls.setAll("body.bounce.y", 0.8);
     balls.setAll("body.bounce.x", 0.8);
     balls.setAll("body.collideWorldBounds", true);
-    balls.setAll("body.width", 100);
-    balls.setAll("body.height", 100);
+    balls.setAll("body.width", 90);
+    balls.setAll("body.height", 90);
 }
 
 function update() {
@@ -112,6 +112,7 @@ function update() {
 
     for (var i = 0; i < add.length; i++) {
         var newPlayer = balls.create(randomRange(1200, 10), randomRange(768, 10), 'semen', 'semen1');
+        newPlayer.angle = 180;
         newPlayer.animations.add('move', [
             'semen1',
             'semen2',
@@ -125,6 +126,9 @@ function update() {
             'semen4',
             'semen3',
             'semen2'], 18, true);
+
+        
+
         newPlayer.body.velocity.setTo(200, 200);
         newPlayer.body.bounce.setTo(0.8, 0.8);
         newPlayer.body.collideWorldBounds = true;
