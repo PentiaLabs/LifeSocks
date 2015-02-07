@@ -26,11 +26,6 @@
         <input id="chosenAction" type="text" value="default" />
         <button id="action">Send action!</button>
 
-        <h2>Board</h2>
-
-        <div id="players"></div>
-        <div id="log"></div>
-
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
         <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
@@ -48,14 +43,6 @@
             console.log('Send:',  $('#chosenAction').val());
             socket.emit('action',  $('#chosenAction').val());
         }, false);
-
-        // Viewport logic
-        var board = io.connect(document.location.origin + '/board');
-        board.on('commands', function (command) {
-            console.log('Recive:', command);
-            $('#log').append(command + '<br />');
-        });
-
         </script>
         
     </body>

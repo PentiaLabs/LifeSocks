@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Multiplayer Framed</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link type="text/css" rel="stylesheet" media="all" href="styles/game.css">
+
+
+        <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {height: 100%;}
+        #board {
+            height: 100%;
+            width: 50%;
+            float: left;
+        }
+        .controller {
+            float: left;
+            width: 50%;
+        }
+        </style>
+    </head>
+    <body>
+        
+        <iframe id="board" src="multi-board.html"></iframe>
+        <iframe class="controller" src="multi-basic.html"></iframe>
+        <iframe class="controller" src="multi-basic.html"></iframe>
+        <iframe class="controller" src="multi-basic.html"></iframe>
+        <iframe class="controller" src="multi-basic.html"></iframe>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
+   
+        
+    </body>
+</html>
