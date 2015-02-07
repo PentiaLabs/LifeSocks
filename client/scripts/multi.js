@@ -70,6 +70,7 @@ function update() {
 	for (other in others) {
 		others[other].sprite.x = others[other].x;
 		others[other].sprite.y = others[other].y;
+		game.physics.arcade.overlap(player, others[other], collisionHandler, null, this);
 	}
 
 	//  Reset the players velocity (movement)
@@ -95,8 +96,8 @@ function update() {
   }
   
   //  Allow the player to jump if they are touching the ground.
-  if (cursors.up.isDown && player.body.touching.down) {
-    player.body.velocity.y = -350;
+  if (cursors.up.isDown && player.body.blocked.down) {
+    player.body.velocity.y = -150;
   }
 
   // new player pos   
@@ -108,6 +109,10 @@ function update() {
 	socket.emit('newPlayer', pos);
 };
 
+function collisionHandler(player, other) {
+	console.log("collision");
+	
+}
 var addRemoteClient = function (clientid, x, y) {
 	var other = otherSprites.getFirstExists(false);
 
