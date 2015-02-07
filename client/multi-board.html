@@ -70,11 +70,11 @@
 
         }
 
-         // Viewport logic
+        // Viewport logic
         var board = io.connect(document.location.origin + '/board');
-        board.on('commands', function (command) {
+        board.on('commands', function (command, player) {
             console.log('Recive:', command);
-            $('#log').append(command + '<br />');
+            $('#log').append(JSON.stringify(command) + '- by '+player.nickname+'<br />');
 
             if (command.moveLeft) {
                 ship.body.moveLeft(command.moveLeft);
@@ -85,7 +85,12 @@
             };
         });
 
-         socket.on('addPlayer', function(clientid) {
+        socket.on('onlinePlayers', function(onlineNumber) {
+            console.log(onlineNumber);
+        });
+
+        socket.on('addPlayer', function(player) {
+            console.log('Player joined:', player);
             //delete others[clientid];
             //removeRemoteClient(clientid);
         });
@@ -98,30 +103,7 @@
 
         function update() {
 
-            ship.body.setZeroVelocity();
-
-            if (cursors.left.isDown)
-            {
-                ship.body.moveLeft(200);
-            }
-            else if (cursors.right.isDown)
-            {
-                ship.body.moveRight(200);
-            }
-
-            if (cursors.up.isDown)
-            {
-                ship.body.moveUp(200);
-            }
-            else if (cursors.down.isDown)
-            {
-                ship.body.moveDown(200);
-            }
-
         }
-
-
-        
 
         </script>
         

@@ -30,33 +30,35 @@ var users = io.of('/users').on('connection', function(socket){
 	var currentPlayer = player.create(socket.id);
 	addPlayer(currentPlayer);
 
-	socket.emit('addPlayer', currentPlayer);
-	
-	io.emit('onlinePlayers', clientSockets.length);
+	board.emit('addPlayer', currentPlayer); 
+	socket.emit('playerData', currentPlayer);
+
+	board.emit('onlinePlayers', currentRoom.players.length);
+	console.log('onlinePlayers:', currentRoom.players.length, currentRoom.players);
 
 	// On Player Update, Change Board Data
 	// Emit new board (maybe a interval?)
 
 	socket.on('action', function(msg){
 		console.log(msg);
-	    board.emit('commands', msg);
+	    board.emit('commands', msg, currentPlayer);
 	});
-
-	console.log(currentRoom);
 
 	socket.on('disconnect', function(){
 		// todo : remove player from game
-		player.remove();
+		board.emit('removePlayer', currentPlayer);
+		player.remove(currentPlayer);
 	});
 });
 
 var board = io
 	.of('/board')
 	.on('connection', function (socket) {
-    
+    	console.log('Board connnected!');
 	});
 
 var port = process.env.PORT || 3000;
+
 http.listen(port, function(){
 	console.log('listening on *:' + port);
 });

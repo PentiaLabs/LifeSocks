@@ -7,7 +7,7 @@ var room = {
 			id: roomid,
 			width: 800,
 			height: 800,
-			players: {}
+			players: []
 		}
 	}
 };
