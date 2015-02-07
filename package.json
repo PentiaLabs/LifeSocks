@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Nordic Game Jam",
   "main": "Gulpfile.js",
+  "engines": {
+    "node": "0.10.x"
+  },
   "scripts": {
     "start": "gulp",
     "test": "gulp test"
