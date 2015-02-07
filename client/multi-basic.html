@@ -44,8 +44,8 @@
 
         var el = document.getElementById("action");
         el.addEventListener("click", function(){
-            console.log('Send:',  $('#chosenAction').val());
-            socket.emit('action',  $('#chosenAction').val());
+            console.log('Send:', JSON.parse($('#chosenAction').val()));
+            socket.emit('action', JSON.parse($('#chosenAction').val()));
         }, false);
 
         var moveLeft = document.getElementById("moveLeft");
