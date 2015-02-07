@@ -31,196 +31,48 @@
           }
 
           var image;
+          var balls;
 
           function create() {
-              game.stage.backgroundColor = '#c8c8c8'
+              game.stage.backgroundColor = '#c8c8c8';
               game.physics.startSystem(Phaser.Physics.ARCADE);
 
-              cursors = game.input.keyboard.createCursorKeys();
+              balls = game.add.group();
+              game.physics.arcade.enable(balls);
+              balls.enableBody = true;
               
-              //  This creates a simple sprite that is using our loaded image and
-              //  displays it on-screen
-              //  and assign it to a variable
-              ball1 = game.add.sprite(10, 10, 'ball');
-              ball2 = game.add.sprite(60, 510, 'ball');
-              ball3 = game.add.sprite(10, 300, 'ball');
-              ball4 = game.add.sprite(95, 20, 'ball');
-              ball5 = game.add.sprite(80, 80, 'ball');
-              ball6 = game.add.sprite(5, 100, 'ball');
-              ball7 = game.add.sprite(100, 580, 'ball');
-              ball8 = game.add.sprite(88, 312, 'ball');
-              ball9 = game.add.sprite(195, 23, 'ball');
-              ball10 = game.add.sprite(480, 85, 'ball');
+              for (var i = 0; i < 6; i++) {
 
-              game.physics.enable([
-                ball1,
-                ball2,
-                ball3,
-                ball4,
-                ball5,
-                ball6,
-                ball7,
-                ball8,
-                ball9,
-                ball10
-              ], Phaser.Physics.ninja);
+                var ball = balls.create(Math.random() * 100 * i, Math.random() * 100 * i, 'ball');
 
-              //  This gets it moving
-              ball1.body.velocity.setTo(200, 200);
-              ball2.body.velocity.setTo(200, 200);
-              ball3.body.velocity.setTo(200, 200);
-              ball4.body.velocity.setTo(200, 200);
-              ball5.body.velocity.setTo(200, 200);
-              ball6.body.velocity.setTo(80, 80);
-              ball7.body.velocity.setTo(200, 200);
-              ball8.body.velocity.setTo(200, 200);
-              ball9.body.velocity.setTo(200, 200);
-              ball10.body.velocity.setTo(100, 100);
+                ball.body.velocity.setTo(200, 200);
 
+                ball.body.bounce.y = 1.0;
+                ball.body.bounce.x = 1.0;
 
-              //  This makes the game world bounce-able
-              ball1.body.collideWorldBounds = true;
-              ball2.body.collideWorldBounds = true;
-              ball3.body.collideWorldBounds = true;
-              ball4.body.collideWorldBounds = true;
-              ball5.body.collideWorldBounds = true;
-              ball6.body.collideWorldBounds = true;
-              ball7.body.collideWorldBounds = true;
-              ball8.body.collideWorldBounds = true;
-              ball9.body.collideWorldBounds = true;
-              ball10.body.collideWorldBounds = true;
-
-              //  This sets the image bounce energy for the horizontal 
-              //  and vertical vectors (as an x,y point). "1" is 100% energy return
-              ball1.body.bounce.setTo(0.7, 0.7);
-              ball2.body.bounce.setTo(0.7, 0.7);
-              ball3.body.bounce.setTo(0.7, 0.7);
-              ball4.body.bounce.setTo(0.7, 0.7);
-              ball5.body.bounce.setTo(0.7, 0.7);
-              ball6.body.bounce.setTo(0.7, 0.7);
-              ball7.body.bounce.setTo(0.7, 0.7);
-              ball8.body.bounce.setTo(0.7, 0.7);
-              ball9.body.bounce.setTo(0.7, 0.7);
-              ball10.body.bounce.setTo(0.7, 0.7);
-
+                ball.body.collideWorldBounds = true;
+              }
 
           }
 
           //  Move the knocker with the arrow keys
-          function update () {
-
-              //  Enable physics between the knocker and the ball
-              game.physics.arcade.collide(ball1, ball2);
-              game.physics.arcade.collide(ball1, ball3);
-              game.physics.arcade.collide(ball1, ball4);
-              game.physics.arcade.collide(ball1, ball5);
-              game.physics.arcade.collide(ball1, ball6);
-              game.physics.arcade.collide(ball1, ball7);
-              game.physics.arcade.collide(ball1, ball8);
-              game.physics.arcade.collide(ball1, ball9);
-
-              
-              game.physics.arcade.collide(ball2, ball1);
-              game.physics.arcade.collide(ball2, ball3);
-              game.physics.arcade.collide(ball2, ball4);
-              game.physics.arcade.collide(ball2, ball5);
-              game.physics.arcade.collide(ball2, ball6);
-              game.physics.arcade.collide(ball2, ball7);
-              game.physics.arcade.collide(ball2, ball8);
-              game.physics.arcade.collide(ball2, ball9);
-
-              game.physics.arcade.collide(ball3, ball2);
-              game.physics.arcade.collide(ball3, ball1);
-              game.physics.arcade.collide(ball3, ball4);
-              game.physics.arcade.collide(ball3, ball5);
-              game.physics.arcade.collide(ball3, ball6);
-              game.physics.arcade.collide(ball3, ball7);
-              game.physics.arcade.collide(ball3, ball8);
-              game.physics.arcade.collide(ball3, ball9);
-
-
-              game.physics.arcade.collide(ball4, ball2);
-              game.physics.arcade.collide(ball4, ball3);
-              game.physics.arcade.collide(ball4, ball1);
-              game.physics.arcade.collide(ball4, ball5);
-              game.physics.arcade.collide(ball4, ball6);
-              game.physics.arcade.collide(ball4, ball7);
-              game.physics.arcade.collide(ball4, ball8);
-              game.physics.arcade.collide(ball4, ball9);
-
-              game.physics.arcade.collide(ball5, ball2);
-              game.physics.arcade.collide(ball5, ball3);
-              game.physics.arcade.collide(ball5, ball4);
-              game.physics.arcade.collide(ball5, ball1);
-              game.physics.arcade.collide(ball5, ball5);
-              game.physics.arcade.collide(ball5, ball6);
-              game.physics.arcade.collide(ball5, ball7);
-              game.physics.arcade.collide(ball5, ball8);
-              game.physics.arcade.collide(ball5, ball9);
-
-              game.physics.arcade.collide(ball6, ball2);
-              game.physics.arcade.collide(ball6, ball3);
-              game.physics.arcade.collide(ball6, ball4);
-              game.physics.arcade.collide(ball6, ball1);
-              game.physics.arcade.collide(ball6, ball5);
-              game.physics.arcade.collide(ball6, ball7);
-              game.physics.arcade.collide(ball6, ball8);
-              game.physics.arcade.collide(ball6, ball9);
-
-              game.physics.arcade.collide(ball7, ball2);
-              game.physics.arcade.collide(ball7, ball3);
-              game.physics.arcade.collide(ball7, ball4);
-              game.physics.arcade.collide(ball7, ball1);
-              game.physics.arcade.collide(ball7, ball5);
-              game.physics.arcade.collide(ball7, ball6);
-              game.physics.arcade.collide(ball7, ball8);
-              game.physics.arcade.collide(ball7, ball9);
-
-              game.physics.arcade.collide(ball8, ball2);
-              game.physics.arcade.collide(ball8, ball3);
-              game.physics.arcade.collide(ball8, ball4);
-              game.physics.arcade.collide(ball8, ball1);
-              game.physics.arcade.collide(ball8, ball5);
-              game.physics.arcade.collide(ball8, ball6);
-              game.physics.arcade.collide(ball8, ball7);
-              game.physics.arcade.collide(ball8, ball9);
-
-              game.physics.arcade.collide(ball9, ball2);
-              game.physics.arcade.collide(ball9, ball3);
-              game.physics.arcade.collide(ball9, ball4);
-              game.physics.arcade.collide(ball9, ball1);
-              game.physics.arcade.collide(ball9, ball5);
-              game.physics.arcade.collide(ball9, ball6);
-              game.physics.arcade.collide(ball9, ball7);
-              game.physics.arcade.collide(ball9, ball8);
-
+          function update() {
+            game.physics.arcade.collide(balls);
+            
           }
 
           function render () {
-
-              //debug helper
-              game.debug.spriteInfo(ball1, 32, 32);
-              game.debug.spriteInfo(ball2, 32, 32);
-              game.debug.spriteInfo(ball3, 32, 32);
-              game.debug.spriteInfo(ball4, 32, 32);
-              game.debug.spriteInfo(ball5, 32, 32);
-              game.debug.spriteInfo(ball6, 32, 32);
-              game.debug.spriteInfo(ball7, 32, 32);
-              game.debug.spriteInfo(ball8, 32, 32);
-              game.debug.spriteInfo(ball9, 32, 32);
-              game.debug.spriteInfo(ball10, 32, 32);
-
-
+            
               game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
               game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
               // Properly centers game in windowed mode, but aligning
               // horizontally makes it off-centered in fullscreen mode.
-              //game.scale.pageAlignHorizontally = true;
-              //game.scale.pageAlignVertically = true;
+              game.scale.pageAlignHorizontally = true;
+              game.scale.pageAlignVertically = true;
 
               // Docs say this is necessary, but it doesn't seem to change behavior?
-              //game.scale.setScreenSize(true);
+              game.scale.setScreenSize(true);
 
               // This is necessary to scale before waiting for window changes.
               game.scale.refresh();
