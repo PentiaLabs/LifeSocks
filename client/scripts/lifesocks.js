@@ -55,15 +55,6 @@ function create() {
     balls.setAll("body.bounce.x", 0.8);
     balls.setAll("body.collideWorldBounds", true);
 
-    // setting gyroscope update frequency
-    gyro.frequency = 10;
-    // start gyroscope detection
-    gyro.startTracking(function(o) {
-        // updating player velocity
-        player.body.velocity.x += o.gamma/20;
-        player.body.velocity.y += o.beta/20;
-    });
-
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
 }
@@ -72,6 +63,15 @@ function update() {
     game.physics.arcade.collide(balls);
     game.physics.arcade.collide(player, balls);
     game.physics.arcade.overlap(balls, dangerZone, collision, null, this);
+
+    // setting gyroscope update frequency
+    gyro.frequency = 10;
+    // start gyroscope detection
+    gyro.startTracking(function(o) {
+        // updating player velocity
+        player.body.velocity.x += o.gamma/20;
+        player.body.velocity.y += o.beta/20;
+    });
 
     //if (cursors.left.isDown) {
     if (left) {
