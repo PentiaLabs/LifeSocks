@@ -18,12 +18,17 @@ var board = require('./room.js');
 
 console.dir(player);
 
-var currentRoom = board.create('theOneAndOnly');
+var currentRoom = board.create();
+
+var addPlayer = function(player) {
+	currentRoom.players[player.id] = player;
+};
 
 var users = io.of('/users').on('connection', function(socket){
 	clientSockets[socket.id] = socket;
 
-	//var currentPlayer = player.create(socket.id);
+	var currentPlayer = player.create(socket.id);
+	addPlayer(currentPlayer);
 	
 	socket.emit('JOINED', 'A New player joined....');
 	io.emit('onlinePlayers', clientSockets.length);
@@ -35,6 +40,8 @@ var users = io.of('/users').on('connection', function(socket){
 		console.log(msg);
 	    board.emit('commands', msg);
 	});
+
+	console.log(currentRoom);
 
 	socket.on('disconnect', function(){
 		// todo : remove player from game
