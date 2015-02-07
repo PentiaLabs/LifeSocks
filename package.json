@@ -4,6 +4,7 @@
   "description": "Nordic Game Jam",
   "main": "Gulpfile.js",
   "scripts": {
+    "start": "gulp",
     "test": "gulp test"
   },
   "repository": {
