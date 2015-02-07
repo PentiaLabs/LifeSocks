@@ -14,10 +14,14 @@
         <link type="text/css" rel="stylesheet" media="all" href="styles/game.css">
     </head>
     <body>
-        <h2>Board</h2>
+        <p>Board</p>
+
+        <div id="phaser-example"></div>
 
         <div id="players"></div>
         <div id="log"></div>
+
+        
 
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
@@ -26,18 +30,13 @@
 
         <script>
         
+        var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 
-        // Viewport logic
-        var board = io.connect(document.location.origin + '/board');
-        board.on('commands', function (command) {
-            console.log('Recive:', command);
-            $('#log').append(command + '<br />');
-        });
 
         function preload() {
 
-            game.load.image('stars', 'assets/misc/starfield.jpg');
-            game.load.spritesheet('ship', 'assets/sprites/humstar.png', 32, 32);
+            game.load.image('stars', 'assets/starfield.jpg');
+            game.load.spritesheet('ship', 'assets/humstar.png', 32, 32);
 
         }
 
@@ -70,6 +69,17 @@
             cursors = game.input.keyboard.createCursorKeys();
 
         }
+
+         // Viewport logic
+        var board = io.connect(document.location.origin + '/board');
+        board.on('commands', function (command) {
+            console.log('Recive:', command);
+            $('#log').append(command + '<br />');
+
+            if (command.moveDown) {
+                ship.body.moveDown(command.moveDown);
+            };
+        });
 
         function update() {
 

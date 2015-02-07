@@ -23,7 +23,11 @@
 
         <div id="me"></div>
 
-        <input id="chosenAction" type="text" value="default" />
+
+        <button id="moveUp">UP</button>
+        <button id="moveDown">Down</button>
+
+        <input id="chosenAction" type="text" value="{moveDown: 200}" />
         <button id="action">Send action!</button>
 
         <script src="/socket.io/socket.io.js"></script>
@@ -42,6 +46,12 @@
         el.addEventListener("click", function(){
             console.log('Send:',  $('#chosenAction').val());
             socket.emit('action',  $('#chosenAction').val());
+        }, false);
+
+        var moveDown = document.getElementById("moveDown");
+        moveDown.addEventListener("click", function(){
+            console.log('Send:', { moveDown: 200 });
+            socket.emit('action', { moveDown: 200 });
         }, false);
         </script>
         
