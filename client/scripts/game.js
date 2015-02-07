@@ -72,21 +72,11 @@ LifeSocks.Game.prototype = {
         //semen.animations.play('move', 18, true);
 
         balls = this.add.group();
-        dangerZone = this.add.group();
 
         //this.physics.ninja.enable(balls);
         balls.enableBody = true;
-        dangerZone.enableBody = true;
 
-        var leftZone = dangerZone.create(0, 0, 'borderShort');
-        //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-        leftZone.scale.setTo(4, 1);
-
-        var rightZone = dangerZone.create(0, 0, 'borderLong');
-        rightZone.rotate = 90;
-        //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-        rightZone.scale.setTo(1, 4);
-
+        
         //for (var i = 0; i < 20; i++) {
         //    var semen = balls.create(randomRange(1200, 10), randomRange(768, 10), 'semen', 'semen1');
         //    semen.scale.setTo(0.9, 0.9);
@@ -172,7 +162,7 @@ LifeSocks.Game.prototype = {
                 players[player].angle += 10;
                 players[player].right = false;
             }
-            this.physics.arcade.velocityFromRotation(players[player].rotation, speed, players[player].body.velocity);
+            this.physics.arcade.velocityFromRotation(players[player].rotation, -speed, players[player].body.velocity);
         }
     },
     render : function (){
