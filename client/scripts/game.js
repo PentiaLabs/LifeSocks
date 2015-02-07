@@ -125,6 +125,7 @@ function update() {
     
     game.physics.arcade.collide(stars, platforms);
     game.physics.arcade.overlap(player, stars, collectStar, null, this);
+
 }
 
 function collectStar (player, star) {
@@ -135,4 +136,15 @@ function collectStar (player, star) {
     //  Add and update the score
     score += 10;
     scoreText.text = 'Score: ' + score;
+}
+
+
+function randomRange(max, min)
+{
+    return Math.random() * (max - min) + min;
+}
+		
+function randomIntRange(max, min) 
+{
+    return (min + Math.floor(Math.random()*(max-min+1)));
 }
