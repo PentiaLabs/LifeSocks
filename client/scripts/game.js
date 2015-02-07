@@ -41,7 +41,7 @@ LifeSocks.Game = function(game) {
 
 LifeSocks.Game.prototype = {
     create: function () {
-        this.stage.backgroundColor = '#c8c8c8';
+        this.stage.backgroundColor = '#ffffff';
         this.physics.startSystem(Phaser.Physics.ninja);
 
         balls = this.add.group();
