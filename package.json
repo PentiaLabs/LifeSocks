@@ -9,7 +9,10 @@
   "scripts": {
     "start": "gulp",
     "test": "gulp test",
-    "postinstall": "gulp"
+    "postinstall": [
+      "npm install",
+      "gulp"
+    ]
   },
   "repository": {
     "type": "git",
