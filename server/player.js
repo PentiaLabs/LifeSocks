@@ -1,11 +1,12 @@
+var NameFactory = require('./NameFactory.js')
+var namefactory = new NameFactory();
+
 var player = {
 	create: function(playerid) {
 		return {
 			id: playerid,
-			nickname: 'Nick Namenik',
-			points: 0,
-			speed: 0,
-			killed: false
+			nickname: namefactory.generate(),
+			dead: false
 		}
 	},
 	remove: function (playerid) {}
