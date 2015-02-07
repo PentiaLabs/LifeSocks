@@ -14,16 +14,16 @@ app.use(express.static(path.join(__dirname, '/../client'))); //  "public" off of
 var clientSockets = {};
 
 var player = require('./player.js');
-var room = require('./room.js');
+var board = require('./room.js');
 
 console.dir(player);
 
-var currentRoom = room.create('theOneAndOnly');
+var currentRoom = board.create('theOneAndOnly');
 
 io.on('connection', function(socket){
 	clientSockets[socket.id] = socket;
 
-	var player = player.create(socket.id);
+	//var currentPlayer = player.create(socket.id);
 	
 	socket.emit('JOINED', 'A New player joined....');
 	io.emit('onlinePlayers', clientSockets.length);
@@ -40,7 +40,12 @@ io.on('connection', function(socket){
 		// todo : remove player from game
 		player.remove();
 	});
+});
 
+var board = io
+  .of('/board')
+  .on('connection', function (socket) {
+    socket.emit('item', { news: 'item' });
 });
 
 var port = process.env.PORT || 3000;
