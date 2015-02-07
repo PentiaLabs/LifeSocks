@@ -27,7 +27,7 @@
   <div id="log"></div>
 
   <script src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
+  <script type="text/javascript" src="scripts/libs/jquery-2.1.3.js"></script>
   <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
 
   <script type="text/javascript" src="scripts/Board/Boot.js"></script>
@@ -38,7 +38,6 @@
   <script type="text/javascript" src="scripts/Board/Lobby.js"></script>
   <script>
     (function () {
-
       var game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'game');
       game.state.add('Boot', LifeSocks.Boot);
       game.state.add('Preloader', LifeSocks.Preloader);
@@ -65,7 +64,6 @@
 
     board.on('removePlayer', function (clientid) {
     });
-
   </script>
 
 </body>

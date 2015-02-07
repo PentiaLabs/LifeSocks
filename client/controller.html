@@ -19,10 +19,13 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <h1>Player - <span id="me"></div></h1>
+        <h2>Player - <span id="me"></div></h2>
+        <p>Use 'A' and 'D' to control</p>
         
-        <button id="moveRight">Right</button>
-        <button id="moveLeft">Left</button>
+        <button class="move" id="moveRight">Right</button>
+        <button class="move" id="moveLeft">Left</button>
+
+        <br /><br />
         
         <input id="chosenAction" type="text" value="besked" />
         <button id="action">Send action!</button>
@@ -33,7 +36,6 @@
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="scripts/libs/jquery-2.1.3.js"></script>
         <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
-        <script type="text/javascript" src="scripts/multi-basic.js"></script>
 
       <script type="text/javascript" src="scripts/Controller/Boot.js"></script>
       <script type="text/javascript" src="scripts/Controller/Preload.js"></script>
@@ -79,6 +81,20 @@
                 console.log('Send:', { rotateRight: 200 });
                 socket.emit('action', { rotateRight: 200 });
             }, false);
+
+
+            $( document ).keypress(function( event ) {
+                if ( event.which == 97 ) {
+                    event.preventDefault();
+                    socket.emit('action', { rotateLeft: 200 });
+
+                }
+                if ( event.which == 100 ) {
+                    event.preventDefault();
+                    socket.emit('action', { rotateRight: 200 });
+                }
+                console.log(event.which);
+            });
 
         </script>
 

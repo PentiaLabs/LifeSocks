@@ -12,3 +12,8 @@ body {
 canvas {
   border: 0px solid red;
   background-color: #fff; }
+
+
+.move {
+	padding: 3em;
+}
