@@ -1,13 +1,43 @@
 // Move game logic here...
-LifeSocks.Game = function(game) {
-    
-};
 var image;
 var balls;
 var speed = 200;
 var dangerZone;
 var players = {};
 var add = [];
+
+LifeSocks.Game = function(game) {
+    // Viewport logic
+    var board = io.connect(document.location.origin + '/board');
+    board.on('commands', function (command, player) {
+        console.log('Recive:', command);
+        $('#log').append(JSON.stringify(command) + '- by ' + player.nickname + '<br />');
+
+        if (command.rotateLeft) {
+            players[player.id].left = true;
+        };
+
+        if (command.rotateRight) {
+            players[player.id].right = true;
+        };
+
+    });
+    board.on('onlinePlayers', function (onlineNumber) {
+        console.log(onlineNumber);
+    });
+
+    board.on('addPlayer', function (player) {
+        console.log('Player joined:', player);
+        add.push(player.id);
+
+    });
+
+    board.on('removePlayer', function (clientid) {
+        //delete others[clientid];
+        //removeRemoteClient(clientid);
+    });
+};
+
 
 LifeSocks.Game.prototype = {
     create: function () {
@@ -33,7 +63,6 @@ LifeSocks.Game.prototype = {
         for (var i = 0; i < 20; i++) {
             balls.create(this.randomRange(1200, 10), this.randomRange(768, 10), 'ball');
         }
-
 
         // The player and its settings
 
@@ -86,84 +115,22 @@ LifeSocks.Game.prototype = {
         // This is necessary to scale before waiting for window changes.
         this.scale.refresh();
 
-        this.input.onDown.add(gofull, this);
+        this.input.onDown.add(this.gofull, this);
     },
-
     collision : function (ball) {
         ball.kill();
     },
-
-
-    gofull : function()
-    {
+    gofull : function() {
         if (this.scale.isFullScreen) {
             this.scale.stopFullScreen();
-        }
-
-        else {
+        } else {
             this.scale.startFullScreen(false);
         }
     },
-
-    randomRange : function(max, min)
-    {
+    randomRange : function(max, min) {
         return Math.random() * (max - min) + min;
     },
-
-    randomIntRange: function (max, min)
-    {
+    randomIntRange: function (max, min) {
         return (min + Math.floor(Math.random() * (max - min + 1)));
     }
 };
-
-//function collision(ball) {
-//    ball.kill();
-//}
-
-//function gofull() {
-//    if (game.scale.isFullScreen) {
-//        game.scale.stopFullScreen();
-//    } else {
-//        game.scale.startFullScreen(false);
-//    }
-//}
-
-//function randomRange(max, min) {
-//    return Math.random() * (max - min) + min;
-//}
-
-//function randomIntRange(max, min) {
-//    return (min + Math.floor(Math.random() * (max - min + 1)));
-//}
-
-// Viewport logic
-var board = io.connect(document.location.origin + '/board');
-board.on('commands', function (command, player) {
-    console.log('Recive:', command);
-    $('#log').append(JSON.stringify(command) + '- by ' + player.nickname + '<br />');
-
-    if (command.rotateLeft) {
-        players[player.id].left = true;
-    };
-
-    if (command.rotateRight) {
-        players[player.id].right = true;
-    };
-
-});
-board.on('onlinePlayers', function (onlineNumber) {
-    console.log(onlineNumber);
-});
-
-board.on('addPlayer', function (player) {
-    console.log('Player joined:', player);
-    add.push(player.id);
-
-});
-
-board.on('removePlayer', function (clientid) {
-
-    //delete others[clientid];
-
-    //removeRemoteClient(clientid);
-});
