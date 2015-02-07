@@ -8,6 +8,8 @@ function preload() {
     game.load.image('pinkball', 'assets/LifeSocks/pinkball.png');
     game.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');
     game.load.image('borderLong', 'assets/LifeSocks/Border_long.jpg');
+
+    game.load.atlas('semen', 'assets/semen.png', 'assets/semen.json');
 }
 
 var image;
@@ -16,10 +18,36 @@ var speed = 200;
 var dangerZone;
 var players = {};
 var add = [];
+var semen;
 
 function create() {
     game.stage.backgroundColor = '#c8c8c8';
     game.physics.startSystem(Phaser.Physics.ninja);
+
+    //  The base of our sperm cell
+    semen = game.add.sprite(200, 200, 'semen', 'semen1');
+    semen.anchor.setTo(0.5, 0.5);
+    semen.animations.add('move', [
+        'semen1',
+        'semen2',
+        'semen3',
+        'semen4',
+        'semen5',
+        'semen6',
+        'semen7',
+        'semen6',
+        'semen5',
+        'semen4',
+        'semen3',
+        'semen2'], 18, true);
+
+    game.physics.enable(semen, Phaser.Physics.ninja);
+    //semen.body.drag.set(0.2);
+    //semen.body.maxVelocity.setTo(400, 400);
+    semen.body.velocity.x = 200;
+    semen.body.collideWorldBounds = true;
+
+    semen.animations.play('move', 18, true);
 
     balls = game.add.group();
     dangerZone = game.add.group();
