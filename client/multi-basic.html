@@ -31,9 +31,25 @@
          <a href="javascript:location.reload()">reload!</button>
 
         <script src="/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
+        <script type="text/javascript" src="scripts/libs/jquery-2.1.3.js"></script>
         <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
         <script type="text/javascript" src="scripts/multi-basic.js"></script>
+
+      <script type="text/javascript" src="scripts/Controller/Boot.js"></script>
+      <script type="text/javascript" src="scripts/Controller/Preload.js"></script>
+      <script type="text/javascript" src="scripts/Controller/MainMenu.js"></script>
+        <script>
+        (function () {
+
+          var game = new Phaser.Game(1280, 768, Phaser.AUTO, 'game');
+          game.state.add('Boot', LifeSocks.Boot);
+          game.state.add('Preloader', LifeSocks.Preloader);
+          game.state.add('MainMenu', LifeSocks.MainMenu);
+          game.state.add('Lobby', LifeSocks.Lobby);
+          game.state.add('Game', LifeSocks.Game);
+          game.state.start('Boot');
+        })();
+        </script>
 
         <script>
             var socket = io.connect(document.location.origin + '/users');
