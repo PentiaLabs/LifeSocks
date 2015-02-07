@@ -24,10 +24,10 @@
         <div id="me"></div>
 
 
-        <button id="moveUp">UP</button>
-        <button id="moveDown">Down</button>
+        <button id="moveRight">Right</button>
+        <button id="moveLeft">Left</button>
 
-        <input id="chosenAction" type="text" value='{"moveDown": "200"}' />
+        <input id="chosenAction" type="text" value='{"moveLeft": "200"}' />
         <button id="action">Send action!</button>
 
         <script src="/socket.io/socket.io.js"></script>
@@ -48,10 +48,16 @@
             socket.emit('action',  $('#chosenAction').val());
         }, false);
 
-        var moveDown = document.getElementById("moveDown");
-        moveDown.addEventListener("click", function(){
-            console.log('Send:', { moveDown: 200 });
-            socket.emit('action', { moveDown: 200 });
+        var moveLeft = document.getElementById("moveLeft");
+        moveLeft.addEventListener("click", function(){
+            console.log('Send:', { moveLeft: 200 });
+            socket.emit('action', { moveLeft: 200 });
+        }, false);
+
+        var moveRight = document.getElementById("moveRight");
+        moveRight.addEventListener("click", function(){
+            console.log('Send:', { moveRight: 200 });
+            socket.emit('action', { moveRight: 200 });
         }, false);
         </script>
         
