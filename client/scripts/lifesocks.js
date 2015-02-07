@@ -63,7 +63,7 @@ function update() {
     //});
 
     game.physics.arcade.collide(balls);
-    game.physics.arcade.overlap(balls, dangerZone, collision, null, this);
+  //  game.physics.arcade.overlap(balls, dangerZone, collision, null, this);
 
     for (var i = 0; i < add.length; i++) {
         var newPlayer = balls.create(randomRange(1200, 10), randomRange(768, 10), 'pinkball');

@@ -20,7 +20,7 @@ LifeSocks.Preloader.prototype = {
 		this.load.spritesheet('button-audio', 'img/button-audio.png', 35, 35);
 
 		this.load.audio('bounce', ['audio/phaserUp3.ogg']);*/
-
+		this.stage.disableVisibilityChange = true;
 	    this.load.image('ball', 'assets/LifeSocks/ball.png');
 	    this.load.image('pinkball', 'assets/LifeSocks/pinkball.png');
 	    this.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');
