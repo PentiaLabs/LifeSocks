@@ -76,9 +76,24 @@
             console.log('Recive:', command);
             $('#log').append(command + '<br />');
 
-            if (command.moveDown) {
-                ship.body.moveDown(command.moveDown);
+            if (command.moveLeft) {
+                ship.body.moveLeft(command.moveLeft);
             };
+
+            if (command.moveRight) {
+                ship.body.moveRight(command.moveRight);
+            };
+        });
+
+         socket.on('addPlayer', function(clientid) {
+            //delete others[clientid];
+            //removeRemoteClient(clientid);
+        });
+
+        socket.on('removePlayer', function(clientid) {
+            //delete others[clientid];
+
+            //removeRemoteClient(clientid);
         });
 
         function update() {
