@@ -57,7 +57,6 @@ var board = io
 	});
 
 var port = process.env.PORT || 3000;
-var port = 80;
 http.listen(port, function(){
 	console.log('listening on *:' + port);
 });
