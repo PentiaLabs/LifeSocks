@@ -20,7 +20,7 @@ console.dir(player);
 
 var currentRoom = board.create('theOneAndOnly');
 
-io.on('connection', function(socket){
+var users = io.of('/users').on('connection', function(socket){
 	clientSockets[socket.id] = socket;
 
 	//var currentPlayer = player.create(socket.id);
@@ -33,7 +33,7 @@ io.on('connection', function(socket){
 
 	socket.on('action', function(msg){
 		console.log(msg);
-	    io.emit('action', msg);
+	    board.emit('commands', msg);
 	});
 
 	socket.on('disconnect', function(){
@@ -43,10 +43,10 @@ io.on('connection', function(socket){
 });
 
 var board = io
-  .of('/board')
-  .on('connection', function (socket) {
-    socket.emit('item', { news: 'item' });
-});
+	.of('/board')
+	.on('connection', function (socket) {
+    
+	});
 
 var port = process.env.PORT || 3000;
 http.listen(port, function(){
