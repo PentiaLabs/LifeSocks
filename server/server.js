@@ -14,11 +14,11 @@ app.use(express.static(path.join(__dirname, '/../client'))); //  "public" off of
 var clientSockets = {};
 
 var player = require('./player.js');
-var board = require('./room.js');
+var BoardClass = require('./room.js');
 
 console.dir(player);
 
-var currentRoom = board.create();
+var currentRoom = BoardClass.create();
 
 var addPlayer = function(player) {
 	currentRoom.players[player.id] = player;
@@ -58,8 +58,8 @@ var users = io.of('/users').on('connection', function(socket){
 var board = io
 	.of('/board')
 	.on('connection', function (socket) {
-    	var currentBoard = board.create(socket.id);
-    	console.log('Board connected with ID:' currentBoard.id);
+    	var currentBoard = BoardClass.create(socket.id);
+    	console.log('Board connected with ID:', currentBoard.id);
 	});
 
 var port = process.env.PORT || 3000;
