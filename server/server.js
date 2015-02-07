@@ -30,8 +30,9 @@ var users = io.of('/users').on('connection', function(socket){
 	var currentPlayer = player.create(socket.id);
 	addPlayer(currentPlayer);
 
-	board.emit('addPlayer', currentPlayer);
-	
+	board.emit('addPlayer', currentPlayer); 
+	socket.emit('playerData', currentPlayer);
+
 	board.emit('onlinePlayers', currentRoom.players.length);
 	console.log('onlinePlayers:', currentRoom.players.length, currentRoom.players);
 
