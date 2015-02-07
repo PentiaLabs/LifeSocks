@@ -23,7 +23,7 @@ var currentRoom = board.create('theOneAndOnly');
 io.on('connection', function(socket){
 	clientSockets[socket.id] = socket;
 
-	var player = player.create(socket.id);
+	var currentPlayer = player.create(socket.id);
 	
 	socket.emit('JOINED', 'A New player joined....');
 	io.emit('onlinePlayers', clientSockets.length);
