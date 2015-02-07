@@ -55,6 +55,15 @@ function create() {
     balls.setAll("body.bounce.x", 0.8);
     balls.setAll("body.collideWorldBounds", true);
 
+    // setting gyroscope update frequency
+    gyro.frequency = 10;
+    // start gyroscope detection
+    gyro.startTracking(function(o) {
+        // updating player velocity
+        player.body.velocity.x += o.gamma/20;
+        player.body.velocity.y += o.beta/20;
+    });
+
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
 }
@@ -117,18 +126,6 @@ function randomRange(max, min) {
 function randomIntRange(max, min) {
     return (min + Math.floor(Math.random() * (max - min + 1)));
 }
-
-function onCreate () {
-    // setting gyroscope update frequency
-    gyro.frequency = 10;
-    // start gyroscope detection
-    gyro.startTracking(function(o) {
-        // updating player velocity
-        player.body.velocity.x += o.gamma/20;
-        player.body.velocity.y += o.beta/20;
-    });     
-}
-
 
 // Viewport logic
 var board = io.connect(document.location.origin + '/board');
