@@ -111,7 +111,7 @@ function update() {
   //  game.physics.arcade.overlap(balls, dangerZone, collision, null, this);
 
     for (var i = 0; i < add.length; i++) {
-        var newPlayer = balls.create(randomRange(1200, 10), randomRange(768, 10), 'semen', 'semen1');
+        var newPlayer = balls.create(randomRange(1900, 10), randomRange(110, 10), 'semen', 'semen1');
         newPlayer.angle = 180;
         newPlayer.animations.add('move', [
             'semen1',

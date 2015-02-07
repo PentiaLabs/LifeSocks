@@ -41,13 +41,38 @@ LifeSocks.Game = function(game) {
 
 LifeSocks.Game.prototype = {
     create: function () {
-        this.stage.backgroundColor = '#ffffff';
+        this.stage.backgroundColor = '#c8c8c8';
         this.physics.startSystem(Phaser.Physics.ninja);
+
+        //  The base of our sperm cell
+        //semen = this.add.sprite(200, 200, 'semen', 'semen1');
+        //semen.anchor.setTo(0.5, 0.5);
+        //semen.animations.add('move', [
+        //    'semen1',
+        //    'semen2',
+        //    'semen3',
+        //    'semen4',
+        //    'semen5',
+        //    'semen6',
+        //    'semen7',
+        //    'semen6',
+        //    'semen5',
+        //    'semen4',
+        //    'semen3',
+        //    'semen2'], 18, true);
+
+        //this.physics.enable(semen, Phaser.Physics.ninja);
+        ////semen.body.drag.set(0.2);
+        ////semen.body.maxVelocity.setTo(400, 400);
+        //semen.body.velocity.x = 200;
+        //semen.body.collideWorldBounds = true;
+
+        //semen.animations.play('move', 18, true);
 
         balls = this.add.group();
         dangerZone = this.add.group();
 
-        //game.physics.ninja.enable(balls);
+        //this.physics.ninja.enable(balls);
         balls.enableBody = true;
         dangerZone.enableBody = true;
 
@@ -60,9 +85,27 @@ LifeSocks.Game.prototype = {
         //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
         rightZone.scale.setTo(1, 4);
 
-        for (var i = 0; i < 20; i++) {
-            balls.create(this.randomRange(1200, 10), this.randomRange(768, 10), 'ball');
-        }
+        //for (var i = 0; i < 20; i++) {
+        //    var semen = balls.create(randomRange(1200, 10), randomRange(768, 10), 'semen', 'semen1');
+        //    semen.scale.setTo(0.9, 0.9);
+
+        //    semen.anchor.setTo(0.5, 0.5);
+        //    semen.animations.add('move', [
+        //        'semen1',
+        //        'semen2',
+        //        'semen3',
+        //        'semen4',
+        //        'semen5',
+        //        'semen6',
+        //        'semen7',
+        //        'semen6',
+        //        'semen5',
+        //        'semen4',
+        //        'semen3',
+        //        'semen2'], 18, true);
+        //    semen.animations.play('move', 18, true);
+        //}
+
 
         // The player and its settings
 
@@ -71,17 +114,47 @@ LifeSocks.Game.prototype = {
         balls.setAll("body.bounce.y", 0.8);
         balls.setAll("body.bounce.x", 0.8);
         balls.setAll("body.collideWorldBounds", true);
+        balls.setAll("body.width", 90);
+        balls.setAll("body.height", 90);
     },
     update : function() {
+        //// setting gyroscope update frequency
+        //gyro.frequency = 10;
+        //// start gyroscope detection
+        //gyro.startTracking(function(o) {
+        //    // updating player velocity
+        //    player.body.velocity.x += o.gamma/20;
+        //    player.body.velocity.y += o.beta/20;
+        //});
+
         this.physics.arcade.collide(balls);
-        //  game.physics.arcade.overlap(balls, dangerZone, collision, null, this);
+        //  this.physics.arcade.overlap(balls, dangerZone, collision, null, this);
 
         for (var i = 0; i < add.length; i++) {
-            var newPlayer = balls.create(this.randomRange(1200, 10), this.randomRange(768, 10), 'pinkball');
+            var newPlayer = balls.create(this.randomRange(1200, 10), this.randomRange(768, 10), 'semen', 'semen1');
+            newPlayer.animations.add('move', [
+                'semen1',
+                'semen2',
+                'semen3',
+                'semen4',
+                'semen5',
+                'semen6',
+                'semen7',
+                'semen6',
+                'semen5',
+                'semen4',
+                'semen3',
+                'semen2'], 18, true);
+
+
+
             newPlayer.body.velocity.setTo(200, 200);
             newPlayer.body.bounce.setTo(0.8, 0.8);
             newPlayer.body.collideWorldBounds = true;
             newPlayer.anchor.setTo(0.5, 0.5);
+            newPlayer.animations.play('move', 18, true);
+            newPlayer.body.width = 100;
+            newPlayer.body.height = 100;
             players[add[i]] = newPlayer;
         }
 
