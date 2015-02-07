@@ -9,6 +9,6 @@ deploy:
   api_key: "6e89900b-3cf5-47e7-b951-1d34c592f547"
   app: infinite-badlands-5327
   run:
-  	- "npm install -g gulp"
-  	- "npm install"
+    - "npm install -g gulp"
+    - "npm install"
     - "gulp"
