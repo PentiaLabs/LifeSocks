@@ -141,8 +141,8 @@ board.on('onlinePlayers', function (onlineNumber) {
 
 board.on('addPlayer', function (player) {
     console.log('Player joined:', player);
-    //players[player.id] = {};
-
+    //delete others[clientid];
+    //removeRemoteClient(clientid);
 });
 
 board.on('removePlayer', function (clientid) {
