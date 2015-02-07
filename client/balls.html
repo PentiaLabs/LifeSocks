@@ -18,14 +18,12 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <h1>GAME!</h1>
-
         <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
         <script type="text/javascript" src="scripts/libs/gyro.js"></script>
         <script type="text/javascript">
             // mods by Patrick OReilly 
 // Twitter: @pato_reilly Web: http://patricko.byethost9.com
-          var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+          var game = new Phaser.Game(1280, 768, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
           function preload() {
               game.stage.disableVisibilityChange = true;
@@ -36,103 +34,59 @@
           var balls;
 
           function create() {
-            game.stage.backgroundColor = '#c8c8c8';
+              game.stage.backgroundColor = '#c8c8c8';
               game.physics.startSystem(Phaser.Physics.ARCADE);
 
-              //cursors = game.input.keyboard.createCursorKeys();
               balls = game.add.group();
               game.physics.arcade.enable(balls);
-              //  This creates a simple sprite that is using our loaded image and
-              //  displays it on-screen
-              //  and assign it to a variable
-              balls.create(10, 10, 'ball');
-              balls.create(60, 510, 'ball');
-              balls.create(10, 300, 'ball');
-              balls.create(95, 20, 'ball');
-              balls.create(80, 80, 'ball');
-
+              balls.enableBody = true;
+              
               for (var i = 0; i < 6; i++) {
-                var ball = balls.create(i * 70, 0, 'ball');
+
+                var ball = balls.create(Math.random() * 100 * i, Math.random() * 100 * i, 'ball');
 
                 ball.body.velocity.setTo(200, 200);
 
-                ball.body.bounce.y = 0.7 + Math.random() * 0.2;
+                ball.body.bounce.y = 1.0;
+                ball.body.bounce.x = 1.0;
 
                 ball.body.collideWorldBounds = true;
               }
-              //game.physics.enable([
-              //  ball1,
-              //  ball2,
-              //  ball3,
-              //  ball4,
-              //  ball5
-              //], Phaser.Physics.ARCADE);
-
-              //  This gets it moving
-              //ball1.body.velocity.setTo(200, 200);
-              //ball2.body.velocity.setTo(200, 200);
-              //ball3.body.velocity.setTo(200, 200);
-              //ball4.body.velocity.setTo(200, 200);
-              //ball5.body.velocity.setTo(200, 200);
-
-              //  This makes the game world bounce-able
-              //ball1.body.collideWorldBounds = true;
-              //ball2.body.collideWorldBounds = true;
-              //ball3.body.collideWorldBounds = true;
-              //ball4.body.collideWorldBounds = true;
-              //ball5.body.collideWorldBounds = true;
-
-              //  This sets the image bounce energy for the horizontal 
-              //  and vertical vectors (as an x,y point). "1" is 100% energy return
-              //ball1.body.bounce.setTo(0.7, 0.7);
-              //ball2.body.bounce.setTo(0.7, 0.7);
-              //ball3.body.bounce.setTo(0.7, 0.7);
-              //ball4.body.bounce.setTo(0.7, 0.7);
-              //ball5.body.bounce.setTo(0.7, 0.7);
-
 
           }
 
           //  Move the knocker with the arrow keys
-          function update () {
-
-            game.physics.arcade.collideGroupVsSelf(balls);
-            //  Enable physics between the knocker and the ball
-            //game.physics.arcade.collide(ball1, ball2);
-            //game.physics.arcade.collide(ball1, ball3);
-            //game.physics.arcade.collide(ball1, ball4);
-            //game.physics.arcade.collide(ball1, ball5);
-
-            //game.physics.arcade.collide(ball2, ball1);
-            //game.physics.arcade.collide(ball2, ball3);
-            //game.physics.arcade.collide(ball2, ball4);
-            //game.physics.arcade.collide(ball2, ball5);
-
-            //game.physics.arcade.collide(ball3, ball2);
-            //game.physics.arcade.collide(ball3, ball1);
-            //game.physics.arcade.collide(ball3, ball4);
-            //game.physics.arcade.collide(ball3, ball5);
-
-            //game.physics.arcade.collide(ball4, ball2);
-            //game.physics.arcade.collide(ball4, ball3);
-            //game.physics.arcade.collide(ball4, ball1);
-            //game.physics.arcade.collide(ball4, ball5);
-
-            //game.physics.arcade.collide(ball5, ball2);
-            //game.physics.arcade.collide(ball5, ball3);
-            //game.physics.arcade.collide(ball5, ball4);
-            //game.physics.arcade.collide(ball5, ball1);
+          function update() {
+            game.physics.arcade.collide(balls);
+            
           }
 
           function render () {
+            
+              game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+              game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
-              //debug helper
-              //game.debug.spriteInfo(ball1, 32, 32);
-              //game.debug.spriteInfo(ball2, 32, 32);
-              //game.debug.spriteInfo(ball3, 32, 32);
-              //game.debug.spriteInfo(ball4, 32, 32);
-              //game.debug.spriteInfo(ball5, 32, 32);
+              // Properly centers game in windowed mode, but aligning
+              // horizontally makes it off-centered in fullscreen mode.
+              game.scale.pageAlignHorizontally = true;
+              game.scale.pageAlignVertically = true;
 
+              // Docs say this is necessary, but it doesn't seem to change behavior?
+              game.scale.setScreenSize(true);
+
+              // This is necessary to scale before waiting for window changes.
+              game.scale.refresh();
+
+              game.input.onDown.add(gofull, this);
+
+          }
+
+          function gofull() {
+              if (game.scale.isFullScreen) {
+                  game.scale.stopFullScreen();
+              } else {
+                  game.scale.startFullScreen(false);
+              }
           }
         </script>
         
