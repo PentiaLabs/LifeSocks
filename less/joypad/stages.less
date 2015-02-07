@@ -28,6 +28,7 @@
     }
 
     img {
+      z-index: -1;
       width: 100%;
       min-height: 100%; // force 16:9 to 4:3
       height: auto;
@@ -62,7 +63,6 @@
       }
     }
   }
-
   //Splash screen
   .game-splash {
     position: relative;
@@ -76,7 +76,20 @@
       padding-top: 75%;
     }
 
+    ul {
+      li {
+        width: 5%;
+        height: auto;
+        background: white;
+        border-radius: 25px;
+        list-style-type: none;
+        float: left;
+        margin-right: 5px;
+      }
+    }
+
     img {
+      z-index: -1;
       width: 100%;
       min-height: 100%; // force 16:9 to 4:3
       height: auto;
@@ -89,11 +102,11 @@
     }
 
     .game-stage-1 {
+      z-index: 1;
     }
 
     .game-stage-2 {
     }
-
     //Game splash results
     .game-splash-results {
       &.win {

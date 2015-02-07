@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -23,7 +23,7 @@
         
         <button id="moveRight">Right</button>
         <button id="moveLeft">Left</button>
-
+        
         <input id="chosenAction" type="text" value="besked" />
         <button id="action">Send action!</button>
 
@@ -37,12 +37,19 @@
         <script type="text/javascript" src="scripts/multi-basic.js"></script>
 
         <script>
-        var socket = io.connect(document.location.origin + '/users');
+            var socket = io.connect(document.location.origin + '/users');
 
-        socket.on('playerData', function(arg) {
-            console.log('playerData:', arg);
-            $('#me').html(arg.nickname);
-        });
+            socket.on('playerData', function(arg) {
+                console.log('playerData:', arg);
+                $('#me').html(arg.nickname);
+            });
+
+            
+            var moveLeft = document.getElementById("moveLeft");
+            moveLeft.addEventListener("click", function(){
+                console.log('Send:', { rotateLeft: 200 });
+                socket.emit('action', { rotateLeft: 200 });
+            }, false);
 
         var el = document.getElementById("action");
         el.addEventListener("click", function(){
@@ -50,17 +57,11 @@
             socket.emit('action', $('#chosenAction').val());
         }, false);
 
-        var moveLeft = document.getElementById("moveLeft");
-        moveLeft.addEventListener("click", function(){
-            console.log('Send:', { moveLeft: 200 });
-            socket.emit('action', { moveLeft: 200 });
-        }, false);
-
-        var moveRight = document.getElementById("moveRight");
-        moveRight.addEventListener("click", function(){
-            console.log('Send:', { moveRight: 200 });
-            socket.emit('action', { moveRight: 200 });
-        }, false);
+            var moveRight = document.getElementById("moveRight");
+            moveRight.addEventListener("click", function(){
+                console.log('Send:', { rotateRight: 200 });
+                socket.emit('action', { rotateRight: 200 });
+            }, false);
 
 
         $( "#target" ).keydown(function( event ) {
@@ -73,6 +74,7 @@
           $.print( event );
         });
         </script>
+
         
     </body>
 </html>
