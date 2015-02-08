@@ -49,10 +49,10 @@ var users = io.of('/users').on('connection', function(socket){
 
 	socket.on('startGame', function(msg){
 		console.log('StartGame', msg);
-		if(!gameStarted){
+		//if(!gameStarted){
 			board.emit('startGame', msg, currentPlayer);
 			gameStarted = true;
-		}
+		//}
 	});
 
 	socket.on('resetGame', function(msg){
