@@ -34,7 +34,7 @@ var users = io.of('/users').on('connection', function(socket){
 	board.emit('addPlayer', currentPlayer); 
 	socket.emit('playerData', currentPlayer);
 
-	board.emit('onlinePlayers', currentRoom.players.length);
+	board.emit('onlinePlayers', currentRoom.players);
 	console.log('onlinePlayers:', currentRoom.players.length, currentRoom.players);
 
 	// On Player Update, Change Board Data
