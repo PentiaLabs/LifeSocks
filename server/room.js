@@ -5,6 +5,7 @@ var room = {
 	create: function(roomid) {
 		return {
 			id: roomid,
+			started: false,
 			players: []
 		}
 	}
