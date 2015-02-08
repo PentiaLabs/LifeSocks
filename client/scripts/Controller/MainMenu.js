@@ -11,9 +11,14 @@ LifeSocks.MainMenu.prototype = {
 	    this.add.sprite(200, 100, 'controller-start-header');
 
 	    StartGameButton = this.add.button(750, 550, 'controller-start', this.startGame, this, null, null, null);
+
+	    socket.on('gameStarted', this.gameStarted, this);
 	},
 	startGame: function() {
 		socket.emit('startGame', true);
+		this.game.state.start('Play');
+	},
+	gameStarted: function() {
 		this.game.state.start('Play');
 	}
 };

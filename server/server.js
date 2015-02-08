@@ -50,6 +50,9 @@ var users = io.of('/users').on('connection', function(socket){
 	socket.on('startGame', function(msg){
 		console.log('StartGame', msg);
 		//if(!gameStarted){
+			// TODO: 
+			// emit that a single user has startet the game, so we can update other controllers
+			users.emit('gameStarted', true, currentPlayer);
 			board.emit('startGame', msg, currentPlayer);
 			gameStarted = true;
 		//}
