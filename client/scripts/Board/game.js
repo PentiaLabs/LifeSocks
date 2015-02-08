@@ -39,7 +39,6 @@ LifeSocks.Game = function(game) {
     });
 };
 
-
 LifeSocks.Game.prototype = {
     create: function () {
         this.stage.backgroundColor = '#000000';

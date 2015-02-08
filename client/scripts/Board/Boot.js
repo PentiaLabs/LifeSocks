@@ -2,8 +2,8 @@ var LifeSocks = {};
 LifeSocks.Boot = function (game) { };
 LifeSocks.Boot.prototype = {
   preload: function () {
-    this.load.image('preloaderBg', 'assets/loading-bg.png');
-    this.load.image('preloaderBar', 'assets/loading-bar.png');
+    this.load.image('preloaderBg', 'assets/loadingbar_back.png');
+    this.load.image('preloaderBar', 'assets/loadingbar.png');
   },
   create: function () {
     // Stretch to fill
