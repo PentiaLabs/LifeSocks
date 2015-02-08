@@ -83,7 +83,7 @@ LifeSocks.Game.prototype = {
         //});
 
         this.physics.arcade.collide(balls);
-        this.physics.arcade.overlap(balls, ground, this.semenSplat, null, this);
+        this.physics.arcade.overlap(balls, ground, this.semenSplat, function (semen, ground) {  return false; }, this);
 
         for (var i = 0; i < add.length; i++) {
             var newPlayer = balls.create(this.randomRange(1200, 10), this.randomRange(768, 10), 'semen', 'semen1');
