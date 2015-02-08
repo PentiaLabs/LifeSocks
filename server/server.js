@@ -60,6 +60,10 @@ var board = io
 	.on('connection', function (socket) {
     	var currentBoard = BoardClass.create(socket.id);
     	console.log('Board connected with ID:', currentBoard.id);
+
+    	socket.on('winner', function(msg){
+    		// Notify winner
+		});
 	});
 
 var port = process.env.PORT || 3000;
