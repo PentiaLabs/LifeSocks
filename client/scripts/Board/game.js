@@ -6,6 +6,8 @@ var dangerZone;
 var players = {};
 var add = [];
 var ground;
+var ballsCollisionGroup;
+var groundCollisionGroup;
 
 LifeSocks.Game = function(game) {
     // Viewport logic
@@ -44,46 +46,45 @@ LifeSocks.Game.prototype = {
         this.stage.backgroundColor = '#000000';
         this.add.sprite(0, 0, 'game-bg');
 
+        this.physics.startSystem(Phaser.Physics.P2JS);
+      this.physics.p2.setBoundsToWorld(true, true, true, true, false);
+        this.physics.p2.restitution = 0.6;
+        this.physics.p2.setImpactEvents(true);
+        ballsCollisionGroup = this.physics.p2.createCollisionGroup();
+        groundCollisionGroup = this.physics.p2.createCollisionGroup();
         //  The platforms group contains the ground and the 2 ledges we can jump on
         platforms = this.add.group();
         platforms.enableBody = true;
+        platforms.physicsBodyType = Phaser.Physics.P2JS;
 
-        ground = platforms.create(0, this.world.height - 50, 'ground');
+        ground = platforms.create(0, this.world.height - 50, 'borderLong');
         ground.body.width = this.world.width;
+        this.physics.p2.enable(ground);
         ground.body.height = 50;
         ground.scale.setTo(4, 4);
         ground.body.immovable = true;
         ground.body.collideWorldBounds = true;
+        ground.body.setCollisionGroup(groundCollisionGroup);
+        ground.body.collides(ballsCollisionGroup, this.semenSplat, this);
 
-        this.physics.startSystem(Phaser.Physics.ninja);
 
         balls = this.add.group();
-
-        //this.physics.ninja.enable(balls);
         balls.enableBody = true;
+        balls.physicsBodyType = Phaser.Physics.P2JS;
 
-        // The player and its settings
+        this.physics.p2.enable(balls);
+        
 
-        balls.setAll("body.velocity.x", 200);
-        balls.setAll("body.velocity.y", 200);
-        balls.setAll("body.bounce.y", 0.8);
-        balls.setAll("body.bounce.x", 0.8);
-        balls.setAll("body.collideWorldBounds", true);
-        balls.setAll("body.width", 90);
-        balls.setAll("body.height", 90);
+      //this.physics.ninja.enable(balls);
+      //balls.enableBody = true;
+
+      // The player and its settings
+
     },
     update : function() {
-        //// setting gyroscope update frequency
-        //gyro.frequency = 10;
-        //// start gyroscope detection
-        //gyro.startTracking(function(o) {
-        //    // updating player velocity
-        //    player.body.velocity.x += o.gamma/20;
-        //    player.body.velocity.y += o.beta/20;
-        //});
-
-        this.physics.arcade.collide(balls);
-        this.physics.arcade.overlap(balls, ground, this.semenSplat, null, this);
+       
+        //this.physics.arcade.collide(balls);
+        //this.physics.arcade.overlap(balls, ground, this.semenSplat, null, this);
 
         for (var i = 0; i < add.length; i++) {
             var newPlayer = balls.create(this.randomRange(1200, 10), this.randomRange(768, 10), 'semen', 'semen1');
@@ -106,13 +107,20 @@ LifeSocks.Game.prototype = {
                 'splat2',
                 'splat3'], 18, false);
 
-            newPlayer.body.velocity.setTo(200, 200);
-            newPlayer.body.bounce.setTo(0.8, 0.8);
+            this.physics.p2.enable(newPlayer);
+            newPlayer.enableBody = true;
+      
+          //newPlayer.body.bounce.setTo(0.8, 0.8);
+            newPlayer.body.setCollisionGroup(ballsCollisionGroup);
+            newPlayer.body.collides(groundCollisionGroup);
+            ground.body.collides(newPlayer);
             newPlayer.body.collideWorldBounds = true;
             newPlayer.anchor.setTo(0.5, 0.5);
             newPlayer.animations.play('move', 18, true);
-            newPlayer.body.width = 100;
-            newPlayer.body.height = 100;
+            //newPlayer.body.width = 100;
+            //newPlayer.body.height = 100;
+          newPlayer.body.setCircle(30);
+            
             players[add[i]] = newPlayer;
         }
 
@@ -120,15 +128,20 @@ LifeSocks.Game.prototype = {
 
         for (player in players) {
             if (players[player].left) {
-                players[player].angle -= 20;
+              //players[player].angle -= 20;
+              players[player].body.angle -= 20;
                 players[player].left = false;
+            } else if (players[player].right) {
+              //players[player].angle += 20;
+              players[player].body.angle += 20;
+              players[player].right = false;
+            } else {
+              players[player].body.setZeroRotation();
             }
 
-            if (players[player].right) {
-                players[player].angle += 20;
-                players[player].right = false;
-            }
-            this.physics.arcade.velocityFromRotation(players[player].rotation, -speed, players[player].body.velocity);
+            
+              players[player].body.thrust(400);
+            //this.physics.arcade.velocityFromRotation(players[player].rotation, -speed, players[player].body.velocity);
         }
     },
     render : function (){
@@ -148,7 +161,8 @@ LifeSocks.Game.prototype = {
 
         this.input.onDown.add(this.gofull, this);
     },
-    semenSplat : function (ground, semen) {
+    semenSplat: function (ground, semen) {
+      debugger;
         semen.animations.stop('move');
         semen.animations.play('splat', 18, false, true);
 
