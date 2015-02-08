@@ -6,6 +6,8 @@ LifeSocks.Boot.prototype = {
     this.load.image('preloaderBar', 'assets/loadingbar.png');
   },
   create: function () {
+    this.game.stage.backgroundColor = '#EBA2C5';
+
     // Stretch to fill
     this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
     this.stage.disableVisibilityChange = true;
