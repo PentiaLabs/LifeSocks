@@ -5,6 +5,7 @@ var speed = 200;
 var dangerZone;
 var players = {};
 var add = [];
+var ground;
 
 LifeSocks.Game = function(game) {
     // Viewport logic
@@ -44,60 +45,23 @@ LifeSocks.Game.prototype = {
         this.stage.backgroundColor = '#000000';
         this.add.sprite(0, 0, 'game-bg');
 
+        //  The platforms group contains the ground and the 2 ledges we can jump on
+        platforms = this.add.group();
+        platforms.enableBody = true;
+
+        ground = platforms.create(0, this.world.height - 50, 'ground');
+        ground.body.width = this.world.width;
+        ground.body.height = 50;
+        ground.scale.setTo(4, 4);
+        ground.body.immovable = true;
+        ground.body.collideWorldBounds = true;
+
         this.physics.startSystem(Phaser.Physics.ninja);
-
-        //  The base of our sperm cell
-        //semen = this.add.sprite(200, 200, 'semen', 'semen1');
-        //semen.anchor.setTo(0.5, 0.5);
-        //semen.animations.add('move', [
-        //    'semen1',
-        //    'semen2',
-        //    'semen3',
-        //    'semen4',
-        //    'semen5',
-        //    'semen6',
-        //    'semen7',
-        //    'semen6',
-        //    'semen5',
-        //    'semen4',
-        //    'semen3',
-        //    'semen2'], 18, true);
-
-        //this.physics.enable(semen, Phaser.Physics.ninja);
-        ////semen.body.drag.set(0.2);
-        ////semen.body.maxVelocity.setTo(400, 400);
-        //semen.body.velocity.x = 200;
-        //semen.body.collideWorldBounds = true;
-
-        //semen.animations.play('move', 18, true);
 
         balls = this.add.group();
 
         //this.physics.ninja.enable(balls);
         balls.enableBody = true;
-
-        
-        //for (var i = 0; i < 20; i++) {
-        //    var semen = balls.create(randomRange(1200, 10), randomRange(768, 10), 'semen', 'semen1');
-        //    semen.scale.setTo(0.9, 0.9);
-
-        //    semen.anchor.setTo(0.5, 0.5);
-        //    semen.animations.add('move', [
-        //        'semen1',
-        //        'semen2',
-        //        'semen3',
-        //        'semen4',
-        //        'semen5',
-        //        'semen6',
-        //        'semen7',
-        //        'semen6',
-        //        'semen5',
-        //        'semen4',
-        //        'semen3',
-        //        'semen2'], 18, true);
-        //    semen.animations.play('move', 18, true);
-        //}
-
 
         // The player and its settings
 
@@ -119,8 +83,8 @@ LifeSocks.Game.prototype = {
         //    player.body.velocity.y += o.beta/20;
         //});
 
-        this.physics.arcade.collide(balls);
-        //  this.physics.arcade.overlap(balls, dangerZone, collision, null, this);
+        //this.physics.arcade.collide(balls);
+        this.physics.arcade.overlap(balls, ground, this.semenSplat, null, this);
 
         for (var i = 0; i < add.length; i++) {
             var newPlayer = balls.create(this.randomRange(1200, 10), this.randomRange(768, 10), 'semen', 'semen1');
@@ -138,7 +102,10 @@ LifeSocks.Game.prototype = {
                 'semen3',
                 'semen2'], 18, true);
 
-
+            newPlayer.animations.add('splat', [
+                'splat1',
+                'splat2',
+                'splat3'], 18, false);
 
             newPlayer.body.velocity.setTo(200, 200);
             newPlayer.body.bounce.setTo(0.8, 0.8);
@@ -181,6 +148,10 @@ LifeSocks.Game.prototype = {
         this.scale.refresh();
 
         this.input.onDown.add(this.gofull, this);
+    },
+    semenSplat : function (ground, semen) {
+        semen.animations.stop('move');
+        semen.animations.play('splat', 18, false, true);
     },
     collision : function (ball) {
         ball.kill();

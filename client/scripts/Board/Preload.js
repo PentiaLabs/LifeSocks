@@ -14,6 +14,7 @@ LifeSocks.Preloader.prototype = {
     this.load.image('pinkball', 'assets/LifeSocks/pinkball.png');
     this.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');
     this.load.image('borderLong', 'assets/LifeSocks/Border_long.jpg');
+    this.load.image('ground', 'assets/LifeSocks/ground.png');
 
 
     //Selection of possible assets
