@@ -8,29 +8,21 @@ LifeSocks.MainMenu.prototype = {
 	    var t = this.add.text(this.world.centerX-300, 0, text, style);
 	    this.add.sprite(0, 0, 'controller-bg');
 
-	    this.add.sprite(50, 250, 'controller-left');
-	    //this.add.sprite(1200, 250, 'controller-right');
-
-	    button = this.add.button(1200, 250, 'controller-right', this.actionOnClick, this, 2, 1, 0);
- 		button.onInputOver.add(this.over, this);
-	    button.onInputOut.add(this.out, this);
-	    button.onInputUp.add(this.up, this);
+	    buttonRight = this.add.button(1200, 250, 'controller-right', this.rotateRight, this, null, null, null);
+	    buttonLeft = this.add.button(50, 250, 'controller-left', this.rotateLeft, this, null, null, null);
 
 	    //this.game.state.start('Game');
 	},
 	startGame: function() {
 	  this.add.sprite(0, 0, 'screen-bg');
 	},
-	 up: function() {
-	    console.log('button up', arguments);
+	rotateRight: function () {
+	    console.log('Right!!!');
+	    socket.emit('action', { rotateRight: 200 });
+
 	},
-	over: function() {
-	    console.log('button over');
-	},
-	out: function () {
-	    console.log('button out');
-	},
-	actionOnClick: function () {
-	    console.log('VILDT!!!');
+	rotateLeft: function () {
+	    console.log('LEFT!');
+	    socket.emit('action', { rotateLeft: 200 });
 	}
 };
