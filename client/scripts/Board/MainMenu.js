@@ -8,7 +8,6 @@ LifeSocks.MainMenu.prototype = {
 	    var t = this.add.text(this.world.centerX-300, 0, text, style);
 	    this.add.sprite(0, 0, 'screen-bg');
 
-
 	    // We need a start button... but We'll fake this :-)
 	    var that = this;
 	    setTimeout(function() {
