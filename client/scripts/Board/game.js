@@ -5,7 +5,7 @@ var speed = 200;
 var dangerZone;
 var players = {};
 var add = [];
-var ground;
+var bottomGround, topGround, leftGround, rightGround;
 var ballsCollisionGroup;
 var groundCollisionGroup;
 var decidedGame = false;
@@ -51,19 +51,54 @@ LifeSocks.Game.prototype = {
         this.physics.p2.setImpactEvents(true);
         this.physics.p2.restitution = 0.6;
         this.physics.p2.defaultRestitution = 0.8;
-        this.physics.p2.defaultFriction = 0.2;
+        //this.physics.p2.defaultFriction = 0.2;
 
         ballsCollisionGroup = this.physics.p2.createCollisionGroup();
         groundCollisionGroup = this.physics.p2.createCollisionGroup();
 
-        ground = this.add.sprite(0, this.world.height - 50, 'ground');
-        ground.scale.setTo(4, 4);
-        this.physics.p2.enable(ground);
-        ground.body.width = this.world.width;
-        ground.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
-        ground.body.setCollisionGroup(groundCollisionGroup);
+        bottomGround = this.add.sprite(0, this.world.height - 10, 'ground');
+        bottomGround.scale.setTo(4, 1);
+        this.physics.p2.enable(bottomGround);
+        bottomGround.body.width = this.world.width;
+        bottomGround.body.mass = 100;
+        bottomGround.body.static = true;
+        bottomGround.body.setCollisionGroup(groundCollisionGroup);
+        bottomGround.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
+
+        topGround = this.add.sprite(0, 10, 'ground');
+        topGround.scale.setTo(4, 1);
+        this.physics.p2.enable(topGround);
+        topGround.body.width = this.world.width;
+        topGround.body.mass = 100;
+        topGround.body.static = true;
+        topGround.body.setCollisionGroup(groundCollisionGroup);
+        topGround.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
+
+        leftGround = this.add.sprite(10, 0, 'ground');
+        leftGround.scale.setTo(4, 1);
+        this.physics.p2.enable(leftGround);
+        leftGround.body.width = this.world.width;
+        leftGround.body.mass = 100;
+        leftGround.body.static = true;
+        leftGround.body.angle = 90;
+        leftGround.body.setCollisionGroup(groundCollisionGroup);
+        leftGround.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
+
+        rightGround = this.add.sprite(this.world.width - 10, 0, 'ground');
+        rightGround.scale.setTo(4, 1);
+        this.physics.p2.enable(rightGround);
+        rightGround.body.width = this.world.width;
+        rightGround.body.mass = 100;
+        rightGround.body.angle = 90;
+        rightGround.body.static = true;
+        rightGround.body.setCollisionGroup(groundCollisionGroup);
+        rightGround.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
         
-        ground.body.collides(ballsCollisionGroup, this.semenSplat, this);
+        rightGround.body.collides(ballsCollisionGroup, this.semenSplat, this);
+        leftGround.body.collides(ballsCollisionGroup, this.semenSplat, this);
+        bottomGround.body.collides(ballsCollisionGroup, this.semenSplat, this);
+        topGround.body.collides(ballsCollisionGroup, this.semenSplat, this);
+
     },
     update : function() {
         for (var i = 0; i < add.length; i++) {
@@ -98,10 +133,13 @@ LifeSocks.Game.prototype = {
             newPlayer.body.setCircle(50);
             newPlayer.anchor.setTo(0.5, 0.5);
             newPlayer.animations.play('move', 18, true);
-
+            newPlayer.body.mass = 1;
             newPlayer.body.setCollisionGroup(ballsCollisionGroup);
             newPlayer.body.collides(groundCollisionGroup);
-            ground.body.collides(newPlayer, this.semenSplat, this);
+            leftGround.body.collides(newPlayer, this.semenSplat, this);
+            rightGround.body.collides(newPlayer, this.semenSplat, this);
+            topGround.body.collides(newPlayer, this.semenSplat, this);
+            bottomGround.body.collides(newPlayer, this.semenSplat, this);
             
             players[add[i]] = newPlayer;
         }
@@ -121,7 +159,7 @@ LifeSocks.Game.prototype = {
               players[player].body.setZeroRotation();
             }
 
-            players[player].body.thrust(200);
+            players[player].body.thrust(10);
         }
 
         // count alive players
