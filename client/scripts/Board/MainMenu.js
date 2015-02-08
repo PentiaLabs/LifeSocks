@@ -19,6 +19,6 @@ LifeSocks.MainMenu.prototype = {
 
 	},
 	startGame: function() {
-		this.game.state.start('Score');
+		this.game.state.start('Game');
 	}
 };

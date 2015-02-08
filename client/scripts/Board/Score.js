@@ -1,4 +1,11 @@
-LifeSocks.Score = function(game) {};
+LifeSocks.Score = function(game) {
+	var that = this;
+
+	board.on('resetGame', function (player) {
+     	console.log('resetGame', player);
+     	that.resetGame();
+    });
+};
 LifeSocks.Score.prototype = {
 	create: function() {
 	    var text = "Somebody";
@@ -10,13 +17,18 @@ LifeSocks.Score.prototype = {
 	    this.add.sprite(0, 0, 'score-txt');
 
 	    semenSock.animations.add('drip', [
-                'semen-sock1',
-                'semen-sock2',
-                'semen-sock3',
-                'semen-sock4',
-                'semen-sock5',
-                'semen-sock6'], 6, true);
+            'semen-sock1',
+            'semen-sock2',
+            'semen-sock3',
+            'semen-sock4',
+            'semen-sock5',
+            'semen-sock6'], 6, true);
 
 	    semenSock.animations.play('drip');
+
+	    board.emit('gameover');
+	},
+	resetGame: function () {
+		this.game.state.start('MainMenu');
 	}
 };

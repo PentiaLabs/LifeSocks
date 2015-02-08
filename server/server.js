@@ -50,6 +50,11 @@ var users = io.of('/users').on('connection', function(socket){
 	    board.emit('startGame', msg, currentPlayer);
 	});
 
+	socket.on('resetGame', function(msg){
+		console.log('resetGame', msg);
+	    board.emit('resetGame', msg, currentPlayer);
+	});
+
 	socket.on('dead', function(msg){
 		currentPlayer.dead = true;
 	});
@@ -66,8 +71,8 @@ var board = io
 	.on('connection', function (socket) {
     	var currentBoard = BoardClass.create(socket.id);
     	console.log('Board connected with ID:', currentBoard.id);
-    	socket.on('winner', function(msg){
-    		// Notify winner
+    	socket.on('gameover', function(){
+    		users.emit('gameover', true);
 		});
 	});
 
