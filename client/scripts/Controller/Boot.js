@@ -10,6 +10,7 @@ LifeSocks.Boot.prototype = {
 
     // Stretch to fill
     this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.stage.disableVisibilityChange = true;
     this.game.state.start('Preloader');
   }

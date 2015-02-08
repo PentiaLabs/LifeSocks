@@ -1,5 +1,5 @@
-LifeSocks.MainMenu = function(game) {};
-LifeSocks.MainMenu.prototype = {
+LifeSocks.Play = function(game) {};
+LifeSocks.Play.prototype = {
 	create: function() {
 
 	    var text = "Life Socks";
@@ -19,7 +19,6 @@ LifeSocks.MainMenu.prototype = {
 	rotateRight: function () {
 	    console.log('Right!!!');
 	    socket.emit('action', { rotateRight: 200 });
-
 	},
 	rotateLeft: function () {
 	    console.log('LEFT!');

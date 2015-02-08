@@ -30,26 +30,24 @@
         <input id="chosenAction" type="text" value="besked" />
         <button id="action">Send action!</button>
 
-
          <a href="javascript:location.reload()">reload!</button>
 
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="scripts/libs/jquery-2.1.3.js"></script>
         <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
 
-      <script type="text/javascript" src="scripts/Controller/Boot.js"></script>
-      <script type="text/javascript" src="scripts/Controller/Preload.js"></script>
-      <script type="text/javascript" src="scripts/Controller/MainMenu.js"></script>
+        <script type="text/javascript" src="scripts/Controller/Boot.js"></script>
+        <script type="text/javascript" src="scripts/Controller/Preload.js"></script>
+        <script type="text/javascript" src="scripts/Controller/MainMenu.js"></script>
+        <script type="text/javascript" src="scripts/Controller/Play.js"></script>
+
         <script>
         (function () {
-            var w = window.innerWidth * window.devicePixelRatio,
-                h = window.innerHeight * window.devicePixelRatio;
-
             var game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'game');
             game.state.add('Boot', LifeSocks.Boot);
             game.state.add('Preloader', LifeSocks.Preloader);
             game.state.add('MainMenu', LifeSocks.MainMenu);
-            game.state.add('Lobby', LifeSocks.Lobby);
+            game.state.add('Play', LifeSocks.Play);
             game.state.add('Game', LifeSocks.Game);
             game.state.start('Boot');
         })();
@@ -62,7 +60,6 @@
                 console.log('playerData:', arg);
                 $('#me').html(arg.nickname);
             });
-
             
             var moveLeft = document.getElementById("moveLeft");
             moveLeft.addEventListener("click", function(){

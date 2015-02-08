@@ -8,7 +8,6 @@ LifeSocks.Preloader.prototype = {
 		this.load.audio('bounce', ['audio/phaserUp3.ogg']);
     */
 
-
     this.load.image('ball', 'assets/LifeSocks/ball.png');
     this.load.image('pinkball', 'assets/LifeSocks/pinkball.png');
     this.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');
@@ -38,7 +37,8 @@ LifeSocks.Preloader.prototype = {
     this.load.image('controller-left', 'assets/controller/control-left.png');
     this.load.image('controller-right', 'assets/controller/control-right.png');
 
-
+    this.load.image('controller-start', 'assets/controller/mobil-startgame-button.png');
+    this.load.image('controller-start-header', 'assets/controller/mobil-startgame-header.png');
   },
   create: function () {
     this.game.state.start('MainMenu');
