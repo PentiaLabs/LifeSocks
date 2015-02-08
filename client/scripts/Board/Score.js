@@ -8,6 +8,5 @@ LifeSocks.Score.prototype = {
 	    this.add.sprite(0, 0, 'score-bg');
 
 	    console.log('Brian, vi vil gerne have en sæd sock her...');
-
 	}
 };

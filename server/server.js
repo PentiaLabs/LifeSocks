@@ -44,6 +44,11 @@ var users = io.of('/users').on('connection', function(socket){
 	    board.emit('commands', msg, currentPlayer);
 	});
 
+	socket.on('startGame', function(msg){
+		console.log('StartGame', msg);
+	    board.emit('startGame', msg, currentPlayer);
+	});
+
 	socket.on('dead', function(msg){
 		currentPlayer.dead = true;
 	});

@@ -21,7 +21,9 @@
   <script src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="scripts/libs/jquery-2.1.3.js"></script>
   <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
-
+  <script>
+      window.board = io.connect(document.location.origin + '/board');
+  </script>
   <script type="text/javascript" src="scripts/Board/Boot.js"></script>
   <script type="text/javascript" src="scripts/Board/Preload.js"></script>
   <script type="text/javascript" src="scripts/Board/MainMenu.js"></script>
@@ -41,13 +43,16 @@
     })();
 
     // Viewport logic
-    var board = io.connect(document.location.origin + '/board');
     board.on('commands', function (command, player) {
       console.log('Recive:', command);
     });
 
     board.on('onlinePlayers', function (onlineNumber) {
       console.log(onlineNumber);
+    });
+
+    board.on('startGame', function (player) {
+      console.log('startGame', player);
     });
 
     board.on('addPlayer', function (player) {
