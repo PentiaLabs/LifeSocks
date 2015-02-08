@@ -121,9 +121,7 @@ LifeSocks.Game.prototype = {
               players[player].body.setZeroRotation();
             }
 
-            
-              players[player].body.reverse(400);
-            //this.physics.arcade.velocityFromRotation(players[player].rotation, -speed, players[player].body.velocity);
+            players[player].body.thrust(200);
         }
 
         // count alive players

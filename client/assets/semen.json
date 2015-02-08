@@ -2,22 +2,6 @@
 
 {
 	"filename": "semen1",
-	"frame": {"x":0,"y":0,"w":250,"h":250},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
-	"sourceSize": {"w":250,"h":250}
-},
-{
-	"filename": "semen2",
-	"frame": {"x":250,"y":0,"w":250,"h":250},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
-	"sourceSize": {"w":250,"h":250}
-},
-{
-	"filename": "semen3",
 	"frame": {"x":500,"y":0,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
@@ -25,8 +9,24 @@
 	"sourceSize": {"w":250,"h":250}
 },
 {
+	"filename": "semen2",
+	"frame": {"x":500,"y":250,"w":250,"h":250},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
+	"sourceSize": {"w":250,"h":250}
+},
+{
+	"filename": "semen3",
+	"frame": {"x":500,"y":500,"w":250,"h":250},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
+	"sourceSize": {"w":250,"h":250}
+},
+{
 	"filename": "semen4",
-	"frame": {"x":750,"y":0,"w":250,"h":250},
+	"frame": {"x":500,"y":750,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
@@ -34,7 +34,7 @@
 },
 {
 	"filename": "semen5",
-	"frame": {"x":1000,"y":0,"w":250,"h":250},
+	"frame": {"x":500,"y":1000,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
@@ -42,7 +42,7 @@
 },
 {
 	"filename": "semen6",
-	"frame": {"x":1250,"y":0,"w":250,"h":250},
+	"frame": {"x":500,"y":1250,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
@@ -50,7 +50,7 @@
 },
 {
 	"filename": "semen7",
-	"frame": {"x":1500,"y":0,"w":250,"h":250},
+	"frame": {"x":500,"y":1500,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
@@ -58,7 +58,7 @@
 },
 {
 	"filename": "splat1",
-	"frame": {"x":1000,"y":250,"w":250,"h":250},
+	"frame": {"x":250,"y":1000,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
@@ -66,7 +66,7 @@
 },
 {
 	"filename": "splat2",
-	"frame": {"x":1250,"y":250,"w":250,"h":250},
+	"frame": {"x":250,"y":1250,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
@@ -74,7 +74,7 @@
 },
 {
 	"filename": "splat3",
-	"frame": {"x":1500,"y":250,"w":250,"h":250},
+	"frame": {"x":250,"y":1500,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
@@ -82,7 +82,7 @@
 },
 {
 	"filename": "smack1",
-	"frame": {"x":0,"y":250,"w":250,"h":250},
+	"frame": {"x":250,"y":0,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
@@ -98,7 +98,7 @@
 },
 {
 	"filename": "smack3",
-	"frame": {"x":500,"y":250,"w":250,"h":250},
+	"frame": {"x":250,"y":500,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
@@ -106,7 +106,7 @@
 },
 {
 	"filename": "smack4",
-	"frame": {"x":750,"y":250,"w":250,"h":250},
+	"frame": {"x":250,"y":750,"w":250,"h":250},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
@@ -118,7 +118,7 @@
 	"version": "1.0",
 	"image": "semen.png",
 	"format": "RGBA8888",
-	"size": {"w":1750,"h":750},
+	"size": {"w":750,"h":1750},
 	"scale": "1",
 	"smartupdate": "$TexturePacker:SmartUpdate:99b2f74fa157c5b63e72b0d68be078b4:1/1$"
 }
