@@ -159,7 +159,7 @@ LifeSocks.Game.prototype = {
               players[player].body.setZeroRotation();
             }
 
-            players[player].body.thrust(10);
+            players[player].body.thrust(50);
         }
 
         // count alive players
