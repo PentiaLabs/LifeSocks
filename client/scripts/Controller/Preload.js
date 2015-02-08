@@ -18,7 +18,6 @@ LifeSocks.Preloader.prototype = {
 
     //Selection of possible assets
     this.load.image('logotype', 'assets/LifeSocks/logotype.png');
-    this.load.image('mobilbackground', 'assets/LifeSocks/mobilbackground.png');
     this.load.image('sock', 'assets/LifeSocks/sock.png');
     this.load.image('welcome-player', 'assets/LifeSocks/welcomeplayer-title.png');
     this.load.image('winner-player', 'assets/LifeSocks/winner-player-title.png');
@@ -34,7 +33,12 @@ LifeSocks.Preloader.prototype = {
 
     // Replace this :)
     this.load.image('button-start', 'assets/LifeSocks/startgamebutton.png');
-    this.load.image('screen-bg', 'assets/LifeSocks/splashbaggrund.png');
+
+    this.load.image('controller-bg', 'assets/controller/mobilbackground.png');
+
+    this.load.image('controller-left', 'assets/controller/control-left.png');
+    this.load.image('controller-right', 'assets/controller/control-right.png');
+
 
   },
   create: function () {

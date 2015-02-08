@@ -82,7 +82,7 @@ LifeSocks.Game.prototype = {
         //    player.body.velocity.y += o.beta/20;
         //});
 
-        //this.physics.arcade.collide(balls);
+        this.physics.arcade.collide(balls);
         this.physics.arcade.overlap(balls, ground, this.semenSplat, null, this);
 
         for (var i = 0; i < add.length; i++) {
@@ -151,6 +151,10 @@ LifeSocks.Game.prototype = {
     semenSplat : function (ground, semen) {
         semen.animations.stop('move');
         semen.animations.play('splat', 18, false, true);
+
+        setTimeout(function () {
+            semen.kill();
+        }, 500);
     },
     collision : function (ball) {
         ball.kill();
