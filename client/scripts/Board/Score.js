@@ -6,8 +6,8 @@ LifeSocks.Score.prototype = {
 
 	    var t = this.add.text(this.world.centerX-300, 0, text, style);
 	    this.add.sprite(0, 0, 'score-bg');
-
-	    var semenSock = this.add.sprite(0, 0, 'semen-sock');
+	    var semenSock = this.add.sprite(400, 100, 'semen-sock');
+	    this.add.sprite(0, 0, 'score-txt');
 
 	    semenSock.animations.add('drip', [
                 'semen-sock1',

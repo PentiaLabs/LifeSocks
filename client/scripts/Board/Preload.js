@@ -37,6 +37,7 @@ LifeSocks.Preloader.prototype = {
     this.load.image('screen-bg', 'assets/splashscreen.png');
     this.load.image('game-bg', 'assets/game_background.png');
     this.load.image('score-bg', 'assets/scorescreen_background.png');
+    this.load.image('score-txt', 'assets/scorescreen_txt.png');
 
   },
   create: function () {

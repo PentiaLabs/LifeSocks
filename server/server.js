@@ -21,6 +21,7 @@ console.dir(player);
 var currentRoom = BoardClass.create();
 
 var addPlayer = function(player) {
+	console.log('numplayers', currentRoom.players.length);
 	currentRoom.players[player.id] = player;
 };
 
