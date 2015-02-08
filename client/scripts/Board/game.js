@@ -6,6 +6,8 @@ var dangerZone;
 var players = {};
 var add = [];
 var ground;
+var ballsCollisionGroup;
+var groundCollisionGroup;
 var decidedGame = false;
 
 LifeSocks.Game = function(game) {
@@ -45,49 +47,27 @@ LifeSocks.Game.prototype = {
         this.stage.backgroundColor = '#000000';
         this.add.sprite(0, 0, 'game-bg');
 
-        //  The platforms group contains the ground and the 2 ledges we can jump on
-        platforms = this.add.group();
-        platforms.enableBody = true;
+        this.physics.startSystem(Phaser.Physics.P2JS);
+        this.physics.p2.setImpactEvents(true);
+        this.physics.p2.restitution = 0.6;
+        this.physics.p2.defaultRestitution = 0.8;
+        this.physics.p2.defaultFriction = 0.2;
 
-        ground = platforms.create(0, this.world.height - 50, 'ground');
-        ground.body.width = this.world.width;
-        ground.body.height = 50;
+        ballsCollisionGroup = this.physics.p2.createCollisionGroup();
+        groundCollisionGroup = this.physics.p2.createCollisionGroup();
+
+        ground = this.add.sprite(0, this.world.height - 50, 'ground');
         ground.scale.setTo(4, 4);
-        ground.body.immovable = true;
-        ground.body.collideWorldBounds = true;
-
-        this.physics.startSystem(Phaser.Physics.ninja);
-
-        balls = this.add.group();
-
-        //this.physics.ninja.enable(balls);
-        balls.enableBody = true;
-
-        // The player and its settings
-
-        balls.setAll("body.velocity.x", 200);
-        balls.setAll("body.velocity.y", 200);
-        balls.setAll("body.bounce.y", 0.8);
-        balls.setAll("body.bounce.x", 0.8);
-        balls.setAll("body.collideWorldBounds", true);
-        balls.setAll("body.width", 90);
-        balls.setAll("body.height", 90);
+        this.physics.p2.enable(ground);
+        ground.body.width = this.world.width;
+        ground.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
+        ground.body.setCollisionGroup(groundCollisionGroup);
+        
+        ground.body.collides(ballsCollisionGroup, this.semenSplat, this);
     },
     update : function() {
-        //// setting gyroscope update frequency
-        //gyro.frequency = 10;
-        //// start gyroscope detection
-        //gyro.startTracking(function(o) {
-        //    // updating player velocity
-        //    player.body.velocity.x += o.gamma/20;
-        //    player.body.velocity.y += o.beta/20;
-        //});
-
-        this.physics.arcade.collide(balls);
-        this.physics.arcade.overlap(balls, ground, this.semenSplat, null, this);
-
         for (var i = 0; i < add.length; i++) {
-            var newPlayer = balls.create(this.randomRange(1200, 10), this.randomRange(768, 10), 'semen', 'semen1');
+            var newPlayer = this.add.sprite(this.randomRange(1200, 10), this.randomRange(768, 10), 'semen', 'semen1');
             newPlayer.animations.add('move', [
                 'semen1',
                 'semen2',
@@ -113,13 +93,16 @@ LifeSocks.Game.prototype = {
                 'smack3',
                 'smack4'], 18, false);
 
-            newPlayer.body.velocity.setTo(200, 200);
-            newPlayer.body.bounce.setTo(0.8, 0.8);
-            newPlayer.body.collideWorldBounds = true;
+            this.physics.p2.enable(newPlayer);
+
+            newPlayer.body.setCircle(50);
             newPlayer.anchor.setTo(0.5, 0.5);
             newPlayer.animations.play('move', 18, true);
-            newPlayer.body.width = 100;
-            newPlayer.body.height = 100;
+
+            newPlayer.body.setCollisionGroup(ballsCollisionGroup);
+            newPlayer.body.collides(groundCollisionGroup);
+            ground.body.collides(newPlayer, this.semenSplat, this);
+            
             players[add[i]] = newPlayer;
         }
 
@@ -127,27 +110,34 @@ LifeSocks.Game.prototype = {
 
         for (player in players) {
             if (players[player].left) {
-                players[player].angle -= 20;
+              //players[player].angle -= 20;
+              players[player].body.angle -= 20;
                 players[player].left = false;
+            } else if (players[player].right) {
+              //players[player].angle += 20;
+              players[player].body.angle += 20;
+              players[player].right = false;
+            } else {
+              players[player].body.setZeroRotation();
             }
 
-            if (players[player].right) {
-                players[player].angle += 20;
-                players[player].right = false;
-            }
-            this.physics.arcade.velocityFromRotation(players[player].rotation, -speed, players[player].body.velocity);
+            
+              players[player].body.reverse(400);
+            //this.physics.arcade.velocityFromRotation(players[player].rotation, -speed, players[player].body.velocity);
         }
 
         // count alive players
         var alivePlayers = 0;
-        for (var i = 0; i < balls.children.length; i++) {
-            if (balls.children[i].alive) {
+        var numPlayers = 0;
+        for (player in players) {
+            numPlayers++;
+            if (players[player].alive) {
                 alivePlayers = alivePlayers + 1;
             }
         }
 
         // if it's the last man standing, and we had more than one player from the beginning, let's celebrate!
-        if (alivePlayers === 1 && balls.children.length > 1 && !decidedGame) {
+        if (alivePlayers === 1 && numPlayers > 1 && !decidedGame) {
             decidedGame = true;
             this.game.state.start('Score');
         }
@@ -169,12 +159,12 @@ LifeSocks.Game.prototype = {
 
         this.input.onDown.add(this.gofull, this);
     },
-    semenSplat : function (ground, semen) {
-        semen.animations.stop('move');
-        semen.animations.play('splat', 18, false, true);
+    semenSplat: function (ground, semen) {
+        semen.sprite.animations.stop('move');
+        semen.sprite.animations.play('splat', 18, false, true);
 
         setTimeout(function () {
-            semen.kill();
+            semen.sprite.kill();
         }, 500);
     },
     collision : function (ball) {

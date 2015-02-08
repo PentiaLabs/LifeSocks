@@ -1,5 +1,12 @@
-var LifeSocks = {};
-LifeSocks.Boot = function (game) { };
+var LifeSocks = {
+  playerData: null,
+};
+LifeSocks.Boot = function (game) {
+  socket.on('playerData', function(arg) {
+    console.log('playerData:', arg);
+    LifeSocks.playerData = arg;
+  });
+};
 LifeSocks.Boot.prototype = {
   preload: function () {
     this.load.image('preloaderBg', 'assets/loadingbar_back.png');

@@ -21,6 +21,7 @@ console.dir(player);
 var currentRoom = BoardClass.create();
 
 var addPlayer = function(player) {
+	console.log('numplayers', currentRoom.players.length);
 	currentRoom.players[player.id] = player;
 };
 
@@ -33,7 +34,7 @@ var users = io.of('/users').on('connection', function(socket){
 	board.emit('addPlayer', currentPlayer); 
 	socket.emit('playerData', currentPlayer);
 
-	board.emit('onlinePlayers', currentRoom.players.length);
+	board.emit('onlinePlayers', currentRoom.players);
 	console.log('onlinePlayers:', currentRoom.players.length, currentRoom.players);
 
 	// On Player Update, Change Board Data
@@ -47,6 +48,11 @@ var users = io.of('/users').on('connection', function(socket){
 	socket.on('startGame', function(msg){
 		console.log('StartGame', msg);
 	    board.emit('startGame', msg, currentPlayer);
+	});
+
+	socket.on('resetGame', function(msg){
+		console.log('resetGame', msg);
+	    board.emit('resetGame', msg, currentPlayer);
 	});
 
 	socket.on('dead', function(msg){
@@ -65,8 +71,8 @@ var board = io
 	.on('connection', function (socket) {
     	var currentBoard = BoardClass.create(socket.id);
     	console.log('Board connected with ID:', currentBoard.id);
-    	socket.on('winner', function(msg){
-    		// Notify winner
+    	socket.on('gameover', function(){
+    		users.emit('gameover', true);
 		});
 	});
 

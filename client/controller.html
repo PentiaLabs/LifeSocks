@@ -14,27 +14,13 @@
         <link type="text/css" rel="stylesheet" media="all" href="styles/game.css">
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
-        <h2>Player - <span id="me"></div></h2>
-        <p>Use 'A' and 'D' to control</p>
-        
-        <button class="move" id="moveRight">Right</button>
-        <button class="move" id="moveLeft">Left</button>
-
-        <br /><br />
-        
-        <input id="chosenAction" type="text" value="besked" />
-        <button id="action">Send action!</button>
-
-         <a href="javascript:location.reload()">reload!</button>
-
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="scripts/libs/jquery-2.1.3.js"></script>
         <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
+
+        <script>
+            var controller = socket = io.connect(document.location.origin + '/users');
+        </script>
 
         <script type="text/javascript" src="scripts/Controller/Boot.js"></script>
         <script type="text/javascript" src="scripts/Controller/Preload.js"></script>
@@ -54,32 +40,6 @@
         </script>
 
         <script>
-            var socket = io.connect(document.location.origin + '/users');
-
-            socket.on('playerData', function(arg) {
-                console.log('playerData:', arg);
-                $('#me').html(arg.nickname);
-            });
-            
-            var moveLeft = document.getElementById("moveLeft");
-            moveLeft.addEventListener("click", function(){
-                console.log('Send:', { rotateLeft: 200 });
-                socket.emit('action', { rotateLeft: 200 });
-            }, false);
-
-        var el = document.getElementById("action");
-        el.addEventListener("click", function(){
-            console.log('Send:', $('#chosenAction').val());
-            socket.emit('action', $('#chosenAction').val());
-        }, false);
-
-            var moveRight = document.getElementById("moveRight");
-            moveRight.addEventListener("click", function(){
-                console.log('Send:', { rotateRight: 200 });
-                socket.emit('action', { rotateRight: 200 });
-            }, false);
-
-
             $( document ).keypress(function( event ) {
                 if ( event.which == 97 ) {
                     event.preventDefault();
@@ -92,9 +52,6 @@
                 }
                 console.log(event.which);
             });
-
         </script>
-
-        
     </body>
 </html>
