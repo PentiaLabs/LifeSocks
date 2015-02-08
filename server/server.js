@@ -45,9 +45,14 @@ var users = io.of('/users').on('connection', function(socket){
 	    board.emit('commands', msg, currentPlayer);
 	});
 
+	var gameStarted = false;
+
 	socket.on('startGame', function(msg){
 		console.log('StartGame', msg);
-	    board.emit('startGame', msg, currentPlayer);
+		if(!gameStarted){
+			board.emit('startGame', msg, currentPlayer);
+			gameStarted = true;
+		}
 	});
 
 	socket.on('resetGame', function(msg){
