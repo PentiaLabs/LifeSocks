@@ -7,6 +7,16 @@ LifeSocks.Score.prototype = {
 	    var t = this.add.text(this.world.centerX-300, 0, text, style);
 	    this.add.sprite(0, 0, 'score-bg');
 
-	    console.log('Brian, vi vil gerne have en sæd sock her...');
+	    var semenSock = this.add.sprite(0, 0, 'semen-sock');
+
+	    semenSock.animations.add('drip', [
+                'semen-sock1',
+                'semen-sock2',
+                'semen-sock3',
+                'semen-sock4',
+                'semen-sock5',
+                'semen-sock6'], 6, true);
+
+	    semenSock.animations.play('drip');
 	}
 };
