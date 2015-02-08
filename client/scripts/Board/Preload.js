@@ -31,6 +31,7 @@ LifeSocks.Preloader.prototype = {
     this.load.image('label-yellow', 'assets/LifeSocks/label-yellow.png');
 
     this.load.atlas('semen', 'assets/semen.png', 'assets/semen.json');
+    this.load.atlas('semen-sock', 'assets/semem-sock-sprite.png', 'assets/semen-sock.json');
 
     this.load.image('button-start', 'assets/LifeSocks/startgamebutton.png');
     this.load.image('screen-bg', 'assets/splashscreen.png');
