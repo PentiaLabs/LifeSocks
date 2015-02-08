@@ -6,9 +6,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Multiplayer</title>
+        <title>Controller - Life Socks</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link type="text/css" rel="stylesheet" media="all" href="styles/game.css">
@@ -30,39 +30,38 @@
         <input id="chosenAction" type="text" value="besked" />
         <button id="action">Send action!</button>
 
-
          <a href="javascript:location.reload()">reload!</button>
 
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript" src="scripts/libs/jquery-2.1.3.js"></script>
         <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
 
-      <script type="text/javascript" src="scripts/Controller/Boot.js"></script>
-      <script type="text/javascript" src="scripts/Controller/Preload.js"></script>
-      <script type="text/javascript" src="scripts/Controller/MainMenu.js"></script>
+        <script>
+            var controller = socket = io.connect(document.location.origin + '/users');
+        </script>
+
+        <script type="text/javascript" src="scripts/Controller/Boot.js"></script>
+        <script type="text/javascript" src="scripts/Controller/Preload.js"></script>
+        <script type="text/javascript" src="scripts/Controller/MainMenu.js"></script>
+        <script type="text/javascript" src="scripts/Controller/Play.js"></script>
+
         <script>
         (function () {
-            var w = window.innerWidth * window.devicePixelRatio,
-                h = window.innerHeight * window.devicePixelRatio;
-
-            /*var game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'game');
+            var game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'game');
             game.state.add('Boot', LifeSocks.Boot);
             game.state.add('Preloader', LifeSocks.Preloader);
             game.state.add('MainMenu', LifeSocks.MainMenu);
-            game.state.add('Lobby', LifeSocks.Lobby);
+            game.state.add('Play', LifeSocks.Play);
             game.state.add('Game', LifeSocks.Game);
-            game.state.start('Boot');*/
+            game.state.start('Boot');
         })();
         </script>
 
         <script>
-            var socket = io.connect(document.location.origin + '/users');
-
             socket.on('playerData', function(arg) {
                 console.log('playerData:', arg);
                 $('#me').html(arg.nickname);
             });
-
             
             var moveLeft = document.getElementById("moveLeft");
             moveLeft.addEventListener("click", function(){
@@ -70,11 +69,11 @@
                 socket.emit('action', { rotateLeft: 200 });
             }, false);
 
-        var el = document.getElementById("action");
-        el.addEventListener("click", function(){
-            console.log('Send:', $('#chosenAction').val());
-            socket.emit('action', $('#chosenAction').val());
-        }, false);
+            var el = document.getElementById("action");
+            el.addEventListener("click", function(){
+                console.log('Send:', $('#chosenAction').val());
+                socket.emit('action', $('#chosenAction').val());
+            }, false);
 
             var moveRight = document.getElementById("moveRight");
             moveRight.addEventListener("click", function(){

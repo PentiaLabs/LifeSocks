@@ -1,0 +1,61 @@
+{"frames": [
+
+{
+	"filename": "semen-sock1",
+	"frame": {"x":0,"y":0,"w":770,"h":1040},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
+	"sourceSize": {"w":770,"h":1040}
+},
+{
+	"filename": "semen-sock2",
+	"frame": {"x":770,"y":0,"w":770,"h":1040},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
+	"sourceSize": {"w":770,"h":1040}
+},
+{
+	"filename": "semen-sock3",
+	"frame": {"x":1540,"y":0,"w":770,"h":1040},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
+	"sourceSize": {"w":770,"h":1040}
+},
+{
+	"filename": "semen-sock4",
+	"frame": {"x":0,"y":1040,"w":770,"h":1040},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
+	"sourceSize": {"w":770,"h":1040}
+},
+{
+	"filename": "semen-sock5",
+	"frame": {"x":770,"y":1040,"w":770,"h":1040},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
+	"sourceSize": {"w":770,"h":1040}
+},
+{
+	"filename": "semen-sock6",
+	"frame": {"x":1540,"y":1040,"w":770,"h":1040},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
+	"sourceSize": {"w":770,"h":1040}
+}
+],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "semem-sock-sprite.png",
+	"format": "RGBA8888",
+	"size": {"w":2310,"h":2080},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:99b2f74fa157c5b63e72b0d68be078b4:1/1$"
+}
+}

@@ -9,7 +9,6 @@ LifeSocks.Preloader.prototype = {
 		this.load.audio('bounce', ['audio/phaserUp3.ogg']);
     */
 
-
     this.load.image('ball', 'assets/LifeSocks/ball.png');
     this.load.image('pinkball', 'assets/LifeSocks/pinkball.png');
     this.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');
@@ -32,11 +31,13 @@ LifeSocks.Preloader.prototype = {
     this.load.image('label-yellow', 'assets/LifeSocks/label-yellow.png');
 
     this.load.atlas('semen', 'assets/semen.png', 'assets/semen.json');
+    this.load.atlas('semen-sock', 'assets/semem-sock-sprite.png', 'assets/semen-sock.json');
 
     this.load.image('button-start', 'assets/LifeSocks/startgamebutton.png');
     this.load.image('screen-bg', 'assets/splashscreen.png');
     this.load.image('game-bg', 'assets/game_background.png');
     this.load.image('score-bg', 'assets/scorescreen_background.png');
+    this.load.image('score-txt', 'assets/scorescreen_txt.png');
 
   },
   create: function () {

@@ -8,6 +8,7 @@ var add = [];
 var ground;
 var ballsCollisionGroup;
 var groundCollisionGroup;
+var decidedGame = false;
 
 LifeSocks.Game = function(game) {
     // Viewport logic
@@ -142,6 +143,20 @@ LifeSocks.Game.prototype = {
             
               players[player].body.thrust(400);
             //this.physics.arcade.velocityFromRotation(players[player].rotation, -speed, players[player].body.velocity);
+        }
+
+        // count alive players
+        var alivePlayers = 0;
+        for (var i = 0; i < balls.children.length; i++) {
+            if (balls.children[i].alive) {
+                alivePlayers = alivePlayers + 1;
+            }
+        }
+
+        // if it's the last man standing, and we had more than one player from the beginning, let's celebrate!
+        if (alivePlayers === 1 && balls.children.length > 1 && !decidedGame) {
+            decidedGame = true;
+            this.game.state.start('Score');
         }
     },
     render : function (){

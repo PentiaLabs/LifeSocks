@@ -1,4 +1,11 @@
-LifeSocks.MainMenu = function(game) {};
+LifeSocks.MainMenu = function(game) {
+	var that = this;
+
+	board.on('startGame', function (player) {
+     	console.log('startGame', player);
+     	that.startGame();
+    });
+};
 LifeSocks.MainMenu.prototype = {
 	create: function() {
 
@@ -8,14 +15,10 @@ LifeSocks.MainMenu.prototype = {
 	    var t = this.add.text(this.world.centerX-300, 0, text, style);
 	    this.add.sprite(0, 0, 'screen-bg');
 
-	    // We need a start button... but We'll fake this :-)
-	    var that = this;
-	    setTimeout(function() {
-	    	that.game.state.start('Game');
-	    }, 3000);
+		board.emit('boardReadyToPlay');
 
 	},
 	startGame: function() {
-	  this.add.sprite(0, 0, 'screen-bg');
+		this.game.state.start('Game');
 	}
 };
