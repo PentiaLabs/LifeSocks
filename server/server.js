@@ -25,6 +25,8 @@ var addPlayer = function(player) {
 	currentRoom.players[player.id] = player;
 };
 
+var gameStarted = false;
+
 var users = io.of('/users').on('connection', function(socket){
 	clientSockets[socket.id] = socket;
 
@@ -44,8 +46,6 @@ var users = io.of('/users').on('connection', function(socket){
 		console.log(msg);
 	    board.emit('commands', msg, currentPlayer);
 	});
-
-	var gameStarted = false;
 
 	socket.on('startGame', function(msg){
 		console.log('StartGame', msg);

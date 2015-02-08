@@ -48,7 +48,7 @@ LifeSocks.Game.prototype = {
         this.add.sprite(0, 0, 'game-bg');
 
         this.physics.startSystem(Phaser.Physics.P2JS);
-      this.physics.p2.setBoundsToWorld(true, true, true, true, false);
+        this.physics.p2.setBoundsToWorld(true, true, true, true, false);
         this.physics.p2.restitution = 0.6;
         this.physics.p2.setImpactEvents(true);
         ballsCollisionGroup = this.physics.p2.createCollisionGroup();
