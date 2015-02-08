@@ -107,6 +107,12 @@ LifeSocks.Game.prototype = {
                 'splat2',
                 'splat3'], 18, false);
 
+            newPlayer.animations.add('smack', [
+                'smack1',
+                'smack2',
+                'smack3',
+                'smack4'], 18, false);
+
             newPlayer.body.velocity.setTo(200, 200);
             newPlayer.body.bounce.setTo(0.8, 0.8);
             newPlayer.body.collideWorldBounds = true;
