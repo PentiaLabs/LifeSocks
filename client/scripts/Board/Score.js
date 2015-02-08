@@ -7,5 +7,7 @@ LifeSocks.Score.prototype = {
 	    var t = this.add.text(this.world.centerX-300, 0, text, style);
 	    this.add.sprite(0, 0, 'score-bg');
 
+	    console.log('Brian, vi vil gerne have en sæd sock her...');
+
 	}
 };
