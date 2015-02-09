@@ -24,9 +24,12 @@
   },
   "homepage": "https://github.com/Saturate/NGJ15",
   "dependencies": {
+    "chalk": "^0.5.1",
     "express": "^4.11.0",
     "gulp": "^3.8.10",
-    "socket.io": "^1.2.1"
+    "node-uuid": "^1.4.2",
+    "socket.io": "^1.2.1",
+    "underscore": "^1.7.0"
   },
   "devDependencies": {
     "gulp-less": "^2.0.1",
