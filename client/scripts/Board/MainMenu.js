@@ -31,21 +31,20 @@ LifeSocks.MainMenu = function(game) {
 };
 LifeSocks.MainMenu.prototype = {
 	create: function() {
+		var game = this;
+		
+	    // var text = "Life Socks";
+	    // var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
 
-    // var text = "Life Socks";
-    // var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+	    // var t = this.add.text(this.world.centerX-300, 0, text, style);
+	    this.add.sprite(0, 0, 'screen-bg');
 
-    // var t = this.add.text(this.world.centerX-300, 0, text, style);
-    this.add.sprite(0, 0, 'screen-bg');
-
-    var game = this;
-
-    // temporarily add joined players (hardcoded for now)
-    for (var i = 0; i < avatarSlots.length; i++) {
-	    setTimeout(function () {
-	    	game.playerJoined();
-	  	}, (i+1) * 1000);
-	  }
+	    // temporarily add joined players (hardcoded for now)
+	    for (var i = 0; i < avatarSlots.length; i++) {
+		    setTimeout(function () {
+		    	game.playerJoined();
+		  	}, (i+1) * 1000);
+		}
 
 		board.emit('boardReadyToPlay');
 	},
