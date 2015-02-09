@@ -103,7 +103,13 @@ LifeSocks.Game.prototype = {
     },
     update : function() {
         for (var i = 0; i < add.length; i++) {
-            var newPlayer = this.add.sprite(this.randomRange(1200, 10), this.randomRange(768, 10), 'semen', 'semen1');
+            var x = this.randomRange(1200, 10);
+            var y = this.randomRange(768, 10);
+            var newPlayer = this.add.sprite(x, y, 'semen', 'semen1');
+
+            newPlayer.addChild(this.make.sprite(x, y, 'label-blue'));
+
+            newPlayer.addChild(this.make.text(x, y, 'X', { font: "10px Arial", fill: "#ffffff", align: "center" }));
 
             newPlayer.animations.add('move', ['semen1','semen2','semen3','semen4','semen5','semen6','semen7','semen6','semen5','semen4','semen3','semen2'], frameRate, true);
 
@@ -115,6 +121,8 @@ LifeSocks.Game.prototype = {
 
             newPlayer.body.setCircle(60);
             newPlayer.anchor.setTo(0.5, 0.5);
+            newPlayer.scale.setTo(0.9, 0.9);
+
             
             newPlayer.animations.play('move', frameRate, true);
 
