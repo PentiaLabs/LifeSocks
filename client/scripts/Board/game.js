@@ -57,8 +57,6 @@ LifeSocks.Game.prototype = {
         semenCG = this.physics.p2.createCollisionGroup();
         groundCG = this.physics.p2.createCollisionGroup();
 
-        //this.physics.p2.updateBoundsCollisionGroup();
-
         bottomGround = this.add.sprite(0, this.world.height - 10, 'ground');
         bottomGround.scale.setTo(4, 1);
         this.physics.p2.enable(bottomGround);
@@ -205,12 +203,36 @@ LifeSocks.Game.prototype = {
 
         this.input.onDown.add(this.gofull, this);
     },
+
+    /**
+    * semenStop
+    * - stops move animation from semen sprite
+    *
+    * @param semen object
+    * @api public
+    */
     semenStop: function (semen) {
         semen.sprite.animations.stop('move');
     },
+
+    /**
+    * semenMove
+    * - starts move animation from semen sprite
+    *
+    * @param semen object
+    * @api public
+    */
     semenMove: function (semen) {
         semen.sprite.animations.play('move', frameRate, true);
     },
+
+    /**
+    * semenSmack
+    * - plays smack animation when two semen sprites collide
+    *
+    * @param semen object
+    * @api public
+    */
     semenSmack: function (semen) {
         var game = this;
         var anim = semen.sprite.animations.getAnimation('smack');
@@ -222,6 +244,14 @@ LifeSocks.Game.prototype = {
 
         semen.sprite.animations.play('smack', 8, false);
     },
+
+    /**
+    * semenSplat
+    * - plays splat animation when semen dies (act as callback to collide method)
+    *
+    * @param ground object, semen object
+    * @api private
+    */
     semenSplat: function (ground, semen) {
         var anim = semen.sprite.animations.getAnimation('splat');
 
@@ -233,9 +263,7 @@ LifeSocks.Game.prototype = {
 
         semen.sprite.animations.play('splat', frameRate, false, true);
     },
-    collision : function (ball) {
-        ball.kill();
-    },
+    
     gofull : function() {
         if (this.scale.isFullScreen) {
             this.scale.stopFullScreen();
