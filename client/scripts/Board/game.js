@@ -104,30 +104,12 @@ LifeSocks.Game.prototype = {
     update : function() {
         for (var i = 0; i < add.length; i++) {
             var newPlayer = this.add.sprite(this.randomRange(1200, 10), this.randomRange(768, 10), 'semen', 'semen1');
-            newPlayer.animations.add('move', [
-                'semen1',
-                'semen2',
-                'semen3',
-                'semen4',
-                'semen5',
-                'semen6',
-                'semen7',
-                'semen6',
-                'semen5',
-                'semen4',
-                'semen3',
-                'semen2'], frameRate, true);
 
-            newPlayer.animations.add('splat', [
-                'splat1',
-                'splat2',
-                'splat3'], frameRate, false);
+            newPlayer.animations.add('move', ['semen1','semen2','semen3','semen4','semen5','semen6','semen7','semen6','semen5','semen4','semen3','semen2'], frameRate, true);
 
-            newPlayer.animations.add('smack', [
-                'smack1',
-                'smack2',
-                'smack3',
-                'smack4'], frameRate, false);
+            newPlayer.animations.add('splat', ['splat1','splat2','splat3'], frameRate, false);
+
+            newPlayer.animations.add('smack', ['smack1','smack2','smack3','smack4'], frameRate, false);
 
             this.physics.p2.enable(newPlayer);
 
