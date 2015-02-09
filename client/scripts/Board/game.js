@@ -6,6 +6,7 @@ var frameRate = 16;
 var dangerZone;
 var players = {};
 var add = [];
+var nicknames = [];
 var bottomGround, topGround, leftGround, rightGround;
 var semenCG;
 var groundCG;
@@ -33,8 +34,9 @@ LifeSocks.Game = function(game) {
 
     board.on('addPlayer', function (player) {
         console.log('Player joined:', player);
+        
         add.push(player.id);
-
+        nicknames.push(player.nickname);
     });
 
     board.on('removePlayer', function (clientid) {
@@ -105,11 +107,18 @@ LifeSocks.Game.prototype = {
         for (var i = 0; i < add.length; i++) {
             var x = this.randomRange(1200, 100);
             var y = this.randomRange(768, 100);
+
+            var nickname = nicknames[i];
+            var label = nickname.substr(0, 1).toUpperCase();
+
             var newPlayer = this.add.sprite(x, y, 'semen', 'semen1');
+            var newPlayerBadge = this.add.sprite(0, 0, 'label-blue');
+            newPlayerBadge.scale.setTo(0.75, 0.75);
+            newPlayerBadge.alpha = 0.5;
 
-            newPlayer.addChild(this.make.sprite(1, 1, 'label-blue'));
-
-            newPlayer.addChild(this.make.text(x, y, 'X', { font: "10px Arial", fill: "#ffffff", align: "center" }));
+            var newPlayerLabel = this.add.text(20, 20, label, { font: '48px Arial', fill: '#ffffff', align: 'center', stroke: '#cccccc', strokeThickness: 1 });
+            newPlayerLabel.angle = -90;
+            newPlayerLabel.scale.setTo(0.75, 0.75);
 
             newPlayer.animations.add('move', ['semen1','semen2','semen3','semen4','semen5','semen6','semen7','semen6','semen5','semen4','semen3','semen2'], frameRate, true);
 
@@ -123,6 +132,15 @@ LifeSocks.Game.prototype = {
             newPlayer.anchor.setTo(0.5, 0.5);
             newPlayer.scale.setTo(0.99, 0.99);
 
+            // add badge to player
+            newPlayer.addChild(newPlayerBadge);
+            newPlayerBadge.x = 30;
+            newPlayerBadge.y = 0;
+
+            // add label to badge
+            newPlayer.addChild(newPlayerLabel);
+            newPlayerLabel.x = 48;
+            newPlayerLabel.y = 52;
             
             newPlayer.animations.play('move', frameRate, true);
 
@@ -132,7 +150,7 @@ LifeSocks.Game.prototype = {
             newPlayer.body.collides(groundCG);
             newPlayer.body.collides(semenCG, this.semenSmack, this);
 
-            // so what happens when player collides with ground areas?
+            // let's decide what happens when player collides with ground and wall areas
             leftGround.body.collides(newPlayer, this.semenSplat, this);
             rightGround.body.collides(newPlayer, this.semenSplat, this);
             topGround.body.collides(newPlayer, this.semenSplat, this);
@@ -142,21 +160,23 @@ LifeSocks.Game.prototype = {
         }
 
         add = [];
+        nicknames = [];
 
         for (player in players) {
             if (players[player].left) {
-              //players[player].angle -= 20;
               players[player].body.angle -= 20;
                 players[player].left = false;
             } else if (players[player].right) {
-              //players[player].angle += 20;
               players[player].body.angle += 20;
               players[player].right = false;
             } else {
               players[player].body.setZeroRotation();
             }
 
+            // start your engines...
             players[player].body.thrust(100);
+
+            // ...but control max velocity
             this.constrainVelocity(players[player], 5);
         }
 
@@ -181,28 +201,21 @@ LifeSocks.Game.prototype = {
       var body = sprite.body
       var angle, currVelocitySqr, vx, vy;
 
-
       vx = body.data.velocity[0];
       vy = body.data.velocity[1];
 
-
       currVelocitySqr = vx * vx + vy * vy;
-
 
       if (currVelocitySqr > maxVelocity * maxVelocity) {
         angle = Math.atan2(vy, vx);
 
-
         vx = Math.cos(angle) * maxVelocity;
         vy = Math.sin(angle) * maxVelocity;
-
 
         body.data.velocity[0] = vx;
         body.data.velocity[1] = vy;
         //console.log('limited speed to: '+maxVelocity);
       }
-
-
     },
 
     render : function (){
