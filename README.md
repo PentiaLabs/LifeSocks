@@ -6,7 +6,8 @@ Nordic Game Jame 2015 Game
 1. Install Github for Windows (You can also just install Git if you like.)
 2. Install nodejs
 3. Run `npm install` in the project folder.
-4. Run `gulp`
+4. Run `npm start`
+5. Point browser to http://localhost:3000/test.html
 
 ## Credits
 
