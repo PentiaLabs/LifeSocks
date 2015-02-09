@@ -103,11 +103,11 @@ LifeSocks.Game.prototype = {
     },
     update : function() {
         for (var i = 0; i < add.length; i++) {
-            var x = this.randomRange(1200, 10);
-            var y = this.randomRange(768, 10);
+            var x = this.randomRange(1200, 100);
+            var y = this.randomRange(768, 100);
             var newPlayer = this.add.sprite(x, y, 'semen', 'semen1');
 
-            newPlayer.addChild(this.make.sprite(x, y, 'label-blue'));
+            newPlayer.addChild(this.make.sprite(1, 1, 'label-blue'));
 
             newPlayer.addChild(this.make.text(x, y, 'X', { font: "10px Arial", fill: "#ffffff", align: "center" }));
 
@@ -157,6 +157,7 @@ LifeSocks.Game.prototype = {
             }
 
             players[player].body.thrust(100);
+            this.constrainVelocity(players[player], 5);
         }
 
         // count alive players
@@ -175,6 +176,35 @@ LifeSocks.Game.prototype = {
             this.game.state.start('Score');
         }
     },
+
+    constrainVelocity: function(sprite, maxVelocity) {
+      var body = sprite.body
+      var angle, currVelocitySqr, vx, vy;
+
+
+      vx = body.data.velocity[0];
+      vy = body.data.velocity[1];
+
+
+      currVelocitySqr = vx * vx + vy * vy;
+
+
+      if (currVelocitySqr > maxVelocity * maxVelocity) {
+        angle = Math.atan2(vy, vx);
+
+
+        vx = Math.cos(angle) * maxVelocity;
+        vy = Math.sin(angle) * maxVelocity;
+
+
+        body.data.velocity[0] = vx;
+        body.data.velocity[1] = vy;
+        //console.log('limited speed to: '+maxVelocity);
+      }
+
+
+    },
+
     render : function (){
         this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
