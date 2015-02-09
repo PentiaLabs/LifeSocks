@@ -17,6 +17,6 @@ Nordic Game Jame 2015 Game
 - Dea Buus Marcussen
 - Kristian Gansted
 - Kristian Thrane
-- Morten Vallenti
+- Morten Vallentin
 - Peter Kræmmer
 - Thomas Willer Sandberg

@@ -211,16 +211,16 @@ LifeSocks.Game.prototype = {
     semenMove: function (semen) {
         semen.sprite.animations.play('move', frameRate, true);
     },
-    semenSmack: function (semen1) {
+    semenSmack: function (semen) {
         var game = this;
-        var anim = semen1.sprite.animations.getAnimation('smack');
+        var anim = semen.sprite.animations.getAnimation('smack');
 
         anim.onComplete.add(function () {
-            game.semenStop(semen1);
-            game.semenMove(semen1);
+            game.semenStop(semen);
+            game.semenMove(semen);
         }, this);
 
-        semen1.sprite.animations.play('smack', 8, false);
+        semen.sprite.animations.play('smack', 8, false);
     },
     semenSplat: function (ground, semen) {
         var anim = semen.sprite.animations.getAnimation('splat');
