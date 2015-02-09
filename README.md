@@ -7,3 +7,15 @@ Nordic Game Jame 2015 Game
 2. Install nodejs
 3. Run `npm install` in the project folder.
 4. Run `gulp`
+
+## Credits
+
+- Allan Kimmer Jensen
+- Arash Sarfehjou
+- Brian Frisch
+- Dea Buus Marcussen
+- Kristian Gansted
+- Kristian Thrane
+- Morten Vallenti
+- Peter Kræmmer
+- Thomas Willer Sandberg
