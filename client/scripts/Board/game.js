@@ -6,8 +6,8 @@ var dangerZone;
 var players = {};
 var add = [];
 var bottomGround, topGround, leftGround, rightGround;
-var ballsCollisionGroup;
-var groundCollisionGroup;
+var semenCG;
+var groundCG;
 var decidedGame = false;
 
 LifeSocks.Game = function(game) {
@@ -53,8 +53,10 @@ LifeSocks.Game.prototype = {
         this.physics.p2.defaultRestitution = 0.8;
         //this.physics.p2.defaultFriction = 0.2;
 
-        ballsCollisionGroup = this.physics.p2.createCollisionGroup();
-        groundCollisionGroup = this.physics.p2.createCollisionGroup();
+        semenCG = this.physics.p2.createCollisionGroup();
+        groundCG = this.physics.p2.createCollisionGroup();
+
+        //this.physics.p2.updateBoundsCollisionGroup();
 
         bottomGround = this.add.sprite(0, this.world.height - 10, 'ground');
         bottomGround.scale.setTo(4, 1);
@@ -62,7 +64,7 @@ LifeSocks.Game.prototype = {
         bottomGround.body.width = this.world.width;
         bottomGround.body.mass = 100;
         bottomGround.body.static = true;
-        bottomGround.body.setCollisionGroup(groundCollisionGroup);
+        bottomGround.body.setCollisionGroup(groundCG);
         bottomGround.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
 
         topGround = this.add.sprite(0, 10, 'ground');
@@ -71,7 +73,7 @@ LifeSocks.Game.prototype = {
         topGround.body.width = this.world.width;
         topGround.body.mass = 100;
         topGround.body.static = true;
-        topGround.body.setCollisionGroup(groundCollisionGroup);
+        topGround.body.setCollisionGroup(groundCG);
         topGround.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
 
         leftGround = this.add.sprite(10, 0, 'ground');
@@ -81,7 +83,7 @@ LifeSocks.Game.prototype = {
         leftGround.body.mass = 100;
         leftGround.body.static = true;
         leftGround.body.angle = 90;
-        leftGround.body.setCollisionGroup(groundCollisionGroup);
+        leftGround.body.setCollisionGroup(groundCG);
         leftGround.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
 
         rightGround = this.add.sprite(this.world.width - 10, 0, 'ground');
@@ -91,13 +93,13 @@ LifeSocks.Game.prototype = {
         rightGround.body.mass = 100;
         rightGround.body.angle = 90;
         rightGround.body.static = true;
-        rightGround.body.setCollisionGroup(groundCollisionGroup);
+        rightGround.body.setCollisionGroup(groundCG);
         rightGround.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
         
-        rightGround.body.collides(ballsCollisionGroup, this.semenSplat, this);
-        leftGround.body.collides(ballsCollisionGroup, this.semenSplat, this);
-        bottomGround.body.collides(ballsCollisionGroup, this.semenSplat, this);
-        topGround.body.collides(ballsCollisionGroup, this.semenSplat, this);
+        rightGround.body.collides(semenCG, this.semenSplat, this);
+        leftGround.body.collides(semenCG, this.semenSplat, this);
+        bottomGround.body.collides(semenCG, this.semenSplat, this);
+        topGround.body.collides(semenCG, this.semenSplat, this);
 
     },
     update : function() {
@@ -134,8 +136,10 @@ LifeSocks.Game.prototype = {
             newPlayer.anchor.setTo(0.5, 0.5);
             newPlayer.animations.play('move', 18, true);
             newPlayer.body.mass = 1;
-            newPlayer.body.setCollisionGroup(ballsCollisionGroup);
-            newPlayer.body.collides(groundCollisionGroup);
+            newPlayer.body.setCollisionGroup(semenCG);
+            //newPlayer.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
+
+            newPlayer.body.collides([groundCG, semenCG]);
             leftGround.body.collides(newPlayer, this.semenSplat, this);
             rightGround.body.collides(newPlayer, this.semenSplat, this);
             topGround.body.collides(newPlayer, this.semenSplat, this);
@@ -159,7 +163,7 @@ LifeSocks.Game.prototype = {
               players[player].body.setZeroRotation();
             }
 
-            players[player].body.thrust(50);
+            players[player].body.thrust(100);
         }
 
         // count alive players
@@ -195,7 +199,10 @@ LifeSocks.Game.prototype = {
 
         this.input.onDown.add(this.gofull, this);
     },
+
     semenSplat: function (ground, semen) {
+        return;
+
         semen.sprite.animations.stop('move');
         semen.sprite.animations.play('splat', 18, false, true);
 
