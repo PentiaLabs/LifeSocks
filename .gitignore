@@ -35,6 +35,9 @@ bower_components
 # Mac Crap
 .DS_Store
 
+# VisualStudio
+obj
+
 .DS_Store
 
 client/.DS_Store
