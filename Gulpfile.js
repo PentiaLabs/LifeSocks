@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var livereload = require('gulp-livereload');
-var sass = require('gulp-sass');
 var less = require('gulp-less');
 var nodemon = require('gulp-nodemon');
 
@@ -9,9 +8,7 @@ gulp.task('watch', function () {
 
     gulp.watch('client/scripts/*.js', ['scripts']);
     gulp.watch('client/**/*.html', ['html']);
-    gulp.watch('scss/**/*.scss', ['sass']);
     gulp.watch('less/**/*.less', ['less']);
-
 });
 
 gulp.task('changed', function () {
@@ -34,12 +31,6 @@ gulp.task('html', function() {
 
 // Sass task, will run when any SCSS files change & BrowserSync
 // will auto-update browsers
-gulp.task('sass', function () {
-    return gulp.src('scss/**/*.scss')
-        .pipe(sass())
-        .pipe(gulp.dest('client/styles'))
-        .pipe(livereload());
-});
 
 gulp.task('less', function () {
     return gulp.src(['less/**/**/bootstrap.less', 'less/joypad/*.less'])
@@ -58,5 +49,5 @@ gulp.task('default', ['watch'], function () {
     .on('change', ['changed'])
     .on('restart', function () {
         console.log('server restarted!');
-    })
+    });
 });
