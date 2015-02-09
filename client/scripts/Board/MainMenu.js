@@ -20,6 +20,7 @@ var avatarSlots = [
 	{ x: 1217, y: 801 },
 	{ x: 1406, y: 725 }
 ];
+var avatars;
 
 LifeSocks.MainMenu = function(game) {
 	var that = this;
@@ -40,6 +41,8 @@ LifeSocks.MainMenu.prototype = {
 	    this.add.sprite(0, 0, 'screen-bg');
 
 	    // temporarily add joined players (hardcoded for now)
+	    avatars = this.add.group();
+
 	    for (var i = 0; i < avatarSlots.length; i++) {
 		    setTimeout(function () {
 		    	game.playerJoined();
@@ -53,6 +56,9 @@ LifeSocks.MainMenu.prototype = {
 		// find next unused slot
 		var avatarSlot = avatarSlots.shift();
 
+		// if we've deleted the group it means we don't want avatars in it
+		if (!avatars) return;
+
 		// let's select a random sprite
 		var readySprite = 'ready' + (1 + Math.floor(Math.random() * (6 - 1 + 1)));
 
@@ -61,9 +67,13 @@ LifeSocks.MainMenu.prototype = {
 
 		// and rotate...
 		joinedPlayer.angle = 90;
+
+		avatars.add(joinedPlayer);
 	},
 
 	startGame: function() {
+		avatars.destroy();
+
 		this.game.state.start('Game');
 	}
 };

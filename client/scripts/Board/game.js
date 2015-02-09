@@ -121,14 +121,13 @@ LifeSocks.Game.prototype = {
 
             newPlayer.body.setCircle(60);
             newPlayer.anchor.setTo(0.5, 0.5);
-            newPlayer.scale.setTo(0.9, 0.9);
+            newPlayer.scale.setTo(0.99, 0.99);
 
             
             newPlayer.animations.play('move', frameRate, true);
 
             newPlayer.body.mass = 1;
             newPlayer.body.setCollisionGroup(semenCG);
-            //newPlayer.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
 
             newPlayer.body.collides(groundCG);
             newPlayer.body.collides(semenCG, this.semenSmack, this);
