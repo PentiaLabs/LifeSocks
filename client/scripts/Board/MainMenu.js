@@ -47,8 +47,11 @@ LifeSocks.MainMenu.prototype = {
 
 	playerJoined: function () {
 		var joinSlot = joinSlots.shift();
+		var readySprite = 'ready' + (1 + Math.floor(Math.random() * (6 - 1 + 1)));
 
-		var joinedPlayer = this.add.sprite(joinSlot.x, joinSlot.y, 'semen', 'ready1');
+		// the 250 is because the axis are getting a bit twisted when we change angle in a second - we should look into changing this somehow
+		var joinedPlayer = this.add.sprite(joinSlot.x + 250, joinSlot.y, 'semen', readySprite);
+		joinedPlayer.angle = 90;
 	},
 
 	startGame: function() {
