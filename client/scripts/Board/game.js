@@ -2,6 +2,7 @@
 var image;
 var balls;
 var speed = 200;
+var frameRate = 16;
 var dangerZone;
 var players = {};
 var add = [];
@@ -117,29 +118,34 @@ LifeSocks.Game.prototype = {
                 'semen5',
                 'semen4',
                 'semen3',
-                'semen2'], 18, true);
+                'semen2'], frameRate, true);
 
             newPlayer.animations.add('splat', [
                 'splat1',
                 'splat2',
-                'splat3'], 18, false);
+                'splat3'], frameRate, false);
 
             newPlayer.animations.add('smack', [
                 'smack1',
                 'smack2',
                 'smack3',
-                'smack4'], 18, false);
+                'smack4'], frameRate, false);
 
             this.physics.p2.enable(newPlayer);
 
-            newPlayer.body.setCircle(50);
+            newPlayer.body.setCircle(60);
             newPlayer.anchor.setTo(0.5, 0.5);
-            newPlayer.animations.play('move', 18, true);
+            
+            newPlayer.animations.play('move', frameRate, true);
+
             newPlayer.body.mass = 1;
             newPlayer.body.setCollisionGroup(semenCG);
             //newPlayer.body.data.motionState = Phaser.Physics.P2.Body.STATIC;
 
-            newPlayer.body.collides([groundCG, semenCG]);
+            newPlayer.body.collides(groundCG);
+            newPlayer.body.collides(semenCG, this.semenSmack, this);
+
+            // so what happens when player collides with ground areas?
             leftGround.body.collides(newPlayer, this.semenSplat, this);
             rightGround.body.collides(newPlayer, this.semenSplat, this);
             topGround.body.collides(newPlayer, this.semenSplat, this);
@@ -199,16 +205,33 @@ LifeSocks.Game.prototype = {
 
         this.input.onDown.add(this.gofull, this);
     },
-
-    semenSplat: function (ground, semen) {
-        return;
-
+    semenStop: function (semen) {
         semen.sprite.animations.stop('move');
-        semen.sprite.animations.play('splat', 18, false, true);
+    },
+    semenMove: function (semen) {
+        semen.sprite.animations.play('move', frameRate, true);
+    },
+    semenSmack: function (semen1) {
+        var game = this;
+        var anim = semen1.sprite.animations.getAnimation('smack');
 
-        setTimeout(function () {
+        anim.onComplete.add(function () {
+            game.semenStop(semen1);
+            game.semenMove(semen1);
+        }, this);
+
+        semen1.sprite.animations.play('smack', 8, false);
+    },
+    semenSplat: function (ground, semen) {
+        var anim = semen.sprite.animations.getAnimation('splat');
+
+        this.semenStop(semen);
+
+        anim.onComplete.add(function () {
             semen.sprite.kill();
-        }, 500);
+        }, this);
+
+        semen.sprite.animations.play('splat', frameRate, false, true);
     },
     collision : function (ball) {
         ball.kill();
