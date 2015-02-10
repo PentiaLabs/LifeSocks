@@ -18,6 +18,11 @@ LifeSocks.Play.prototype = {
 	    var style = { font: "65px Arial", fill: "#00000", align: "center" };
 	    var t = this.add.text(this.world.centerX, 600, text, style);
 
+	    // TODO: change hardcoded color to actual player color
+	    // find next badge color - and cycle through them from the beginning, when we've used them all
+        var badge = this.add.sprite(0, 700, 'label-green');
+        badge.x = this.world.width / 2 - badge.width / 2;
+
 	    console.log(t.width);
 	    t.x = this.world.width / 2 - t.width / 2;
 	    
