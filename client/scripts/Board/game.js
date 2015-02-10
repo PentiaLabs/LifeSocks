@@ -5,6 +5,7 @@ var speed = 200;
 var frameRate = 16;
 var dangerZone;
 var players = {};
+var numPlayers = 0;
 var add = [];
 var nicknames = [];
 var availableBadges = [
@@ -18,6 +19,8 @@ var bottomGround, topGround, leftGround, rightGround;
 var semenCG;
 var groundCG;
 var decidedGame = false;
+var semenCircleSize = 60;
+var countingDown;
 
 LifeSocks.Game = function(game) {
     board.on('commands', function (command, player) {
@@ -102,17 +105,17 @@ LifeSocks.Game.prototype = {
         leftGround.body.collides(semenCG, this.semenSplat, this);
         bottomGround.body.collides(semenCG, this.semenSplat, this);
         topGround.body.collides(semenCG, this.semenSplat, this);
-
     },
     update : function() {
-        for (var i = 0; i < add.length; i++) {
-            var x = this.randomRange(1200, 100);
-            var y = this.randomRange(768, 100);
+      for (var i = 0; i < add.length; i++) {
+
+            var startingState = this.getStartingState(numPlayers % 4);
 
             var nickname = nicknames[i];
             var labelStr = nickname.substr(0, 1).toUpperCase();
 
-            var semen = this.add.sprite(x, y, 'semen', 'semen1');
+            var semen = this.add.sprite(startingState.x, startingState.y, 'semen', 'semen1');
+            
 
             // find next badge color - and cycle through them from the beginning, when we've used them all
             var badgeColor = i >= availableBadges.length ? availableBadges[i - availableBadges.length] : availableBadges[i];
@@ -133,9 +136,10 @@ LifeSocks.Game.prototype = {
 
             this.physics.p2.enable(semen);
 
-            semen.body.setCircle(60);
+            semen.body.setCircle(semenCircleSize);
             semen.anchor.setTo(0.5, 0.5);
             semen.scale.setTo(0.99, 0.99);
+            semen.body.angle = startingState.angle;
 
             // add badge to player
             semen.addChild(badge);
@@ -162,10 +166,36 @@ LifeSocks.Game.prototype = {
             bottomGround.body.collides(semen, this.semenSplat, this);
             
             players[add[i]] = semen;
-        }
+            numPlayers++;
+         }
 
         add = [];
         nicknames = [];
+
+        // so find out if we haven't countet down - if we haven't, begin countdown...
+        if (typeof countingDown === 'undefined') {
+            countingDown = true;
+
+            var countdownHeadline = this.add.sprite(this.world.width / 2 - 304, 400, 'countdown-headline');
+
+            setTimeout(function () {
+                countdownHeadline.kill();
+            }, 10000);
+
+            var countdown = this.add.sprite(this.world.width / 2 - 303, 500, 'countdown', 'countdown1');
+            var count = countdown.animations.add('count', ['countdown10','countdown9','countdown8','countdown7','countdown6','countdown5','countdown4','countdown3','countdown2','countdown1','countdowngo','avoidedges'], 60, false);    
+
+            count.onComplete.add(function () {
+                countingDown = false;
+                countdown.kill();
+            }, this);
+
+            countdown.animations.play('count', 1, false);
+        }
+        
+        // ... and avoid going further until countdown has completed
+        if (countingDown) return;
+
 
         for (player in players) {
             if (players[player].left) {
@@ -187,9 +217,7 @@ LifeSocks.Game.prototype = {
 
         // count alive players
         var alivePlayers = 0;
-        var numPlayers = 0;
         for (player in players) {
-            numPlayers++;
             if (players[player].alive) {
                 alivePlayers = alivePlayers + 1;
             }
@@ -203,7 +231,7 @@ LifeSocks.Game.prototype = {
     },
 
     constrainVelocity: function(sprite, maxVelocity) {
-      var body = sprite.body
+      var body = sprite.body;
       var angle, currVelocitySqr, vx, vy;
 
       vx = body.data.velocity[0];
@@ -221,6 +249,37 @@ LifeSocks.Game.prototype = {
         body.data.velocity[1] = vy;
         //console.log('limited speed to: '+maxVelocity);
       }
+    },
+    //Quadrants : 0 = lower left, 1 = upper left, 2 = upper right, 3 = lower right
+    getStartingState: function(quadrant) {
+      var angle = quadrant * 90 + 45;
+      var x, y;
+      while (true) {
+        //Quadrant < 2 indicates left side of the board
+        x = quadrant < 2 ? this.randomRange(100, 0.5 * this.game.width) : this.randomRange(0.5 * this.game.width, this.game.width - 100);
+        //quadrant % 3 == 0 indicates the lower half of the board
+        y = (quadrant % 3) == 0 ? this.randomRange(0.5 * this.game.height, this.game.height - 100) : this.randomRange(100, 0.5 * this.game.height);
+
+        //Check if the position collides with the position of a spermatozon already on the board
+        var collides = false;
+        for (player in players) {
+          var otherx = players[player].body.x;
+          var othery = players[player].body.x;
+          var dist = this.euclidianDistance(x, y, otherx, othery);
+          if (dist < semenCircleSize*2) {
+            collides = true;
+            break;
+          }
+        }
+        if (!collides)
+          break;
+      }
+
+      return { angle: angle, x: x, y: y };
+    },
+    
+    euclidianDistance : function(x1, y1, x2, y2) {
+      return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     },
 
     render : function (){

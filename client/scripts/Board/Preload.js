@@ -15,7 +15,6 @@ LifeSocks.Preloader.prototype = {
     this.load.image('borderLong', 'assets/LifeSocks/Border_long.jpg');
     this.load.image('ground', 'assets/LifeSocks/ground.png');
 
-
     //Selection of possible assets
     this.load.image('logotype', 'assets/LifeSocks/logotype.png');
     this.load.image('sock', 'assets/LifeSocks/sock.png');
@@ -31,6 +30,9 @@ LifeSocks.Preloader.prototype = {
 
     this.load.atlas('semen', 'assets/semen.png', 'assets/semen.json');
     this.load.atlas('semen-sock', 'assets/semem-sock-sprite.png', 'assets/semen-sock.json');
+
+    this.load.image('countdown-headline', 'assets/countdownheadline.png');
+    this.load.atlas('countdown', 'assets/countdown.png', 'assets/countdown.json');
 
     this.load.image('button-start', 'assets/LifeSocks/startgamebutton.png');
     this.load.image('screen-bg', 'assets/splashscreen.png');
