@@ -3,12 +3,23 @@ var path = require('path');
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var cors = require('cors');
 
 app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname + '/../client/multi.html'));
 });
 
+//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'example.com');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
+
 app.use(express.static(path.join(__dirname, '/../client'))); //  "public" off of current is root
+app.use(cors());
 
 // Count how many are online
 var clientSockets = {};
