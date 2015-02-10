@@ -20,20 +20,16 @@ var groundCG;
 var decidedGame = false;
 
 LifeSocks.Game = function(game) {
-    // Viewport logic
-    var board = io.connect(document.location.origin + '/board');
     board.on('commands', function (command, player) {
         console.log('Recive:', command);
         $('#log').append(JSON.stringify(command) + '- by ' + player.nickname + '<br />');
 
         if (command.rotateLeft) {
             players[player.id].left = true;
-        };
-
+        }
         if (command.rotateRight) {
             players[player.id].right = true;
-        };
-
+        }
     });
     board.on('onlinePlayers', function (onlineNumber) {
         console.log(onlineNumber);

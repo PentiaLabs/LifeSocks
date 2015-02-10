@@ -1,12 +1,17 @@
 var _ = require('underscore');
 var uuid = require('node-uuid');
+var gameServer = require('./gameServer.js');
+
+var NameFactory = require('./NameFactory.js')
+var namefactory = new NameFactory();
 
 module.exports = (function() {
   function User(socket, data) {
     this.id = uuid.v4();
-    this._socket = socket;
-    this.name = 'Nameless User';
+    this._socketId = socket.id;
+    this.name = namefactory.generate();
     this.disconnectedSince = null;
+    this.isHost = false; // Is this player is the host?
     this.data = data || {};
   }
 
@@ -32,17 +37,22 @@ module.exports = (function() {
     getUserData: function() {
       return {
         id: this.id,
-        name: this.name
+        name: this.name,
+        isHost: this.isHost
       };
     },
 
+    message: function(name, arg) {
+      console.log('Message send to:', this.id, name, arg);
+      var socket = gameServer.getSocketFromSocketId(this._socketId);
+      socket.emit(name, arg);
+    },
+
     delete: function() {
-      this.disconnectedSince = this.disconnectedSince || new Date().getTime();
+      //this.disconnectedSince = this.disconnectedSince || new Date().getTime();
       this.leaveRoom();
       //this._socket.disconnect();
-      this.cloak._deleteUser(this);
     }
-
   };
 
   return User;

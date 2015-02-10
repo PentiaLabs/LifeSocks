@@ -10,7 +10,7 @@ LifeSocks.Play.prototype = {
 	create: function() {
 		this.add.sprite(0, 0, 'controller-bg');
 
-	    var text = LifeSocks.playerData.nickname;
+	    var text = LifeSocks.playerData.name;
 	    var style = { font: "65px Arial", fill: "#ffffff", align: "center" };
 	    var t = this.add.text(this.world.centerX, 600, text, style);
 	    

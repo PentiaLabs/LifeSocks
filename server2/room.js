@@ -3,7 +3,7 @@
 */
 var _ = require('underscore');
 var uuid = require('node-uuid');
-
+var chalk = require('chalk');
 
 module.exports = (function() {
 	function Room(socket, nameArg, minRoomMembers, maxRoomMembers) {
@@ -11,8 +11,10 @@ module.exports = (function() {
 		this.maxRoomMembers = maxRoomMembers || 10;
 		this.id = uuid.v4();
 		this._socketId = socket.id;
+		this._socket = socket;
 		this.name = nameArg;
-		this.players = [];
+		this.members = [];
+		this.gameStarted = false;
 		this.data = {};
 		this.created = new Date().getTime();
 	}
@@ -23,25 +25,48 @@ module.exports = (function() {
 		    	return false;
 		    }
 
-		    this.players.push(user);
+		    this.members.push(user);
 		    user.room = this;
+
+		    /*
+				We need to do this a smarter way, if the host leaves no one is host.
+		    */
+		    if(this.getMembers().length === 1) {
+		    	user.isHost = true;
+		    }
+
+		    this._socket.emit('playerJoinedRoom', user.getUserData());
+		    console.log(chalk.green('playerJoinedRoom:', this.id, user.id, this.getMembers()));
 
 		    return true;
 		},
-
 		removeMember: function(user) {
 			if (user.room !== this) {
 		        return;
 		    }
 		    this.members = _(this.members).without(user);
+
+		   	this._socket.emit('playerLeftRoom', user.getUserData());
+		    console.log(chalk.red('playerLeftRoom:', this.id, user.id, this.getMembers()));
+
 		    delete user.room;
-
 		},
-
+		getMembers: function(json) {
+			if (json) {
+				return _.invoke(this.members, 'getUserData');
+			}
+			else {
+				return _.values(this.members);
+			}
+		},
 		age: function() {
 			return new Date().getTime() - this.created;
 		},
-
+		messagePlayers: function(name, arg) {
+			_.forEach(this.members, function(player) {
+				player.message(name, arg);
+			}.bind(this));
+		},
 		_shouldAllowUser: function() {
 			// Check that game is not running already ect.
 			return true;

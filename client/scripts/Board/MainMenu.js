@@ -23,11 +23,19 @@ var avatarSlots = [
 var avatars;
 
 LifeSocks.MainMenu = function(game) {
-	var that = this;
+	var game = this;
+
+	board.on('playerJoinedRoom', function (player) {
+     	console.log('playerJoinedRoom', player);
+    });
+
+    board.on('playerLeftRoom', function (player) {
+     	console.log('playerLeftRoom', player);
+    });
 
 	board.on('startGame', function (player) {
      	console.log('startGame', player);
-     	that.startGame();
+     	game.startGame();
     });
 };
 LifeSocks.MainMenu.prototype = {

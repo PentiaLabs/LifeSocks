@@ -10,75 +10,68 @@ var chalk = require('chalk');
 // Own odules
 var User = require('./user.js');
 var Room = require('./room.js');
+var gameServer = require('./gameServer.js');
 
 var config = {
 	port: process.env.PORT || 3000,
 	clientPath: '/../client'
 };
-
-var users = {};
-var rooms = {};
-
-var gameServer = {
-	createRoom: function(socket, name) {
-		var roomName = name || 'Nameless Room';
-		room = new Room(socket, roomName);
-		rooms[room.id] = room;
-		return room;
-	},
-	getRoom: function(id) {
-      return rooms[id] || false;
-    },
-    getRooms: function() {
-        return _.values(rooms);
-    },
-    userCount: function() {
-    	return _(users).size();
-    }
-};
-
 var users = io.of('/users').on('connection', function(socket){
-	
 	var user = new User(socket);
-	users[user.id] = user;
+	gameServer.users[user.id] = user;
+	gameServer.userSockets[socket.id] = socket;
 
 	console.log(chalk.green('User connected with ID:', user.id));
 
 	socket.emit('playerData', user.getUserData());
 
+	/* 
+		Only join a room of one is open.
+		Later it would be nice if we just created a room.
+	*/
 	if(gameServer.getRooms()[0]) {
 		user.joinRoom(gameServer.getRooms()[0]);
-		console.log(gameServer.getRooms()[0]);
 	} else {
 		console.log('No rooms avaiable');
 	}
 
 	socket.on('action', function(msg){
 		console.log(msg);
-	    board.emit('commands', msg, user);
+	    board.emit('commands', msg, user.getUserData());
 	});
 
 	socket.on('startGame', function(msg){
-		console.log('StartGame', msg, user.room.data.gamesStarted);
+		if(!user.room) {
+			return false;
+		}
+		console.log('StartGame', msg, user.id, user.room.gamesStarted);
 		// TODO: 
 		// emit that a single user has startet the game, so we can update other controllers
-		users.emit('gameStarted', true, user);
-		board.emit('startGame', msg, user);
+		if(!user.room.gameStarted) {
+
+			console.log('Players in room', user.room.getMembers());
+
+			user.room.messagePlayers('gameStarted', true);
+			users.emit('gameStarted', true);
+			board.emit('startGame', msg);
+
+			user.room.gameStarted = true;
+		}
 	});
 
 	socket.on('disconnect', function(){
-		board.emit('removePlayer', user);
-		console.log(chalk.blue(user.name + ' (' + user.id + ') ' + 'disconnects'));
+		user.delete();
 	});
 });
 
 var board = io
 	.of('/board')
 	.on('connection', function (socket) {
+		console.log('Rooms: ',gameServer.getRooms());
     	var currentBoard = gameServer.createRoom(socket);
     	console.log(chalk.green('Board connected with ID:', currentBoard.id, currentBoard._socketId));
     	
-    	users.emit('roomCreated', currentBoard);
+    	users.emit('roomCreated', currentBoard.id);
 
     	socket.on('gameover', function(){
     		users.emit('gameover', true);
