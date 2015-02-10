@@ -9,13 +9,6 @@ LifeSocks.Preloader.prototype = {
 		this.load.audio('bounce', ['audio/phaserUp3.ogg']);
     */
 
-    var url = window.location.protocol + '://' + window.location.host;
-    if (window.location.port) {
-        url = url + ':' + window.location.port;
-    }
-
-    this.load.image('qr', 'http://chart.apis.google.com/chart?chs=249x249&cht=qr&chl=' + url);
-
     this.load.image('ball', 'assets/LifeSocks/ball.png');
     this.load.image('pinkball', 'assets/LifeSocks/pinkball.png');
     this.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');

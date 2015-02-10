@@ -40,8 +40,6 @@ LifeSocks.MainMenu.prototype = {
 	    // var t = this.add.text(this.world.centerX-300, 0, text, style);
 	    this.add.sprite(0, 0, 'screen-bg');
 
-	    this.add.sprite(0, 0, 'qr');
-
 	    // temporarily add joined players (hardcoded for now)
 	    avatars = this.add.group();
 
@@ -75,6 +73,7 @@ LifeSocks.MainMenu.prototype = {
 
 	startGame: function() {
 		avatars.destroy();
+		document.querySelector('#qr').style.display = 'none';
 
 		this.game.state.start('Game');
 	}

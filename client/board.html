@@ -18,6 +18,8 @@
 <body>
   <div id="game"></div>
 
+  <img id="qr" src="" style="position:absolute;top:0px;right:0;width:100px;height:100px;" />
+
   <script src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="scripts/libs/jquery-2.1.3.js"></script>
   <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
@@ -40,6 +42,15 @@
       game.state.add('Game', LifeSocks.Game);
       game.state.add('Score', LifeSocks.Score);
       game.state.start('Boot');
+
+      var url = window.location.protocol + '://' + window.location.host;
+      if (window.location.port) {
+          url = url + ':' + window.location.port;
+      }
+
+      // add qr code
+      document.querySelector('#qr').style.display = 'block';
+      document.querySelector('#qr').src = 'http://chart.apis.google.com/chart?chs=100x100&cht=qr&chl=' + url;
     })();
 
     // Viewport logic
