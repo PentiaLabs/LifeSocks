@@ -52,9 +52,7 @@ LifeSocks.Game.prototype = {
 
         this.physics.startSystem(Phaser.Physics.P2JS);
         this.physics.p2.setImpactEvents(true);
-        this.physics.p2.restitution = 0.6;
-        this.physics.p2.defaultRestitution = 0.8;
-        //this.physics.p2.defaultFriction = 0.2;
+        this.physics.p2.restitution = 1;
 
         semenCG = this.physics.p2.createCollisionGroup();
         groundCG = this.physics.p2.createCollisionGroup();
