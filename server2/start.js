@@ -23,8 +23,6 @@ var users = io.of('/users').on('connection', function(socket){
 
 	console.log(chalk.green('User connected with ID:', user.id));
 
-	socket.emit('playerData', user.getUserData());
-
 	/* 
 		Only join a room of one is open.
 		Later it would be nice if we just created a room.
@@ -34,6 +32,8 @@ var users = io.of('/users').on('connection', function(socket){
 	} else {
 		console.log('No rooms avaiable');
 	}
+
+	socket.emit('playerData', user.getUserData());
 
 	socket.on('action', function(msg){
 		console.log(msg);
