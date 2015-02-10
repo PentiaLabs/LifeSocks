@@ -18,6 +18,7 @@ var bottomGround, topGround, leftGround, rightGround;
 var semenCG;
 var groundCG;
 var decidedGame = false;
+var countingDown;
 
 LifeSocks.Game = function(game) {
     // Viewport logic
@@ -33,7 +34,6 @@ LifeSocks.Game = function(game) {
         if (command.rotateRight) {
             players[player.id].right = true;
         };
-
     });
     board.on('onlinePlayers', function (onlineNumber) {
         console.log(onlineNumber);
@@ -106,9 +106,9 @@ LifeSocks.Game.prototype = {
         leftGround.body.collides(semenCG, this.semenSplat, this);
         bottomGround.body.collides(semenCG, this.semenSplat, this);
         topGround.body.collides(semenCG, this.semenSplat, this);
-
     },
     update : function() {
+
         for (var i = 0; i < add.length; i++) {
             var x = this.randomRange(1200, 100);
             var y = this.randomRange(768, 100);
@@ -170,6 +170,31 @@ LifeSocks.Game.prototype = {
 
         add = [];
         nicknames = [];
+
+        // so find out if we haven't countet down - if we haven't, begin countdown...
+        if (typeof countingDown === 'undefined') {
+            countingDown = true;
+
+            var countdownHeadline = this.add.sprite(this.world.width / 2 - 304, 400, 'countdown-headline');
+
+            setTimeout(function () {
+                countdownHeadline.kill();
+            }, 10000);
+
+            var countdown = this.add.sprite(this.world.width / 2 - 303, 500, 'countdown', 'countdown1');
+            var count = countdown.animations.add('count', ['countdown10','countdown9','countdown8','countdown7','countdown6','countdown5','countdown4','countdown3','countdown2','countdown1','countdowngo','avoidedges'], 60, false);    
+
+            count.onComplete.add(function () {
+                countingDown = false;
+                countdown.kill();
+            }, this);
+
+            countdown.animations.play('count', 1, false);
+        }
+        
+        // ... and avoid going further until countdown has completed
+        if (countingDown) return;
+
 
         for (player in players) {
             if (players[player].left) {
