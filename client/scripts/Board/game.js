@@ -7,6 +7,13 @@ var dangerZone;
 var players = {};
 var add = [];
 var nicknames = [];
+var availableBadges = [
+    'label-blue', 
+    'label-green',
+    'label-grey', 
+    'label-pink', 
+    'label-yellow'
+];
 var bottomGround, topGround, leftGround, rightGround;
 var semenCG;
 var groundCG;
@@ -107,54 +114,58 @@ LifeSocks.Game.prototype = {
             var y = this.randomRange(768, 100);
 
             var nickname = nicknames[i];
-            var label = nickname.substr(0, 1).toUpperCase();
+            var labelStr = nickname.substr(0, 1).toUpperCase();
 
-            var newPlayer = this.add.sprite(x, y, 'semen', 'semen1');
-            var newPlayerBadge = this.add.sprite(0, 0, 'label-blue');
-            newPlayerBadge.scale.setTo(0.75, 0.75);
-            newPlayerBadge.alpha = 0.5;
+            var semen = this.add.sprite(x, y, 'semen', 'semen1');
 
-            var newPlayerLabel = this.add.text(20, 20, label, { font: '48px Arial', fill: '#ffffff', align: 'center', stroke: '#cccccc', strokeThickness: 1 });
-            newPlayerLabel.angle = -90;
-            newPlayerLabel.scale.setTo(0.75, 0.75);
+            // find next badge color - and cycle through them from the beginning, when we've used them all
+            var badgeColor = i >= availableBadges.length ? availableBadges[i - availableBadges.length] : availableBadges[i];
 
-            newPlayer.animations.add('move', ['semen1','semen2','semen3','semen4','semen5','semen6','semen7','semen6','semen5','semen4','semen3','semen2'], frameRate, true);
+            var badge = this.add.sprite(0, 0, badgeColor);
+            badge.scale.setTo(0.75, 0.75);
+            badge.alpha = 0.5;
 
-            newPlayer.animations.add('splat', ['splat1','splat2','splat3'], frameRate, false);
+            var label = this.add.text(20, 20, labelStr, { font: '48px Arial', fill: '#ffffff', align: 'center', stroke: '#cccccc', strokeThickness: 1 });
+            label.angle = -90;
+            label.scale.setTo(0.75, 0.75);
 
-            newPlayer.animations.add('smack', ['smack1','smack2','smack3','smack4'], frameRate, false);
+            semen.animations.add('move', ['semen1','semen2','semen3','semen4','semen5','semen6','semen7','semen6','semen5','semen4','semen3','semen2'], frameRate, true);
 
-            this.physics.p2.enable(newPlayer);
+            semen.animations.add('splat', ['splat1','splat2','splat3'], frameRate, false);
 
-            newPlayer.body.setCircle(60);
-            newPlayer.anchor.setTo(0.5, 0.5);
-            newPlayer.scale.setTo(0.99, 0.99);
+            semen.animations.add('smack', ['smack1','smack2','smack3','smack4'], frameRate, false);
+
+            this.physics.p2.enable(semen);
+
+            semen.body.setCircle(60);
+            semen.anchor.setTo(0.5, 0.5);
+            semen.scale.setTo(0.99, 0.99);
 
             // add badge to player
-            newPlayer.addChild(newPlayerBadge);
-            newPlayerBadge.x = 30;
-            newPlayerBadge.y = 0;
+            semen.addChild(badge);
+            badge.x = 30;
+            badge.y = 0;
 
             // add label to badge
-            newPlayer.addChild(newPlayerLabel);
-            newPlayerLabel.x = 48;
-            newPlayerLabel.y = 52;
+            semen.addChild(label);
+            label.x = 48;
+            label.y = 52;
             
-            newPlayer.animations.play('move', frameRate, true);
+            semen.animations.play('move', 18, true);
 
-            newPlayer.body.mass = 1;
-            newPlayer.body.setCollisionGroup(semenCG);
+            semen.body.mass = 1;
+            semen.body.setCollisionGroup(semenCG);
 
-            newPlayer.body.collides(groundCG);
-            newPlayer.body.collides(semenCG, this.semenSmack, this);
+            semen.body.collides(groundCG);
+            semen.body.collides(semenCG, this.semenSmack, this);
 
             // let's decide what happens when player collides with ground and wall areas
-            leftGround.body.collides(newPlayer, this.semenSplat, this);
-            rightGround.body.collides(newPlayer, this.semenSplat, this);
-            topGround.body.collides(newPlayer, this.semenSplat, this);
-            bottomGround.body.collides(newPlayer, this.semenSplat, this);
+            leftGround.body.collides(semen, this.semenSplat, this);
+            rightGround.body.collides(semen, this.semenSplat, this);
+            topGround.body.collides(semen, this.semenSplat, this);
+            bottomGround.body.collides(semen, this.semenSplat, this);
             
-            players[add[i]] = newPlayer;
+            players[add[i]] = semen;
         }
 
         add = [];
