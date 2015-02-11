@@ -20,7 +20,7 @@ LifeSocks.Play.prototype = {
 
 	    // TODO: change hardcoded color to actual player color
 	    // find next badge color - and cycle through them from the beginning, when we've used them all
-      	var badge = this.add.sprite(0, 700, 'label-green');
+      	var badge = this.add.sprite(0, 700, LifeSocks.playerData.badge);
       	badge.x = this.world.width / 2 - badge.width / 2;
 
 	    t.x = this.world.width / 2 - t.width / 2;
