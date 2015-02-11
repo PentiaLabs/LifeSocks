@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var livereload = require('gulp-livereload');
-var less = require('gulp-less');
 var nodemon = require('gulp-nodemon');
 
 gulp.task('watch', function () {
