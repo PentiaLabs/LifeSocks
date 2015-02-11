@@ -9,6 +9,12 @@ Nordic Game Jame 2015 Game
 4. Run `npm start`
 5. Point browser to http://localhost:3000/test.html
 
+## Heroku
+We got continuous integration running, useful for testing.
+
+- [Start a board](https://life-socks.herokuapp.com/board)
+- [Start a controller](https://life-socks.herokuapp.com/)
+
 ## Credits
 
 - Allan Kimmer Jensen
