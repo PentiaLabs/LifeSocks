@@ -45,6 +45,13 @@ LifeSocks.Game = function(game) {
         nicknames.push(player.nickname);
     });
 
+    board.on('playerJoinedRoom', function (player) {
+        console.log('Player joined:', player);
+        
+        add.push(player.id);
+        nicknames.push(player.name);
+    });
+
     board.on('removePlayer', function (clientid) {
         //delete others[clientid];
         //removeRemoteClient(clientid);

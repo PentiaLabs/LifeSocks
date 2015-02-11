@@ -16,6 +16,7 @@ var config = {
 	port: process.env.PORT || 3000,
 	clientPath: '/../client'
 };
+
 var users = io.of('/users').on('connection', function(socket){
 	var user = new User(socket);
 	gameServer.users[user.id] = user;
