@@ -96,7 +96,7 @@ LifeSocks.Game.prototype = {
       for (var i = 0; i < add.length; i++) {
 
             var startingState = this.getStartingState(numPlayers % 4);
-
+debugger;
             var nickname = nicknames[i];
             var labelStr = nickname.substr(0, 1).toUpperCase();
 

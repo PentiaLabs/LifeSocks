@@ -11,7 +11,7 @@ module.exports = (function() {
     this._socketId = socket.id;
     this.name = namefactory.generate();
     this.disconnectedSince = null;
-    this.isHost = false; // Is this player is the host?
+    this.isHost = false; // Is this player the host?
     this.data = data || {};
   }
 

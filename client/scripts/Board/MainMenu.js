@@ -44,28 +44,23 @@ LifeSocks.MainMenu = function(game) {
 	board.on('playerJoinedRoom', function (player) {      
       add.push(player.id);
       nicknames.push(player.name);
-  });
+  	});
 
-  board.on('playerLeftRoom', function (player) {
+  	board.on('playerLeftRoom', function (player) {
   		var pos = add.map(function(idx) { 
 				return idx; 
 			}).indexOf(player.id);
 
       add.splice(pos, 1);
       nicknames.splice(pos, 1);
-  });
+  	});
 };
 
 LifeSocks.MainMenu.prototype = {
-	create: function() {		
-    // var text = "Life Socks";
-    // var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+	create: function() {
+    	this.add.sprite(0, 0, 'screen-bg');
 
-    // var t = this.add.text(this.world.centerX-300, 0, text, style);
-    this.add.sprite(0, 0, 'screen-bg');
-
-    // temporarily add joined players (hardcoded for now)
-    avatars = this.add.group();
+    	avatars = this.add.group();
 
 		board.emit('boardReadyToPlay');
 	},
@@ -74,7 +69,7 @@ LifeSocks.MainMenu.prototype = {
 		avatars.removeChildren();
 
 		for (var i = 0; i < add.length; i++) {
-	  	this.playerJoined(i);
+	  		this.playerJoined(i);
 		}
 	},
 
@@ -101,6 +96,7 @@ LifeSocks.MainMenu.prototype = {
 
 	startGame: function() {
 		avatars.destroy();
+		
 		document.querySelector('#qr').style.display = 'none';
 
 		this.game.state.start('Game');
