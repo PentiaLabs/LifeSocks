@@ -7,7 +7,7 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "start": "gulp",
+    "start": "node server/start.js",
     "test": "gulp test"
   },
   "repository": {
