@@ -84,9 +84,8 @@ LifeSocks.Game.prototype = {
         leftGround.body.collides(semenCG, this.semenSplat, this);
         bottomGround.body.collides(semenCG, this.semenSplat, this);
         topGround.body.collides(semenCG, this.semenSplat, this);
-    },
-    update : function() {
-      for (var i = 0; i < add.length; i++) {
+
+        for (var i = 0; i < add.length; i++) {
 
             var startingState = this.getStartingState(numPlayers % 4);
 
@@ -142,12 +141,13 @@ LifeSocks.Game.prototype = {
             
             players[add[i]] = semen;
             numPlayers++;
-         }
+        }
 
         add = [];
         nicknames = [];
         badges = [];
-
+    },
+    update : function() {
         // so find out if we haven't countet down - if we haven't, begin countdown...
         if (typeof countingDown === 'undefined') {
             countingDown = true;
@@ -171,7 +171,6 @@ LifeSocks.Game.prototype = {
         
         // ... and avoid going further until countdown has completed
         if (countingDown) return;
-
 
         for (player in players) {
             if (players[player].left) {
