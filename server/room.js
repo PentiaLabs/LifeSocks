@@ -22,34 +22,35 @@ module.exports = (function() {
 	Room.prototype = {
 		addMember: function(user) {
 			if (!this._shouldAllowUser(user)) {
-		    	return false;
-		    }
+				user.message('serverRefusedJoin');
+				return false;
+			}
 
-		    this.members.push(user);
-		    user.room = this;
+			this.members.push(user);
+			user.room = this;
 
-		    /*
+			/*
 				We need to do this a smarter way, if the host leaves no one is host.
-		    */
-		    if(this.getMembers().length === 1) {
-		    	user.isHost = true;
-		    }
+			*/
+			if(this.getMembers().length === 1) {
+				user.isHost = true;
+			}
 
-		    this._socket.emit('playerJoinedRoom', user.getUserData());
-		    console.log(chalk.green('playerJoinedRoom:', this.id, user.id, this.getMembers()));
+			this._socket.emit('playerJoinedRoom', user.getUserData());
+			console.log(chalk.green('playerJoinedRoom:', this.id, user.id, this.getMembers()));
 
-		    return true;
+			return true;
 		},
 		removeMember: function(user) {
 			if (user.room !== this) {
-		        return;
-		    }
-		    this.members = _(this.members).without(user);
+				return;
+			}
+			this.members = _(this.members).without(user);
 
-		   	this._socket.emit('playerLeftRoom', user.getUserData());
-		    console.log(chalk.red('playerLeftRoom:', this.id, user.id, this.getMembers()));
+			this._socket.emit('playerLeftRoom', user.getUserData());
+			console.log(chalk.red('playerLeftRoom:', this.id, user.id, this.getMembers()));
 
-		    delete user.room;
+			delete user.room;
 		},
 		getMembers: function(json) {
 			if (json) {
