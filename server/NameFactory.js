@@ -24,7 +24,7 @@ var NameFactory = function() {
 	
 	this.generate = function() {
 		return names.splice(Math.floor(Math.random() * names.length), 1);
-	}
-}
+	};
+};
 
 module.exports = NameFactory;
