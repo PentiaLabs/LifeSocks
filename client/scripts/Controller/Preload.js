@@ -8,11 +8,8 @@ LifeSocks.Preloader.prototype = {
 		this.load.audio('bounce', ['audio/phaserUp3.ogg']);
 		*/
 
-		this.load.image('ball', 'assets/LifeSocks/ball.png');
-		this.load.image('pinkball', 'assets/LifeSocks/pinkball.png');
 		this.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');
 		this.load.image('borderLong', 'assets/LifeSocks/Border_long.jpg');
-
 
 		//Selection of possible assets
 		this.load.image('logotype', 'assets/LifeSocks/logotype.png');
