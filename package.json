@@ -7,20 +7,20 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "gulp",
     "test": "gulp test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Saturate/NGJ15.git"
+    "url": "https://github.com/PentiaLabs/LifeSocks.git"
   },
   "keywords": [
     "NGJ"
   ],
   "author": "Allan Kimmer Jensen",
-  "license": "ISC",
+  "license": "None",
   "bugs": {
-    "url": "https://github.com/Saturate/NGJ15/issues"
+    "url": "https://github.com/PentiaLabs/LifeSocks/issues"
   },
   "homepage": "https://github.com/Saturate/NGJ15",
   "dependencies": {
@@ -33,7 +33,6 @@
     "cors": "^2.5.3"
   },
   "devDependencies": {
-    "gulp-less": "^2.0.1",
     "gulp-livereload": "^3.4.0",
     "gulp-nodemon": "^1.0.5"
   }
