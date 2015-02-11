@@ -45,7 +45,7 @@ gulp.task('test', function() {
 
 // use default task to launch livereload and watch JS and SASS files
 gulp.task('default', ['watch'], function () {
-  nodemon({ script: 'server/server.js' })
+  nodemon({ script: 'server/start.js' })
     .on('change', ['changed'])
     .on('restart', function () {
         console.log('server restarted!');
