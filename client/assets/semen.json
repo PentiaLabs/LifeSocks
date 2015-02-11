@@ -113,6 +113,14 @@
 	"sourceSize": {"w":250,"h":250}
 },
 {
+	"filename": "crown",
+	"frame": {"x":0,"y":0,"w":250,"h":250},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
+	"sourceSize": {"w":250,"h":250}
+},
+{
 	"filename": "ready1",
 	"frame": {"x":0,"y":250,"w":250,"h":250},
 	"rotated": false,

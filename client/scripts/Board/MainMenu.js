@@ -49,8 +49,8 @@ LifeSocks.MainMenu = function(game) {
   	});
 
   	board.on('playerLeftRoom', function (player) {
-  		var pos = add.map(function(idx) { 
-				return idx; 
+  		var pos = add.map(function(playerId) { 
+				return playerId; 
 			}).indexOf(player.id);
 
       add.splice(pos, 1);

@@ -1,4 +1,3 @@
-// Move game logic here...
 var image;
 var balls;
 var speed = 200;
@@ -12,6 +11,7 @@ var groundCG;
 var decidedGame = false;
 var semenCircleSize = 60;
 var countingDown;
+var winner;
 
 LifeSocks.Game = function(game) {
     board.on('commands', function (command, player) {
@@ -139,10 +139,6 @@ LifeSocks.Game.prototype = {
             players[add[i]] = semen;
             numPlayers++;
         }
-
-        add = [];
-        nicknames = [];
-        badges = [];
     },
     update : function() {
         // so find out if we haven't countet down - if we haven't, begin countdown...
@@ -189,14 +185,22 @@ LifeSocks.Game.prototype = {
 
         // count alive players
         var alivePlayers = 0;
+        var alivePlayer;
         for (player in players) {
             if (players[player].alive) {
+                alivePlayer = player;
                 alivePlayers = alivePlayers + 1;
             }
         }
 
         // if it's the last man standing, and we had more than one player from the beginning, let's celebrate!
         if (alivePlayers === 1 && numPlayers > 1 && !decidedGame) {
+            var pos = add.map(function(playerId) { 
+                return playerId; 
+            }).indexOf(alivePlayer);
+
+            winner = nicknames[pos];
+
             decidedGame = true;
             this.game.state.start('Score');
         }
