@@ -44,7 +44,7 @@ LifeSocks.MainMenu.prototype = {
 		spritePlayerOne.visible = false;
 		spriteWaiting.visible = false;
 		startButton.visible = false;
-		spriteAreYouReady = false;
+		spriteAreYouReady.visible = false;
 
 		if (numPlayers == 1) {
 			if (LifeSocks.playerData.isHost) {

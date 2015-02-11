@@ -27,7 +27,7 @@ LifeSocks.Preloader.prototype = {
 		this.load.image('button-start', 'assets/LifeSocks/startgamebutton.png');
 
 		this.load.image('controller-bg', 'assets/controller/mobilbackground.png');
-		this.load.image('areyouready-headline', 'assets/controller/areyouready-headline.png');
+		this.load.image('areyouready-headline', 'assets/areyouready-headline.png');
 
 		this.load.image('controller-left', 'assets/controller/control-left.png');
 		this.load.image('controller-right', 'assets/controller/control-right.png');
