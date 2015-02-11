@@ -68,6 +68,9 @@ module.exports = (function() {
 			}.bind(this));
 		},
 		_shouldAllowUser: function() {
+			if(this.gameStarted) {
+				return false;
+			}
 			// Check that game is not running already ect.
 			return true;
 		}
