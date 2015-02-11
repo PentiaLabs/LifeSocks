@@ -9,10 +9,11 @@ WebSocket messages is documented like `message [argument, argumet2]`
 
 #### Send
 
-`command`Control commands
+- `action` Control commands, rotate left and right.
 
 #### Received
 - `gameStarted` When the host starts the game this event is emitted.
+- `serverRefusedJoin` when the server does not allow a player to join.
 
 ### Board
 
