@@ -8,7 +8,6 @@ gulp.task('watch', function () {
 
     gulp.watch('client/scripts/*.js', ['scripts']);
     gulp.watch('client/**/*.html', ['html']);
-    gulp.watch('less/**/*.less', ['less']);
 });
 
 gulp.task('changed', function () {
@@ -27,16 +26,6 @@ gulp.task('html', function() {
     .pipe(
         livereload()
     );
-});
-
-// Sass task, will run when any SCSS files change & BrowserSync
-// will auto-update browsers
-
-gulp.task('less', function () {
-    return gulp.src(['less/**/**/bootstrap.less', 'less/joypad/*.less'])
-        .pipe(less())
-        .pipe(gulp.dest('client/styles/joypad'))
-        .pipe(livereload());
 });
 
 gulp.task('test', function() {
