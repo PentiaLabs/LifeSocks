@@ -6,13 +6,6 @@ var frameRate = 16;
 var dangerZone;
 var players = {};
 var numPlayers = 0;
-var availableBadges = [
-    'label-blue', 
-    'label-green',
-    'label-grey', 
-    'label-pink', 
-    'label-yellow'
-];
 var bottomGround, topGround, leftGround, rightGround;
 var semenCG;
 var groundCG;
@@ -96,17 +89,13 @@ LifeSocks.Game.prototype = {
       for (var i = 0; i < add.length; i++) {
 
             var startingState = this.getStartingState(numPlayers % 4);
-debugger;
+
             var nickname = nicknames[i];
             var labelStr = nickname.substr(0, 1).toUpperCase();
 
             var semen = this.add.sprite(startingState.x, startingState.y, 'semen', 'semen1');
-            
 
-            // find next badge color - and cycle through them from the beginning, when we've used them all
-            var badgeColor = i >= availableBadges.length ? availableBadges[i - availableBadges.length] : availableBadges[i];
-
-            var badge = this.add.sprite(0, 0, badgeColor);
+            var badge = this.add.sprite(0, 0, badges[i]);
             badge.scale.setTo(0.75, 0.75);
             badge.alpha = 0.5;
 
@@ -157,6 +146,7 @@ debugger;
 
         add = [];
         nicknames = [];
+        badges = [];
 
         // so find out if we haven't countet down - if we haven't, begin countdown...
         if (typeof countingDown === 'undefined') {

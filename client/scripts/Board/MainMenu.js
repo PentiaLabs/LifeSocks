@@ -1,5 +1,6 @@
 var add = [];
 var nicknames = [];
+var badges = [];
 
 // these are the coordinates in which joined players will be placed
 var avatarSlots = [
@@ -44,6 +45,7 @@ LifeSocks.MainMenu = function(game) {
 	board.on('playerJoinedRoom', function (player) {      
       add.push(player.id);
       nicknames.push(player.name);
+      badges.push(player.badge);
   	});
 
   	board.on('playerLeftRoom', function (player) {
@@ -53,6 +55,7 @@ LifeSocks.MainMenu = function(game) {
 
       add.splice(pos, 1);
       nicknames.splice(pos, 1);
+      badges.splice(pos, 1);
   	});
 };
 
