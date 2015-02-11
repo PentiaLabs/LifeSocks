@@ -7,7 +7,7 @@ Nordic Game Jame 2015 Game
 2. Install nodejs
 3. Run `npm install` in the project folder.
 4. Run `npm start`
-5. Point browser to http://localhost:3000/test.html
+5. Point browser to [http://localhost:3000/test.html](http://localhost:3000/test.html)
 
 ## Heroku
 We got continuous integration running, useful for testing.
