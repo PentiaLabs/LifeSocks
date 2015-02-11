@@ -1,3 +1,6 @@
+var add = [];
+var nicknames = [];
+
 // these are the coordinates in which joined players will be placed
 var avatarSlots = [
 	// first row
@@ -37,38 +40,55 @@ LifeSocks.MainMenu = function(game) {
      	console.log('startGame', player);
      	game.startGame();
     });
+
+	board.on('playerJoinedRoom', function (player) {      
+      add.push(player.id);
+      nicknames.push(player.name);
+  });
+
+  board.on('playerLeftRoom', function (player) {
+  		var pos = add.map(function(idx) { 
+				return idx; 
+			}).indexOf(player.id);
+
+      add.splice(pos, 1);
+      nicknames.splice(pos, 1);
+  });
 };
+
 LifeSocks.MainMenu.prototype = {
-	create: function() {
-		var game = this;
-		
-	    // var text = "Life Socks";
-	    // var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+	create: function() {		
+    // var text = "Life Socks";
+    // var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
 
-	    // var t = this.add.text(this.world.centerX-300, 0, text, style);
-	    this.add.sprite(0, 0, 'screen-bg');
+    // var t = this.add.text(this.world.centerX-300, 0, text, style);
+    this.add.sprite(0, 0, 'screen-bg');
 
-	    // temporarily add joined players (hardcoded for now)
-	    avatars = this.add.group();
-
-	    for (var i = 0; i < avatarSlots.length; i++) {
-		    setTimeout(function () {
-		    	game.playerJoined();
-		  	}, (i+1) * 1000);
-		}
+    // temporarily add joined players (hardcoded for now)
+    avatars = this.add.group();
 
 		board.emit('boardReadyToPlay');
 	},
 
-	playerJoined: function () {
+	update: function () {
+		avatars.removeChildren();
+
+		for (var i = 0; i < add.length; i++) {
+	  	this.playerJoined(i);
+		}
+	},
+
+	playerJoined: function (pos) {
 		// find next unused slot
-		var avatarSlot = avatarSlots.shift();
+		var avatarSlot = avatarSlots[pos];
 
 		// if we've deleted the group it means we don't want avatars in it
 		if (!avatars) return;
 
 		// let's select a random sprite
-		var readySprite = 'ready' + (1 + Math.floor(Math.random() * (6 - 1 + 1)));
+		// TODO: select random avatar
+		//var readySprite = 'ready' + (1 + Math.floor(Math.random() * (6 - 1 + 1)));
+		var readySprite = 'ready1';
 
 		// the '+ 250' is because the axis are getting a bit twisted when we change angle in the next line - we should look into changing this somehow
 		var joinedPlayer = this.add.sprite(avatarSlot.x + 250, avatarSlot.y, 'semen', readySprite);

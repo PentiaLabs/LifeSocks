@@ -2,6 +2,7 @@ LifeSocks.MainMenu = function(game) {};
 LifeSocks.MainMenu.prototype = {
 	create: function() {
 		console.log('Create: MainMenu');
+			var that = this;
 	    var text = "Life Socks";
 	    var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
 
@@ -12,13 +13,16 @@ LifeSocks.MainMenu.prototype = {
 
 	    StartGameButton = this.add.button(750, 550, 'controller-start', this.startGame, this, null, null, null);
 
-	    socket.on('gameStarted', this.gameStarted, this);
+	    socket.on('gameStarted', function () {
+	    	that.gameStarted();
+	    });
 	},
 	startGame: function() {
 		socket.emit('startGame', true);
+
 		this.game.state.start('Play');
 	},
 	gameStarted: function() {
-		//this.game.state.start('Play');
+		this.game.state.start('Play');
 	}
 };

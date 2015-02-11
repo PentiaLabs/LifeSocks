@@ -2,9 +2,9 @@ LifeSocks.Play = function(game) {
 	var that = this;
 
 	controller.on('gameover', function () {
-     	console.log('gameover');
-     	that.restart();
-    });
+   	console.log('gameover');
+   	that.restart();
+  });
 };
 LifeSocks.Play.prototype = {
 	create: function() {
@@ -20,10 +20,9 @@ LifeSocks.Play.prototype = {
 
 	    // TODO: change hardcoded color to actual player color
 	    // find next badge color - and cycle through them from the beginning, when we've used them all
-        var badge = this.add.sprite(0, 700, 'label-green');
-        badge.x = this.world.width / 2 - badge.width / 2;
+      var badge = this.add.sprite(0, 700, 'label-green');
+      badge.x = this.world.width / 2 - badge.width / 2;
 
-	    console.log(t.width);
 	    t.x = this.world.width / 2 - t.width / 2;
 	    
 	    this.add.button(this.world.width - 528 - 50, 250, 'controller-right', this.rotateRight, this, null, null, null);
@@ -33,11 +32,9 @@ LifeSocks.Play.prototype = {
 		this.game.state.start('MainMenu');
 	},
 	rotateRight: function () {
-	    console.log('Right!!!');
 	    socket.emit('action', { rotateRight: 200 });
 	},
 	rotateLeft: function () {
-	    console.log('LEFT!');
 	    socket.emit('action', { rotateLeft: 200 });
 	}
 };

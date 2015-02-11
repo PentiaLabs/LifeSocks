@@ -6,8 +6,6 @@ var frameRate = 16;
 var dangerZone;
 var players = {};
 var numPlayers = 0;
-var add = [];
-var nicknames = [];
 var availableBadges = [
     'label-blue', 
     'label-green',
@@ -36,18 +34,6 @@ LifeSocks.Game = function(game) {
     });
     board.on('onlinePlayers', function (onlineNumber) {
         console.log(onlineNumber);
-    });
-
-    board.on('playerJoinedRoom', function (player) {
-        console.log('Player joined:', player);
-        
-        add.push(player.id);
-        nicknames.push(player.name);
-    });
-
-    board.on('playerLeftRoom', function (clientid) {
-        //delete others[clientid];
-        //removeRemoteClient(clientid);
     });
 };
 
