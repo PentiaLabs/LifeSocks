@@ -25,10 +25,10 @@ LifeSocks.Game = function(game) {
         console.log('Recive:', command);
         $('#log').append(JSON.stringify(command) + '- by ' + player.nickname + '<br />');
 
-        if (command.rotateLeft) {
+        if (command.rotateLeft && players[player.id]) {
             players[player.id].left = true;
         }
-        if (command.rotateRight) {
+        if (command.rotateRight && players[player.id]) {
             players[player.id].right = true;
         }
     });
