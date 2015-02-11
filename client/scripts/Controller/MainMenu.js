@@ -18,6 +18,10 @@ LifeSocks.MainMenu.prototype = {
 
 		// so add graphics that we can show or hide later
 		spritePlayerOne = this.add.sprite(200, 100, 'controller-start-header');
+
+		spriteAreYouReady = this.add.sprite(200, 100, 'areyouready-headline');
+		spriteAreYouReady.x = this.world.centerX - spriteAreYouReady.width / 2;
+
 		spriteWaiting = this.add.sprite(this.world.centerX, this.world.centerY, 'waiting', 'waiting1');
 		spriteWaiting.scale.setTo(0.75,0.75);
 		spriteWaiting.y = this.world.centerY;
@@ -40,13 +44,17 @@ LifeSocks.MainMenu.prototype = {
 		spritePlayerOne.visible = false;
 		spriteWaiting.visible = false;
 		startButton.visible = false;
+		spriteAreYouReady = false;
 
 		if (numPlayers == 1) {
 			if (LifeSocks.playerData.isHost) {
 				spritePlayerOne.visible = true;
 				spriteWaiting.visible = true;
 			}else{
+				// TODO: decide whether this should even be here - the problem lies elsewhere (it shouldn't be possible to have a game without a host)
 				label = 'The host has left... something is wrong';
+				text = this.add.text(this.world.centerX, this.world.centerY, label, style);
+				text.x = this.world.width / 2 - text.width / 2;
 			}
 		}else{
 			// if we have more than one player connected, and we're the host, we should be able to start the game
@@ -54,12 +62,10 @@ LifeSocks.MainMenu.prototype = {
 				spritePlayerOne.visible = true;
 				startButton.visible = true;
 			}else{
-				label = 'Waiting for host to start the game';
+				spriteAreYouReady.visible = true;
+				spriteWaiting.visible = true; // <- TODO: should be a 'waiting for host to start the game...' animation
 			}
 		}
-
-		text = this.add.text(this.world.centerX, this.world.centerY, label, style);
-		text.x = this.world.width / 2 - text.width / 2;
 	},
 	startGame: function() {
 		socket.emit('startGame', true);
