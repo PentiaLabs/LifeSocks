@@ -15,9 +15,6 @@ var countingDown;
 
 LifeSocks.Game = function(game) {
     board.on('commands', function (command, player) {
-        console.log('Recive:', command);
-        $('#log').append(JSON.stringify(command) + '- by ' + player.nickname + '<br />');
-
         if (command.rotateLeft && players[player.id]) {
             players[player.id].left = true;
         }
