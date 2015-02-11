@@ -1,3 +1,5 @@
+[![LifeSocks](https://github.com/PentiaLabs/LifeSocks/blob/master/client/assets/logotype_v01_1024.png?raw=true)](https://github.com/PentiaLabs/LifeSocks/)   
+
 # LifeSocks [![Build Status](https://travis-ci.org/PentiaLabs/LifeSocks.svg)](https://travis-ci.org/PentiaLabs/LifeSocks)   
 Nordic Game Jame 2015 Game
 
