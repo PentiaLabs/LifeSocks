@@ -1,6 +1,6 @@
 [![LifeSocks](https://github.com/PentiaLabs/LifeSocks/blob/master/client/assets/logotype_v01_1024.png?raw=true)](https://github.com/PentiaLabs/LifeSocks/)   
 
-# LifeSocks [![Build Status](https://travis-ci.org/PentiaLabs/LifeSocks.svg)](https://travis-ci.org/PentiaLabs/LifeSocks)   
+# LifeSocks [![Build Status](https://travis-ci.org/PentiaLabs/LifeSocks.svg)](https://travis-ci.org/PentiaLabs/LifeSocks) [![Dependencies](https://david-dm.org/PentiaLabs/LifeSocks.svg)](https://david-dm.org/PentiaLabs/LifeSocks) 
 A game about the beautiful start of life - and socks!
 
 An average human male ejaculation contains over 15 million sperm per milliliter. The obvious fate of a single spermatozoon is to be eliminated. Fight your way to the top and enjoy the sweet feeling of being one in a million!
