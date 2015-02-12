@@ -1,4 +1,3 @@
-// Move game logic here...
 var image;
 var balls;
 var speed = 200;
@@ -6,25 +5,16 @@ var frameRate = 16;
 var dangerZone;
 var players = {};
 var numPlayers = 0;
-var availableBadges = [
-    'label-blue', 
-    'label-green',
-    'label-grey', 
-    'label-pink', 
-    'label-yellow'
-];
 var bottomGround, topGround, leftGround, rightGround;
 var semenCG;
 var groundCG;
 var decidedGame = false;
 var semenCircleSize = 60;
 var countingDown;
+var winner;
 
 LifeSocks.Game = function(game) {
     board.on('commands', function (command, player) {
-        console.log('Recive:', command);
-        $('#log').append(JSON.stringify(command) + '- by ' + player.nickname + '<br />');
-
         if (command.rotateLeft && players[player.id]) {
             players[player.id].left = true;
         }
@@ -91,9 +81,8 @@ LifeSocks.Game.prototype = {
         leftGround.body.collides(semenCG, this.semenSplat, this);
         bottomGround.body.collides(semenCG, this.semenSplat, this);
         topGround.body.collides(semenCG, this.semenSplat, this);
-    },
-    update : function() {
-      for (var i = 0; i < add.length; i++) {
+
+        for (var i = 0; i < add.length; i++) {
 
             var startingState = this.getStartingState(numPlayers % 4);
 
@@ -101,12 +90,8 @@ LifeSocks.Game.prototype = {
             var labelStr = nickname.substr(0, 1).toUpperCase();
 
             var semen = this.add.sprite(startingState.x, startingState.y, 'semen', 'semen1');
-            
 
-            // find next badge color - and cycle through them from the beginning, when we've used them all
-            var badgeColor = i >= availableBadges.length ? availableBadges[i - availableBadges.length] : availableBadges[i];
-
-            var badge = this.add.sprite(0, 0, badgeColor);
+            var badge = this.add.sprite(0, 0, badges[i]);
             badge.scale.setTo(0.75, 0.75);
             badge.alpha = 0.5;
 
@@ -153,11 +138,9 @@ LifeSocks.Game.prototype = {
             
             players[add[i]] = semen;
             numPlayers++;
-         }
-
-        add = [];
-        nicknames = [];
-
+        }
+    },
+    update : function() {
         // so find out if we haven't countet down - if we haven't, begin countdown...
         if (typeof countingDown === 'undefined') {
             countingDown = true;
@@ -182,7 +165,6 @@ LifeSocks.Game.prototype = {
         // ... and avoid going further until countdown has completed
         if (countingDown) return;
 
-
         for (player in players) {
             if (players[player].left) {
               players[player].body.angle -= 20;
@@ -203,14 +185,22 @@ LifeSocks.Game.prototype = {
 
         // count alive players
         var alivePlayers = 0;
+        var alivePlayer;
         for (player in players) {
             if (players[player].alive) {
+                alivePlayer = player;
                 alivePlayers = alivePlayers + 1;
             }
         }
 
         // if it's the last man standing, and we had more than one player from the beginning, let's celebrate!
         if (alivePlayers === 1 && numPlayers > 1 && !decidedGame) {
+            var pos = add.map(function(playerId) { 
+                return playerId; 
+            }).indexOf(alivePlayer);
+
+            winner = nicknames[pos];
+
             decidedGame = true;
             this.game.state.start('Score');
         }

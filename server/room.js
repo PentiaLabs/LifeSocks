@@ -39,6 +39,8 @@ module.exports = (function() {
 			this._socket.emit('playerJoinedRoom', user.getUserData());
 			console.log(chalk.green('playerJoinedRoom:', this.id, user.id, this.getMembers()));
 
+			this.sendUserCount();
+			
 			return true;
 		},
 		removeMember: function(user) {
@@ -51,6 +53,15 @@ module.exports = (function() {
 			console.log(chalk.red('playerLeftRoom:', this.id, user.id, this.getMembers()));
 
 			delete user.room;
+
+			this.sendUserCount();
+		},
+		sendUserCount: function () {
+			var usersInRoom = this.members.length;
+
+			_.forEach(this.members, function(player) {
+				player.message('playerCount', usersInRoom);
+			}.bind(this));
 		},
 		getMembers: function(json) {
 			if (json) {

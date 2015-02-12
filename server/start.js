@@ -14,7 +14,7 @@ var gameServer = require('./gameServer.js');
 
 var config = {
 	port: process.env.PORT || 3000,
-	clientPath: '/../client'
+	clientPath: '../client'
 };
 
 var users = io.of('/users').on('connection', function(socket){

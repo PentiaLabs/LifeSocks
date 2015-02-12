@@ -1,0 +1,37 @@
+{"frames": [
+
+{
+	"filename": "waiting1",
+	"frame": {"x":5,"y":5,"w":1923,"h":110},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":1923,"h":110},
+	"sourceSize": {"w":1923,"h":110}
+},
+{
+	"filename": "waiting2",
+	"frame": {"x":5,"y":125,"w":1923,"h":110},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":1923,"h":110},
+	"sourceSize": {"w":1923,"h":110}
+},
+{
+	"filename": "waiting3",
+	"frame": {"x":5,"y":245,"w":1923,"h":110},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":1923,"h":110},
+	"sourceSize": {"w":1923,"h":110}
+}
+],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "waiting.png",
+	"format": "RGBA8888",
+	"size": {"w":1933,"h":360},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:99b2f74fa157c5b63e72b0d68be078b4:1/1$"
+}
+}

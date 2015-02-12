@@ -29,12 +29,11 @@ LifeSocks.Score = function(game) {
 LifeSocks.Score.prototype = {
 	create: function() {
 		var game = this;
-	    var text = "Somebody";
-	    var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
 
-	    var t = this.add.text(this.world.centerX-300, 0, text, style);
 	    this.add.sprite(0, 0, 'score-bg');
+
 	    var semenSock = this.add.sprite(400, 100, 'semen-sock');
+
 	    this.add.sprite(0, 0, 'score-txt');
 
 	    semenSock.animations.add('drip', [
@@ -46,6 +45,14 @@ LifeSocks.Score.prototype = {
             'semen-sock6'], 6, true);
 
 	    semenSock.animations.play('drip');
+
+	   	this.add.text(197, 489, winner, { font: '60px Arial Black', fill: '#00000', align: 'center' });
+	   	
+	   	var winner = this.add.sprite(397 + 250, 388, 'semen', 'crown');
+	   	var crown = this.add.sprite(397 + 250, 388, 'semen', 'ready3');
+
+	   	winner.angle = 90;
+	   	crown.angle = 90;
 
 	    // temporarily add joined players (hardcoded for now)
 	    for (var i = 0; i < loserSlots.length; i++) {

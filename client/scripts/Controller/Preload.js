@@ -7,10 +7,7 @@ LifeSocks.Preloader.prototype = {
 		/*
 		this.load.audio('bounce', ['audio/phaserUp3.ogg']);
 		*/
-
-		this.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');
-		this.load.image('borderLong', 'assets/LifeSocks/Border_long.jpg');
-
+		
 		//Selection of possible assets
 		this.load.image('logotype', 'assets/LifeSocks/logotype.png');
 		this.load.image('sock', 'assets/LifeSocks/sock.png');
@@ -25,11 +22,12 @@ LifeSocks.Preloader.prototype = {
 		this.load.image('label-yellow', 'assets/LifeSocks/label-yellow.png');
 
 		this.load.atlas('semen', 'assets/semen.png', 'assets/semen.json');
+		this.load.atlas('waiting', 'assets/waiting.png', 'assets/waiting.json');
 
-		// Replace this :)
 		this.load.image('button-start', 'assets/LifeSocks/startgamebutton.png');
 
 		this.load.image('controller-bg', 'assets/controller/mobilbackground.png');
+		this.load.image('areyouready-headline', 'assets/areyouready-headline.png');
 
 		this.load.image('controller-left', 'assets/controller/control-left.png');
 		this.load.image('controller-right', 'assets/controller/control-right.png');

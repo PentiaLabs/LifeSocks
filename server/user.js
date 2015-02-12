@@ -5,13 +5,17 @@ var gameServer = require('./gameServer.js');
 var NameFactory = require('./NameFactory.js')
 var namefactory = new NameFactory();
 
+var BadgeFactory = require('./BadgeFactory.js');
+var badgefactory = new BadgeFactory();
+
 module.exports = (function() {
   function User(socket, data) {
     this.id = uuid.v4();
     this._socketId = socket.id;
     this.name = namefactory.generate();
+    this.badge = badgefactory.generate();
     this.disconnectedSince = null;
-    this.isHost = false; // Is this player is the host?
+    this.isHost = false; // Is this player the host?
     this.data = data || {};
   }
 
@@ -38,6 +42,7 @@ module.exports = (function() {
       return {
         id: this.id,
         name: this.name,
+        badge: this.badge,
         isHost: this.isHost
       };
     },

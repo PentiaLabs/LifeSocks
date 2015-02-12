@@ -1,13 +1,13 @@
 {
-  "name": "NGJ15",
-  "version": "0.0.1",
-  "description": "Nordic Game Jam",
+  "name": "LifeSocks",
+  "version": "0.2.2",
+  "description": "A game about the beautiful start of life - and socks!",
   "main": "Gulpfile.js",
   "engines": {
     "node": "0.10.x"
   },
   "scripts": {
-    "start": "gulp",
+    "start": "node server/start.js",
     "test": "gulp test"
   },
   "repository": {
@@ -15,14 +15,18 @@
     "url": "https://github.com/PentiaLabs/LifeSocks.git"
   },
   "keywords": [
-    "NGJ"
+    "NGJ", "Game", "Phaser", "WebSockets"
   ],
-  "author": "Allan Kimmer Jensen",
+  "contributors": [{ 
+    "name" : "Allan Kimmer Jensen", 
+    "email" : "akj@pentia.dk", 
+    "url" : "http://AKJ.IO/"
+  }],
   "license": "None",
   "bugs": {
     "url": "https://github.com/PentiaLabs/LifeSocks/issues"
   },
-  "homepage": "https://github.com/Saturate/NGJ15",
+  "homepage": "https://github.com/PentiaLabs/LifeSocks",
   "dependencies": {
     "chalk": "^0.5.1",
     "express": "^4.11.0",
