@@ -1,7 +1,11 @@
 [![LifeSocks](https://github.com/PentiaLabs/LifeSocks/blob/master/client/assets/logotype_v01_1024.png?raw=true)](https://github.com/PentiaLabs/LifeSocks/)   
 
 # LifeSocks [![Build Status](https://travis-ci.org/PentiaLabs/LifeSocks.svg)](https://travis-ci.org/PentiaLabs/LifeSocks)   
-Nordic Game Jame 2015 Game
+A game about the beautiful start of life - and socks!
+
+An average human male ejaculation contains over 15 million sperm per milliliter. The obvious fate of a single spermatozoon is to be eliminated. Fight your way to the top and enjoy the sweet feeling of being one in a million!
+
+We started working on this game at [Nordic Game Jame 2015](nordicgamejam.org). Since then we have been working to improve it.
 
 ## Getting Started
 
@@ -17,7 +21,7 @@ We got continuous integration running, useful for testing.
 - [Start a board](https://life-socks.herokuapp.com/board)
 - [Start a controller](https://life-socks.herokuapp.com/)
 
-## Credits
+## Team
 
 - Allan Kimmer Jensen
 - Arash Sarfehjou
