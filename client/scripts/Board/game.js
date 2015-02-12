@@ -180,7 +180,7 @@ LifeSocks.Game.prototype = {
             players[player].body.thrust(100);
 
             // ...but control max velocity
-            this.constrainVelocity(players[player], 10);
+            this.constrainVelocity(players[player], 7);
         }
 
         // count alive players
