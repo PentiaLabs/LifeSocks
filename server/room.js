@@ -49,12 +49,26 @@ module.exports = (function() {
 			}
 			this.members = _(this.members).without(user);
 
+			if(user.isHost) {
+				this.assignNewHost();
+			}
+
 			this._socket.emit('playerLeftRoom', user.getUserData());
 			console.log(chalk.red('playerLeftRoom:', this.id, user.id, this.getMembers()));
 
 			delete user.room;
 
 			this.sendUserCount();
+		},
+		assignNewHost: function (member) {
+			var user = member;
+			if(!user) {
+				user = this.getMembers()[0]; // Make the first play in the array host.
+			}
+			if(user) {
+				user.isHost = true;
+				user.message('playerData', user.getUserData());
+			}
 		},
 		sendUserCount: function () {
 			var usersInRoom = this.members.length;

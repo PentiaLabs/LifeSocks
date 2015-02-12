@@ -49,7 +49,6 @@ var users = io.of('/users').on('connection', function(socket){
 		// TODO: 
 		// emit that a single user has startet the game, so we can update other controllers
 		if(!user.room.gameStarted) {
-
 			console.log('Players in room', user.room.getMembers());
 
 			user.room.messagePlayers('gameStarted', true);
@@ -76,6 +75,7 @@ var board = io
 
     	socket.on('gameover', function(){
     		users.emit('gameover', true);
+    		currentBoard.gameStarted = false;
 		});
 
 		socket.on('disconnect', function(){
