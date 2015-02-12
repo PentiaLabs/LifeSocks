@@ -34,7 +34,7 @@ LifeSocks.Game.prototype = {
 
         this.physics.startSystem(Phaser.Physics.P2JS);
         this.physics.p2.setImpactEvents(true);
-        this.physics.p2.restitution = 1;
+        this.physics.p2.restitution = 0.5;
 
         semenCG = this.physics.p2.createCollisionGroup();
         groundCG = this.physics.p2.createCollisionGroup();
@@ -180,7 +180,7 @@ LifeSocks.Game.prototype = {
             players[player].body.thrust(100);
 
             // ...but control max velocity
-            this.constrainVelocity(players[player], 5);
+            this.constrainVelocity(players[player], 10);
         }
 
         // count alive players
