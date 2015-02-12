@@ -15,7 +15,7 @@ module.exports = (function() {
     this.name = namefactory.generate();
     this.badge = badgefactory.generate();
     this.disconnectedSince = null;
-    this.isHost = false; // Is this player the host?
+    this.isHost = true; // Is this player the host?
     this.data = data || {};
   }
 
