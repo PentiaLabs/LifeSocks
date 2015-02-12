@@ -29,33 +29,29 @@ var avatars;
 LifeSocks.MainMenu = function(game) {
 	var game = this;
 
-	board.on('playerJoinedRoom', function (player) {
-     	console.log('playerJoinedRoom', player);
-    });
-
-    board.on('playerLeftRoom', function (player) {
-     	console.log('playerLeftRoom', player);
-    });
-
 	board.on('startGame', function (player) {
-     	console.log('startGame', player);
-     	game.startGame();
+		console.log('startGame', player);
+		game.startGame();
     });
 
-	board.on('playerJoinedRoom', function (player) {      
-      add.push(player.id);
-      nicknames.push(player.name);
-      badges.push(player.badge);
+	board.on('playerJoinedRoom', function (player) {
+	    console.log('playerJoinedRoom', player);
+     
+		add.push(player.id);
+		nicknames.push(player.name);
+		badges.push(player.badge);
   	});
 
   	board.on('playerLeftRoom', function (player) {
-  		var pos = add.map(function(playerId) { 
-				return playerId; 
-			}).indexOf(player.id);
+  		console.log('playerLeftRoom', player);
 
-      add.splice(pos, 1);
-      nicknames.splice(pos, 1);
-      badges.splice(pos, 1);
+  		var pos = add.map(function(playerId) { 
+			return playerId; 
+		}).indexOf(player.id);
+
+		add.splice(pos, 1);
+		nicknames.splice(pos, 1);
+		badges.splice(pos, 1);
   	});
 };
 

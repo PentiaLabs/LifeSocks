@@ -19,7 +19,7 @@ WebSocket messages is documented like `message [argument, argumet2]`
 
 #### Send
 
-- `gameOver` When the game has ended, this is emitted. Later on the server should know that it's ended due to only one player being alive. But right now it's useful.
+- `gameover` When the game has ended, this is emitted. Later on the server should know that it's ended due to only one player being alive. But right now it's useful.
 
 #### Received
 - `playerLeftRoom` (UserData), Is emmitted when a player leaves a room, this could be due to multiple reasons, like closing the browser or losing internet connection.

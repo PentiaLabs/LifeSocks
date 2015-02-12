@@ -2,8 +2,8 @@ LifeSocks.Preloader = function (game) { };
 LifeSocks.Preloader.prototype = {
   preload: function () {
     this.game.stage.backgroundColor = '#16181a';
-    this.preloadBg = this.add.sprite((1920 / 2) - 411, (1080) / 2, 'preloaderBg');
-    this.preloadBar = this.add.sprite((1920 / 2) - 411, (1080) / 2, 'preloaderBar');
+    this.preloadBg = this.add.sprite((this.game.width / 2) - 411, (this.game.height) / 2, 'preloaderBg');
+    this.preloadBar = this.add.sprite((this.game.width / 2) - 411, (this.game.height) / 2, 'preloaderBar');
     this.load.setPreloadSprite(this.preloadBar);
    	
    	/*
