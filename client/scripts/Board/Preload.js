@@ -5,9 +5,11 @@ LifeSocks.Preloader.prototype = {
     this.preloadBg = this.add.sprite((1920 / 2) - 411, (1080) / 2, 'preloaderBg');
     this.preloadBar = this.add.sprite((1920 / 2) - 411, (1080) / 2, 'preloaderBar');
     this.load.setPreloadSprite(this.preloadBar);
-    /*
-		this.load.audio('bounce', ['audio/phaserUp3.ogg']);
-    */
+   	
+   	/*
+	this.load.audio('boing', ['assets/sounds/boing.ogg']);
+	this.load.audio('fart', ['assets/sounds/fart.ogg']);
+	*/
 
     this.load.image('borderShort', 'assets/LifeSocks/Border_short.jpg');
     this.load.image('borderLong', 'assets/LifeSocks/Border_long.jpg');
