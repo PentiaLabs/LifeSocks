@@ -26,6 +26,7 @@
         <script type="text/javascript" src="scripts/Controller/Preload.js"></script>
         <script type="text/javascript" src="scripts/Controller/MainMenu.js"></script>
         <script type="text/javascript" src="scripts/Controller/Play.js"></script>
+        <script type="text/javascript" src="scripts/Controller/Result.js"></script>
 
         <script>
         (function () {
@@ -35,6 +36,8 @@
             game.state.add('MainMenu', LifeSocks.MainMenu);
             game.state.add('Play', LifeSocks.Play);
             game.state.add('Game', LifeSocks.Game);
+            game.state.add('Result', LifeSocks.Result);
+            
             game.state.start('Boot');
         })();
         </script>

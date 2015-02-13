@@ -13,12 +13,25 @@ LifeSocks.Preloader.prototype = {
 		
 		// Selection of possible assets
 		this.load.image('logotype', 'assets/logotype.png');
-		this.load.image('sock', 'assets/controller/sock.png');
 
 		// Headlines and text
+
+		// Headlines for intermediate screen
 		this.load.image('header-first-player', 'assets/controller/first-player-title.png');
 		this.load.image('header-are-you-ready', 'assets/controller/areyouready-headline.png');
 		this.load.atlas('text-waiting', 'assets/controller/waiting.png', 'assets/controller/waiting.json');	
+
+		// Headlines for result screen
+
+		// first for losers
+		this.load.image('header-you-lost', 'assets/controller/youlost-headline.png');
+		this.load.image('header-youre-a-stain', 'assets/controller/youlost-headline-2.png');
+		this.load.image('splashsperm', 'assets/controller/splashsperm.png');	
+
+		// then for the winner
+		this.load.image('header-you-won', 'assets/controller/winner-headline.png');
+		this.load.image('header-1-in-1000000', 'assets/controller/winner-headline-2.png');
+		this.load.image('sock', 'assets/controller/sock.png');
 
 		// Game controls
 		this.load.image('controller-bg', 'assets/controller/mobilbackground.png');
