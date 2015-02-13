@@ -38,7 +38,7 @@ var users = io.of('/users').on('connection', function(socket){
 
 	socket.on('action', function(msg){
 		console.log(msg);
-	    board.emit('commands', msg, user.getUserData());
+		board.emit('commands', msg, user.getUserData());
 	});
 
 	socket.on('startGame', function(msg){
@@ -67,15 +67,23 @@ var users = io.of('/users').on('connection', function(socket){
 var board = io
 	.of('/board')
 	.on('connection', function (socket) {
-		console.log('Rooms: ',gameServer.getRooms());
-    	var currentBoard = gameServer.createRoom(socket);
-    	console.log(chalk.green('Board connected with ID:', currentBoard.id, currentBoard._socketId));
-    	
-    	users.emit('roomCreated', currentBoard.id);
+		console.log(socket.handshake);
 
-    	socket.on('gameover', function(){
-    		users.emit('gameover', true);
-    		currentBoard.gameStarted = false;
+		// Find room ID
+		console.log('Rooms: ',gameServer.getRooms());
+		var currentBoard = gameServer.createRoom(socket, '#test');
+		console.log(chalk.green('Board connected with ID:', currentBoard.id, currentBoard._socketId));
+		
+		users.emit('roomCreated', currentBoard.id);
+		
+		socket.on('subscribeToBoard', function(roomName ) {
+			var room = gameServer.getRoomFromName(roomName);
+			console.log(gameServer.getRoomFromName(roomName));
+		});
+
+		socket.on('gameover', function(){
+			users.emit('gameover', true);
+			currentBoard.gameStarted = false;
 		});
 
 		socket.on('reset', function(){

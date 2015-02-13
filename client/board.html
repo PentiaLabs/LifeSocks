@@ -25,6 +25,7 @@
   <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
   <script>
       window.board = io.connect(document.location.origin + '/board');
+      board.emit('subscribeToBoard', document.location.hash || 'none'); //
   </script>
   <script type="text/javascript" src="scripts/Board/Boot.js"></script>
   <script type="text/javascript" src="scripts/Board/Preload.js"></script>

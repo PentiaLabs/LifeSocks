@@ -15,6 +15,9 @@ var gameServer = {
 	getRoom: function(id) {
       return this.rooms[id] || false;
     },
+    getRoomFromName: function(name) {
+	    return _.findWhere(this.rooms, { name: name });
+    },
     getRooms: function() {
         return _.values(this.rooms);
     },
