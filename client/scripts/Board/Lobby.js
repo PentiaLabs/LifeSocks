@@ -1,4 +1,4 @@
-LifeSocks.Lobby = function(game) {};
+LifeSocks.Lobby = function() {};
 LifeSocks.Lobby.prototype = {
 	create: function() {
 		this.game.state.start('Game');

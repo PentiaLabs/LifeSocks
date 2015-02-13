@@ -4,7 +4,7 @@ var spritePlayerOne;
 var spriteWaiting;
 var startButton;
 
-LifeSocks.MainMenu = function(game) {
+LifeSocks.MainMenu = function() {
 	socket.on('playerCount', function (players) {   
 		numPlayers = players;
 	});
@@ -38,25 +38,21 @@ LifeSocks.MainMenu.prototype = {
     });
 	},
 	update: function () {
-		var label,
-			style = { font: '65px Arial', fill: '#00000', align: 'center' },
-			text;
-
 		spritePlayerOne.visible = false;
 		spriteWaiting.visible = false;
 		startButton.visible = false;
 		spriteAreYouReady.visible = false;
-
+		
 		// if there's only one player, he's the host and he's waiting
-		if (numPlayers == 1) {
+		if (numPlayers === 1) {
 			spritePlayerOne.visible = true;
 			spriteWaiting.visible = true;
-		}else{
+		} else {
 			// if we have more than one player connected, and we're the host, we should be able to start the game
 			if (LifeSocks.playerData.isHost) {
 				spritePlayerOne.visible = true;
 				startButton.visible = true;
-			}else{
+			} else {
 				spriteAreYouReady.visible = true;
 				spriteWaiting.visible = true; // <- TODO: should be a 'waiting for host to start the game...' animation
 			}

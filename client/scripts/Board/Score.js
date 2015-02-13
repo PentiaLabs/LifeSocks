@@ -18,7 +18,7 @@ var loserSlots = [
 	{ x: 1526, y: 830 }
 ];
 
-LifeSocks.Score = function(game) {
+LifeSocks.Score = function() {
 	var that = this;
 
 	board.on('resetGame', function (player) {
@@ -28,6 +28,8 @@ LifeSocks.Score = function(game) {
 };
 LifeSocks.Score.prototype = {
 	create: function() {
+		var winner;
+		var crown;
 		var game = this;
 
 	    this.add.sprite(0, 0, 'score-bg');
@@ -48,17 +50,15 @@ LifeSocks.Score.prototype = {
 
 	   	this.add.text(197, 489, winner, { font: '60px Arial Black', fill: '#00000', align: 'center' });
 	   	
-	   	var winner = this.add.sprite(397 + 250, 388, 'semen', 'crown');
-	   	var crown = this.add.sprite(397 + 250, 388, 'semen', 'ready3');
+	   	winner = this.add.sprite(397 + 250, 388, 'semen', 'crown');
+	   	crown = this.add.sprite(397 + 250, 388, 'semen', 'ready3');
 
 	   	winner.angle = 90;
 	   	crown.angle = 90;
 
 	    // temporarily add joined players (hardcoded for now)
 	    for (var i = 0; i < loserSlots.length; i++) {
-		    setTimeout(function () {
-		    	game.showLoser();
-		  	}, (i+1) * 1000);
+		    setTimeout(game.showLoser, (i+1) * 1000);
 		}
 
 	    board.emit('gameover');

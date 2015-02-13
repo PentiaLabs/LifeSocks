@@ -60,6 +60,11 @@ module.exports = (function() {
 
 			this.sendUserCount();
 		},
+		removeAllMembers: function () {
+			_.forEach(this.members, function(member) {
+				member.leaveRoom();
+			}.bind(this));
+		},
 		assignNewHost: function (member) {
 			var user = member;
 			if(!user) {
@@ -73,8 +78,8 @@ module.exports = (function() {
 		sendUserCount: function () {
 			var usersInRoom = this.members.length;
 
-			_.forEach(this.members, function(player) {
-				player.message('playerCount', usersInRoom);
+			_.forEach(this.members, function(member) {
+				member.message('playerCount', usersInRoom);
 			}.bind(this));
 		},
 		getMembers: function(json) {

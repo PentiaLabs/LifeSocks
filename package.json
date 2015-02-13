@@ -15,13 +15,18 @@
     "url": "https://github.com/PentiaLabs/LifeSocks.git"
   },
   "keywords": [
-    "NGJ", "Game", "Phaser", "WebSockets"
+    "NGJ",
+    "Game",
+    "Phaser",
+    "WebSockets"
   ],
-  "contributors": [{ 
-    "name" : "Allan Kimmer Jensen", 
-    "email" : "akj@pentia.dk", 
-    "url" : "http://AKJ.IO/"
-  }],
+  "contributors": [
+    {
+      "name": "Allan Kimmer Jensen",
+      "email": "akj@pentia.dk",
+      "url": "http://AKJ.IO/"
+    }
+  ],
   "license": "None",
   "bugs": {
     "url": "https://github.com/PentiaLabs/LifeSocks/issues"
@@ -37,7 +42,9 @@
     "cors": "^2.5.3"
   },
   "devDependencies": {
+    "gulp-jshint": "^1.9.2",
     "gulp-livereload": "^3.4.0",
-    "gulp-nodemon": "^1.0.5"
+    "gulp-nodemon": "^1.0.5",
+    "jshint-stylish": "^1.0.0"
   }
 }

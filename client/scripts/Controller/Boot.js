@@ -1,7 +1,7 @@
 var LifeSocks = {
   playerData: null,
 };
-LifeSocks.Boot = function (game) {
+LifeSocks.Boot = function () {
   socket.on('playerData', function(arg) {
     console.log('playerData:', arg);
     LifeSocks.playerData = arg;

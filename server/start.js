@@ -82,11 +82,15 @@ var board = io
     		currentBoard.gameStarted = false;
 			});
 
+		socket.on('reset', function(){
+			currentBoard.removeAllMembers();
+			currentBoard.gameStarted = false;
+		});
+
 		socket.on('disconnect', function(){
 			console.log(chalk.red('The board ' + socket.id + ' disconnects'));
 		});
 	});
-
 
 app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname + '/../client/controller.html'));

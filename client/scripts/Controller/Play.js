@@ -1,7 +1,7 @@
 var leftBtn;
 var rightBtn;
 
-LifeSocks.Play = function(game) {
+LifeSocks.Play = function() {
 	var that = this;
 
 	controller.on('gameover', function () {
@@ -13,7 +13,7 @@ LifeSocks.Play.prototype = {
 	create: function() {
 		this.add.sprite(0, 0, 'controller-bg');
 
-		var avatar = this.add.sprite(this.world.width / 2, 400, 'semen', 'ready1');
+		var avatar = this.add.sprite(this.world.width / 2, 400, 'semen', 'ready' + LifeSocks.playerData.avatar);
 		avatar.angle = 90;
 		avatar.x = this.world.width / 2 - avatar.width / 2 + avatar.width;
 
