@@ -165,10 +165,10 @@ LifeSocks.Game.prototype = {
 
         for (var player in players) {
             if (players[player].left) {
-              players[player].body.angle -= 20;
+              players[player].body.angle -= 5;
                 players[player].left = false;
             } else if (players[player].right) {
-              players[player].body.angle += 20;
+              players[player].body.angle += 5;
               players[player].right = false;
             } else {
               players[player].body.setZeroRotation();
@@ -178,7 +178,7 @@ LifeSocks.Game.prototype = {
             players[player].body.thrust(100);
 
             // ...but control max velocity
-            this.constrainVelocity(players[player], 7);
+            this.constrainVelocity(players[player], 5);
         }
 
         // count alive players
