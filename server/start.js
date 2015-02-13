@@ -74,7 +74,7 @@ var board = io
     	users.emit('roomCreated', currentBoard.id);
 
     	socket.on('killPlayer', function (userId) {
-    		console.log('killPlayer', userId);
+    		gameServer.users[userId].playerKilled();
     	});
 
     	socket.on('gameover', function(){
