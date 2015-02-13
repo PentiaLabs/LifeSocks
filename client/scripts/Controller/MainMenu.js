@@ -17,12 +17,13 @@ LifeSocks.MainMenu.prototype = {
 		this.add.sprite(0, 0, 'controller-bg');
 
 		// so add graphics that we can show or hide later
-		spritePlayerOne = this.add.sprite(200, 100, 'controller-start-header');
+		spritePlayerOne = this.add.sprite(this.world.centerX, 100, 'header-first-player');
+		spritePlayerOne.x = this.world.centerX - spritePlayerOne.width / 2;
 
-		spriteAreYouReady = this.add.sprite(200, 100, 'areyouready-headline');
+		spriteAreYouReady = this.add.sprite(200, 100, 'header-are-you-ready');
 		spriteAreYouReady.x = this.world.centerX - spriteAreYouReady.width / 2;
 
-		spriteWaiting = this.add.sprite(this.world.centerX, this.world.centerY, 'waiting', 'waiting1');
+		spriteWaiting = this.add.sprite(this.world.centerX, this.world.centerY, 'text-waiting', 'waiting1');
 		spriteWaiting.scale.setTo(0.75,0.75);
 		spriteWaiting.y = this.world.centerY;
 		spriteWaiting.x = this.world.centerX - spriteWaiting.width / 2;
@@ -30,11 +31,11 @@ LifeSocks.MainMenu.prototype = {
 		spriteWaiting.animations.add('ticking', ['waiting1','waiting2','waiting3']);
 		spriteWaiting.animations.play('ticking', 1, true);
 
-		startButton = this.add.button(750, 550, 'controller-start', this.startGame, this, null, null, null);
+		startButton = this.add.button(750, 550, 'controller-start-button', this.startGame, this, null, null, null);
 
-	    socket.on('gameStarted', function () {
-	    	that.gameStarted();
-	    });
+    socket.on('gameStarted', function () {
+    	that.gameStarted();
+    });
 	},
 	update: function () {
 		var label,
@@ -46,16 +47,10 @@ LifeSocks.MainMenu.prototype = {
 		startButton.visible = false;
 		spriteAreYouReady.visible = false;
 
+		// if there's only one player, he's the host and he's waiting
 		if (numPlayers == 1) {
-			if (LifeSocks.playerData.isHost) {
-				spritePlayerOne.visible = true;
-				spriteWaiting.visible = true;
-			}else{
-				// TODO: decide whether this should even be here - the problem lies elsewhere (it shouldn't be possible to have a game without a host)
-				label = 'The host has left... something is wrong';
-				text = this.add.text(this.world.centerX, this.world.centerY, label, style);
-				text.x = this.world.width / 2 - text.width / 2;
-			}
+			spritePlayerOne.visible = true;
+			spriteWaiting.visible = true;
 		}else{
 			// if we have more than one player connected, and we're the host, we should be able to start the game
 			if (LifeSocks.playerData.isHost) {
