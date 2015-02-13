@@ -22,6 +22,7 @@ LifeSocks.Game = function(game) {
             players[player.id].right = true;
         }
     });
+
     board.on('onlinePlayers', function (onlineNumber) {
         console.log(onlineNumber);
     });
@@ -90,6 +91,7 @@ LifeSocks.Game.prototype = {
             var labelStr = nickname.substr(0, 1).toUpperCase();
 
             var semen = this.add.sprite(startingState.x, startingState.y, 'semen', 'semen1');
+            semen.playerId = add[i];
 
             var badge = this.add.sprite(0, 0, badges[i]);
             badge.scale.setTo(0.75, 0.75);
@@ -138,6 +140,7 @@ LifeSocks.Game.prototype = {
             
             players[add[i]] = semen;
             numPlayers++;
+
         }
     },
     update : function() {
@@ -226,6 +229,7 @@ LifeSocks.Game.prototype = {
         //console.log('limited speed to: '+maxVelocity);
       }
     },
+
     //Quadrants : 0 = lower left, 1 = upper left, 2 = upper right, 3 = lower right
     getStartingState: function(quadrant) {
       var angle = quadrant * 90 + 45;
@@ -325,6 +329,10 @@ LifeSocks.Game.prototype = {
     * @api private
     */
     semenSplat: function (ground, semen) {
+        // kill player  
+        board.emit('killPlayer', semen.sprite.playerId);
+
+        // kill player as an animation
         var anim = semen.sprite.animations.getAnimation('splat');
 
         this.semenStop(semen);

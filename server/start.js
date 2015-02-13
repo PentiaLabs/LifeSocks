@@ -73,10 +73,14 @@ var board = io
     	
     	users.emit('roomCreated', currentBoard.id);
 
+    	socket.on('killPlayer', function (userId) {
+    		console.log('killPlayer', userId);
+    	});
+
     	socket.on('gameover', function(){
     		users.emit('gameover', true);
     		currentBoard.gameStarted = false;
-		});
+			});
 
 		socket.on('disconnect', function(){
 			console.log(chalk.red('The board ' + socket.id + ' disconnects'));

@@ -1,3 +1,4 @@
+var onlinePlayers = {};
 var add = [];
 var nicknames = [];
 var badges = [];
@@ -42,13 +43,17 @@ LifeSocks.MainMenu = function(game) {
      	game.startGame();
     });
 
-	board.on('playerJoinedRoom', function (player) {      
+	board.on('playerJoinedRoom', function (player) {
+			onlinePlayers[player.id] = players;
+
       add.push(player.id);
       nicknames.push(player.name);
       badges.push(player.badge);
   	});
 
   	board.on('playerLeftRoom', function (player) {
+  		delete onlinePlayers[player.id];
+
   		var pos = add.map(function(playerId) { 
 				return playerId; 
 			}).indexOf(player.id);
