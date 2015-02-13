@@ -1,8 +1,4 @@
-var image;
-var balls;
-var speed = 200;
 var frameRate = 16;
-var dangerZone;
 var players = {};
 var numPlayers = 0;
 var bottomGround, topGround, leftGround, rightGround;
@@ -10,10 +6,10 @@ var semenCG;
 var groundCG;
 var decidedGame = false;
 var semenCircleSize = 60;
-var countingDown;
+var countingDown; 
 var winner;
 
-LifeSocks.Game = function(game) {
+LifeSocks.Game = function() {
     board.on('commands', function (command, player) {
         if (command.rotateLeft && players[player.id]) {
             players[player.id].left = true;
@@ -163,9 +159,11 @@ LifeSocks.Game.prototype = {
         }
         
         // ... and avoid going further until countdown has completed
-        if (countingDown) return;
+        if (countingDown) {
+        	return;
+        }
 
-        for (player in players) {
+        for (var player in players) {
             if (players[player].left) {
               players[player].body.angle -= 20;
                 players[player].left = false;
@@ -234,11 +232,11 @@ LifeSocks.Game.prototype = {
         //Quadrant < 2 indicates left side of the board
         x = quadrant < 2 ? this.randomRange(100, 0.5 * this.game.width) : this.randomRange(0.5 * this.game.width, this.game.width - 100);
         //quadrant % 3 == 0 indicates the lower half of the board
-        y = (quadrant % 3) == 0 ? this.randomRange(0.5 * this.game.height, this.game.height - 100) : this.randomRange(100, 0.5 * this.game.height);
+        y = (quadrant % 3) === 0 ? this.randomRange(0.5 * this.game.height, this.game.height - 100) : this.randomRange(100, 0.5 * this.game.height);
 
         //Check if the position collides with the position of a spermatozon already on the board
         var collides = false;
-        for (player in players) {
+        for (var player in players) {
           var otherx = players[player].body.x;
           var othery = players[player].body.x;
           var dist = this.euclidianDistance(x, y, otherx, othery);
@@ -247,8 +245,9 @@ LifeSocks.Game.prototype = {
             break;
           }
         }
-        if (!collides)
-          break;
+        if (!collides) {
+        	break;
+        }
       }
 
       return { angle: angle, x: x, y: y };

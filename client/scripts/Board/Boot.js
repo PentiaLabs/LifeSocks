@@ -1,5 +1,5 @@
 var LifeSocks = {};
-LifeSocks.Boot = function (game) { };
+LifeSocks.Boot = function () { };
 LifeSocks.Boot.prototype = {
   preload: function () {
     this.load.image('preloaderBg', 'assets/loadingbar_back.png');

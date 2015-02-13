@@ -14,6 +14,7 @@ module.exports = (function() {
     this._socketId = socket.id;
     this.name = namefactory.generate();
     this.badge = badgefactory.generate();
+    this.avatar = (Math.floor(Math.random() * 6) + 1); // TODO: Make the player select between 3 avatars that each got a name.
     this.disconnectedSince = null;
     this.isHost = false; // Is this player the host?
     this.data = data || {};
@@ -43,6 +44,7 @@ module.exports = (function() {
         id: this.id,
         name: this.name,
         badge: this.badge,
+        avatar: this.avatar,
         isHost: this.isHost
       };
     },

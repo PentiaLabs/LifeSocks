@@ -1,4 +1,4 @@
-LifeSocks.Preloader = function (game) { };
+LifeSocks.Preloader = function () { };
 LifeSocks.Preloader.prototype = {
   preload: function () {
     this.game.stage.backgroundColor = '#16181a';

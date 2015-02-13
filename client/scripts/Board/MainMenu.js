@@ -26,12 +26,12 @@ var avatarSlots = [
 ];
 var avatars;
 
-LifeSocks.MainMenu = function(game) {
-	var game = this;
+LifeSocks.MainMenu = function() {
+	var that = this;
 
 	board.on('startGame', function (player) {
 		console.log('startGame', player);
-		game.startGame();
+		that.startGame();
     });
 
 	board.on('playerJoinedRoom', function (player) {
@@ -77,7 +77,9 @@ LifeSocks.MainMenu.prototype = {
 		var avatarSlot = avatarSlots[pos];
 
 		// if we've deleted the group it means we don't want avatars in it
-		if (!avatars) return;
+		if (!avatars) {
+			return;
+		}
 
 		// let's select a random sprite
 		// TODO: select random avatar
