@@ -89,7 +89,7 @@ LifeSocks.Game.prototype = {
             var semen = this.add.sprite(startingState.x, startingState.y, 'semen', 'semen1');
             semen.playerId = add[i];
 
-            var badge = this.add.sprite(0, 0, badges[i]);
+            var badge = this.add.sprite(0, 0, 'labels', badges[i]);
             badge.scale.setTo(0.75, 0.75);
             badge.alpha = 0.5;
 
@@ -136,7 +136,6 @@ LifeSocks.Game.prototype = {
             
             players[add[i]] = semen;
             numPlayers++;
-
         }
     },
     update : function() {

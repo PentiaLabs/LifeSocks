@@ -20,7 +20,7 @@ LifeSocks.Play.prototype = {
     var style = { font: "65px Arial", fill: "#00000", align: "center" };
     var t = this.add.text(this.world.centerX, 600, text, style);
 
-  	var badge = this.add.sprite(0, 700, LifeSocks.playerData.badge);
+  	var badge = this.add.sprite(0, 700, 'labels', LifeSocks.playerData.badge);
   	badge.x = this.world.width / 2 - badge.width / 2;
 
     t.x = this.world.width / 2 - t.width / 2;

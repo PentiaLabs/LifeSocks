@@ -18,12 +18,7 @@ LifeSocks.Preloader.prototype = {
     this.load.atlas('semen-sock', 'assets/semem-sock-sprite.png', 'assets/semen-sock.json');
 
     // Player characters and labels
-    this.load.image('label-blue', 'assets/label-blue.png');
-    this.load.image('label-green', 'assets/label-green.png');
-    this.load.image('label-grey', 'assets/label-grey.png');
-    this.load.image('label-pink', 'assets/label-pink.png');
-    this.load.image('label-yellow', 'assets/label-yellow.png');
-
+    this.load.atlas('labels', 'assets/labels.png', 'assets/labels.json');
     this.load.atlas('semen', 'assets/semen.png', 'assets/semen.json');
 
     // Countdown graphics
