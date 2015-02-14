@@ -88,8 +88,6 @@ LifeSocks.MainMenu.prototype = {
 
 	        delay += 1000;
 	    }
-
-	    // TODO: send to back, alpha, scale, rotate, other axis
 	},
 
 	update: function () {
