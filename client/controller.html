@@ -11,23 +11,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link type="text/css" rel="stylesheet" media="all" href="styles/game.css">
+        <link type="text/css" rel="stylesheet" media="all" href="/styles/game.css">
     </head>
     <body>
         <script src="/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="scripts/libs/jquery-2.1.3.js"></script>
-        <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
+        <script type="text/javascript" src="/scripts/libs/jquery-2.1.3.js"></script>
+        <script type="text/javascript" src="/scripts/libs/phaser.min.js"></script>
 
         <script>
+            var regex = /(\w+)(?:\/?)$/gi;
+            var roomName = regex.exec(document.location.href)[1];
             var controller = socket = io.connect(document.location.origin + '/users');
-            controller.emit('subscribeToBoard', document.location.hash || 'none'); //
+            controller.emit('subscribeToBoard', roomName); //
         </script>
 
-        <script type="text/javascript" src="scripts/Controller/Boot.js"></script>
-        <script type="text/javascript" src="scripts/Controller/Preload.js"></script>
-        <script type="text/javascript" src="scripts/Controller/MainMenu.js"></script>
-        <script type="text/javascript" src="scripts/Controller/Play.js"></script>
-        <script type="text/javascript" src="scripts/Controller/Result.js"></script>
+        <script type="text/javascript" src="/scripts/Controller/Boot.js"></script>
+        <script type="text/javascript" src="/scripts/Controller/Preload.js"></script>
+        <script type="text/javascript" src="/scripts/Controller/MainMenu.js"></script>
+        <script type="text/javascript" src="/scripts/Controller/Play.js"></script>
+        <script type="text/javascript" src="/scripts/Controller/Result.js"></script>
 
         <script>
         (function () {

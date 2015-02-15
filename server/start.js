@@ -111,11 +111,11 @@ var board = io
 		});
 	});
 
-app.get('/', function(req, res){
+app.get('/:game', function(req, res){
 	res.sendFile(path.join(__dirname + '/../client/controller.html'));
 });
 
-app.get('/board', function(req, res){
+app.get('/board/:game', function(req, res){
 	res.sendFile(path.join(__dirname + '/../client/board.html'));
 });
 

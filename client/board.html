@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <link type="text/css" rel="stylesheet" media="all" href="styles/game.css">
+  <link type="text/css" rel="stylesheet" media="all" href="/styles/game.css">
 </head>
 <body>
   <div id="game"></div>
@@ -21,18 +21,20 @@
   <img id="qr" src="" style="position:absolute;top:0px;right:0;width:100px;height:100px;" />
 
   <script src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript" src="scripts/libs/jquery-2.1.3.js"></script>
-  <script type="text/javascript" src="scripts/libs/phaser.min.js"></script>
+  <script type="text/javascript" src="/scripts/libs/jquery-2.1.3.js"></script>
+  <script type="text/javascript" src="/scripts/libs/phaser.min.js"></script>
   <script>
-      window.board = io.connect(document.location.origin + '/board', { roomName: document.location.hash  });
-      board.emit('subscribeToBoard', document.location.hash || 'none'); //
+      var regex = /\/board\/(\w+)(?:\/?)/gi;
+      var roomName = regex.exec(document.location.href)[1];
+      window.board = io.connect(document.location.origin + '/board');
+      board.emit('subscribeToBoard', roomName);
   </script>
-  <script type="text/javascript" src="scripts/Board/Boot.js"></script>
-  <script type="text/javascript" src="scripts/Board/Preload.js"></script>
-  <script type="text/javascript" src="scripts/Board/MainMenu.js"></script>
-  <script type="text/javascript" src="scripts/Board/Lobby.js"></script>
-  <script type="text/javascript" src="scripts/Board/game.js"></script>
-  <script type="text/javascript" src="scripts/Board/Score.js"></script>
+  <script type="text/javascript" src="/scripts/Board/Boot.js"></script>
+  <script type="text/javascript" src="/scripts/Board/Preload.js"></script>
+  <script type="text/javascript" src="/scripts/Board/MainMenu.js"></script>
+  <script type="text/javascript" src="/scripts/Board/Lobby.js"></script>
+  <script type="text/javascript" src="/scripts/Board/game.js"></script>
+  <script type="text/javascript" src="/scripts/Board/Score.js"></script>
   <script>
     (function () {
       var game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'game');
