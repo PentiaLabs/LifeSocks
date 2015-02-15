@@ -18,8 +18,8 @@ We started working on this game at [Nordic Game Jame 2015](nordicgamejam.org). S
 ## Heroku
 We got continuous integration running, useful for testing.
 
-- [Start a board](https://life-socks.herokuapp.com/board)
-- [Start a controller](https://life-socks.herokuapp.com/)
+- [Start a board](https://life-socks.herokuapp.com/board/GithubTest)
+- [Start a controller](https://life-socks.herokuapp.com/GithubTest)
 
 ## Team
 
