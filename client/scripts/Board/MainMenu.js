@@ -47,12 +47,12 @@ LifeSocks.MainMenu = function() {
   		delete onlinePlayers[player.id];
 
   		var pos = add.map(function(playerId) { 
-				return playerId; 
-			}).indexOf(player.id);
+			return playerId; 
+		}).indexOf(player.id);
 
-			add.splice(pos, 1);
-			nicknames.splice(pos, 1);
-			badges.splice(pos, 1);
+		add.splice(pos, 1);
+		nicknames.splice(pos, 1);
+		badges.splice(pos, 1);
   	});
 };
 
@@ -82,12 +82,14 @@ LifeSocks.MainMenu.prototype = {
 	        var speed = this.rnd.between(20000, 30000);
 
 	        var tween = this.add.tween(sprite).to({ x: this.world.width + 250 }, speed, Phaser.Easing.Sinusoidal.InOut, true, delay, 1000, false);
-	        tween.onComplete.add(function () {
-	        	sprite.kill();
-	        });
+	        tween.onComplete.add(this.killSprite, this);
 
 	        delay += 1000;
 	    }
+	},
+
+	killSprite: function (sprite) {
+		sprite.kill();
 	},
 
 	update: function () {
