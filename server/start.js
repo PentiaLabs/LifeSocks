@@ -67,32 +67,49 @@ var users = io.of('/users').on('connection', function(socket){
 var board = io
 	.of('/board')
 	.on('connection', function (socket) {
-		console.log(socket.handshake);
-
 		// Find room ID
-		console.log('Rooms: ',gameServer.getRooms());
-		var currentBoard = gameServer.createRoom(socket, '#test');
-		console.log(chalk.green('Board connected with ID:', currentBoard.id, currentBoard._socketId));
-		
-		users.emit('roomCreated', currentBoard.id);
-		
-		socket.on('subscribeToBoard', function(roomName ) {
+		console.log('ROOMS: ',gameServer.getRooms());
+
+		var endp = socket.request;
+    	console.log("query... ", socket.request);
+
+		socket.on('subscribeToBoard', function(roomName) {
+			socket.join('board-' + roomName);
+
 			var room = gameServer.getRoomFromName(roomName);
-			console.log(gameServer.getRoomFromName(roomName));
-		});
+			console.log('doesROOMEXIST`?', room);
+			/*
+				If room does not exsist, create it.
+			*/
+			if(!room) {
+				room = gameServer.createRoom(socket, roomName);
+				room.messagePlayers('roomCreated', room.id);
+			}
 
-		socket.on('gameover', function(){
-			users.emit('gameover', true);
-			currentBoard.gameStarted = false;
-		});
+			console.log(chalk.green('Board connected with ID:', room.id, room._socketId));
 
-		socket.on('reset', function(){
-			currentBoard.removeAllMembers();
-			currentBoard.gameStarted = false;
-		});
+			socket.on('killPlayer', function (userId) {
+	    		gameServer.users[userId].playerKilled();
+	    	});
 
-		socket.on('disconnect', function(){
-			console.log(chalk.red('The board ' + socket.id + ' disconnects'));
+			setInterval(function () {
+	    		socket.broadcast.to('board-' + roomName).emit('test', 'I am ' +roomName + ' on ' + socket.id);
+	    		console.log('try to emit to SocketIOroom.... ', 'board-' + roomName);
+			}, 1000);
+
+			socket.on('gameover', function(){
+				room.messagePlayers('gameover', true);
+				room.gameStarted = false;
+			});
+
+			socket.on('reset', function(){
+				room.removeAllMembers();
+				room.gameStarted = false;
+			});
+
+			socket.on('disconnect', function(){
+				console.log(chalk.red('The board ' + socket.id + ' disconnects'));
+			});
 		});
 	});
 

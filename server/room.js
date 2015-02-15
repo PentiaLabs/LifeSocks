@@ -75,6 +75,14 @@ module.exports = (function() {
 				user.message('playerData', user.getUserData());
 			}
 		},
+		getRoomData: function() {
+			return {
+				id: this.id,
+				name: this.name,
+				badge: this.gameStarted,
+				avatar: this.created
+			};
+		},
 		sendUserCount: function () {
 			var usersInRoom = this.members.length;
 

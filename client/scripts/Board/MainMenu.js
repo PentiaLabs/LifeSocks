@@ -1,3 +1,4 @@
+var onlinePlayers = {};
 var add = [];
 var nicknames = [];
 var badges = [];
@@ -35,23 +36,23 @@ LifeSocks.MainMenu = function() {
     });
 
 	board.on('playerJoinedRoom', function (player) {
-	    console.log('playerJoinedRoom', player);
-     
-		add.push(player.id);
-		nicknames.push(player.name);
-		badges.push(player.badge);
+			onlinePlayers[player.id] = players;
+
+      add.push(player.id);
+      nicknames.push(player.name);
+      badges.push(player.badge);
   	});
 
   	board.on('playerLeftRoom', function (player) {
-  		console.log('playerLeftRoom', player);
+  		delete onlinePlayers[player.id];
 
   		var pos = add.map(function(playerId) { 
-			return playerId; 
-		}).indexOf(player.id);
+				return playerId; 
+			}).indexOf(player.id);
 
-		add.splice(pos, 1);
-		nicknames.splice(pos, 1);
-		badges.splice(pos, 1);
+			add.splice(pos, 1);
+			nicknames.splice(pos, 1);
+			badges.splice(pos, 1);
   	});
 };
 
