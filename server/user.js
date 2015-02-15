@@ -46,7 +46,8 @@ module.exports = (function() {
 				name: this.name,
 				badge: this.badge,
 				avatar: this.avatar,
-				isHost: this.isHost
+				isHost: this.isHost,
+				isAlive: this.isAlive
 			};
 		},
 
