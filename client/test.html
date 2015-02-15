@@ -29,7 +29,7 @@
         </style>
     </head>
     <body>
-        <iframe id="board" src="board.html"></iframe>
+        <iframe id="board" src="board/tester"></iframe>
         <iframe class="controller"></iframe>
         <iframe class="controller"></iframe>
         <!-- <iframe class="controller"></iframe>
@@ -45,7 +45,7 @@
                 var controllerFrames = $('iframe.controller');
 
                 controllerFrames.each(function () {
-                    $(this).attr('src', 'controller.html');
+                    $(this).attr('src', '/tester');
                 });
             }
             setTimeout(startControllers, 1000);

@@ -29,6 +29,7 @@ LifeSocks.Score = function() {
 LifeSocks.Score.prototype = {
 	create: function() {
 		var winner;
+		var winnerNickname;
 		var crown;
 		var game = this;
 
@@ -47,24 +48,31 @@ LifeSocks.Score.prototype = {
             'semen-sock6'], 6, true);
 
 	    semenSock.animations.play('drip');
-
-	   	this.add.text(197, 489, winner, { font: '60px Arial Black', fill: '#00000', align: 'center' });
 	   	
-	   	winner = this.add.sprite(397 + 250, 388, 'semen', 'crown');
-	   	crown = this.add.sprite(397 + 250, 388, 'semen', 'ready3');
+	   	winner = this.add.sprite(397, 420, 'semen', 'ready3');
+	   	crown = this.add.sprite(397, 420, 'semen', 'crown');
 
-	   	winner.angle = 90;
-	   	crown.angle = 90;
+	   	winner.anchor.setTo(0.5, 0.5);
+	   	crown.anchor.setTo(0.5, 0.5);
 
-	    // temporarily add joined players (hardcoded for now)
-	    for (var i = 0; i < loserSlots.length; i++) {
-		    setTimeout(game.showLoser, (i+1) * 1000);
-		}
+	   	winner.angle = -90;
+	   	crown.angle = -90;
+
+		for (var i = 0; i < add.length; i++) {
+            if (onlinePlayers[add[i]].isAlive) {
+            	winnerNickname = nicknames[i];
+            } else {
+            	game.showLoser(nicknames[i]);
+            }
+        }
+
+        var winnerLabel = this.add.text(197, 489, winnerNickname, { font: '60px Arial Black', fill: '#00000', align: 'center' });
+        winnerLabel.x = winnerLabel.x + winnerLabel.width / 2;
 
 	    board.emit('gameover');
 	},
 
-	showLoser: function () {
+	showLoser: function (nickname) {
 		// find next unused slot
 		var avatarSlot = loserSlots.shift();
 
@@ -73,6 +81,8 @@ LifeSocks.Score.prototype = {
 
 		// the '+ 250' is because the axis are getting a bit twisted when we change angle in the next line - we should look into changing this somehow
 		var loser = this.add.sprite(avatarSlot.x + 250, avatarSlot.y, 'semen', readySprite);
+
+		this.add.text(avatarSlot.x, avatarSlot.y + 200, nickname, { font: '30px Arial Black', fill: '#00000', align: 'center' });
 
 		// and rotate...
 		loser.angle = 90;

@@ -7,7 +7,6 @@ var groundCG;
 var decidedGame = false;
 var semenCircleSize = 60;
 var countingDown; 
-var winner;
 
 LifeSocks.Game = function() {
     board.on('commands', function (command, player) {
@@ -190,16 +189,18 @@ LifeSocks.Game.prototype = {
             if (players[player].alive) {
                 alivePlayer = player;
                 alivePlayers = alivePlayers + 1;
+            }else{
+                onlinePlayers[player].isAlive = false;
             }
         }
 
         // if it's the last man standing, and we had more than one player from the beginning, let's celebrate!
         if (alivePlayers === 1 && numPlayers > 1 && !decidedGame) {
-            var pos = add.map(function(playerId) { 
-                return playerId; 
-            }).indexOf(alivePlayer);
+            // var pos = add.map(function(playerId) { 
+            //     return playerId; 
+            // }).indexOf(alivePlayer);
 
-            winner = nicknames[pos];
+            // winner = nicknames[pos];
 
             decidedGame = true;
             this.game.state.start('Score');

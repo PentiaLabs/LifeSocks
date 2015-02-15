@@ -53,7 +53,7 @@ module.exports = (function() {
 
 		playerKilled: function () {
 			this.isAlive = false;
-			this.message('playerKilled');
+			this.message('playerKilled', this.id);
 		},
 
 		message: function(name, arg) {

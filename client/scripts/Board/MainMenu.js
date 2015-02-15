@@ -36,7 +36,7 @@ LifeSocks.MainMenu = function() {
     });
 
 	board.on('playerJoinedRoom', function (player) {
-			onlinePlayers[player.id] = players;
+		onlinePlayers[player.id] = player;
 
       add.push(player.id);
       nicknames.push(player.name);
@@ -54,6 +54,10 @@ LifeSocks.MainMenu = function() {
 		nicknames.splice(pos, 1);
 		badges.splice(pos, 1);
   	});
+
+    board.on('playerKilled', function (playerId) {
+        onlinePlayers[playerId].isAlive = false;
+    });
 };
 
 LifeSocks.MainMenu.prototype = {
