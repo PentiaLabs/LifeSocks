@@ -82,7 +82,9 @@ LifeSocks.Score.prototype = {
 		// the '+ 250' is because the axis are getting a bit twisted when we change angle in the next line - we should look into changing this somehow
 		var loser = this.add.sprite(avatarSlot.x + 250, avatarSlot.y, 'semen', readySprite);
 
-		this.add.text(avatarSlot.x, avatarSlot.y + 200, nickname, { font: '30px Arial Black', fill: '#00000', align: 'center' });
+		var loserNickname = this.add.text(avatarSlot.x + 125, avatarSlot.y + 200, nickname, { font: '30px Arial Black', fill: '#00000', align: 'center' });
+		loserNickname.x = loserNickname.x - loserNickname.width / 2;
+
 
 		// and rotate...
 		loser.angle = 90;
