@@ -74,7 +74,7 @@ var board = io
 	.on('connection', function (socket) {
 		// Find room ID
 		console.log('ROOMS: ',gameServer.getRooms());
-    	//console.log("query... ", socket.request);
+		//console.log("query... ", socket.request);
 
 		socket.on('subscribeToBoard', function(roomName) {
 			socket.join('board-' + roomName);
@@ -92,12 +92,12 @@ var board = io
 			console.log(chalk.green('Board connected with ID:', room.id, room._socketId));
 
 			socket.on('killPlayer', function (userId) {
-	    		gameServer.users[userId].playerKilled();
-	    	});
+				gameServer.users[userId].playerKilled();
+			});
 
 			socket.on('gameover', function(){
 				room.messagePlayers('gameover', true);
-				room.gameStarted = false;
+				room.reset();
 			});
 
 			socket.on('reset', function(){
@@ -107,6 +107,7 @@ var board = io
 
 			socket.on('disconnect', function(){
 				console.log(chalk.red('The board ' + socket.id + ' disconnects'));
+				room.reset();
 			});
 		});
 	});

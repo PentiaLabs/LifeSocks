@@ -101,6 +101,10 @@ module.exports = (function() {
 		age: function() {
 			return new Date().getTime() - this.created;
 		},
+		reset: function() {
+			this.gameStarted = false;
+			this.removeAllMembers();
+		},
 		messagePlayers: function(name, arg) {
 			_.forEach(this.members, function(player) {
 				player.message(name, arg);
