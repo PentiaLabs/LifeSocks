@@ -20,6 +20,7 @@
 
         <script>
             var controller = socket = io.connect(document.location.origin + '/users');
+            controller.emit('subscribeToBoard', document.location.hash || 'none'); //
         </script>
 
         <script type="text/javascript" src="scripts/Controller/Boot.js"></script>

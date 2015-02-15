@@ -1,6 +1,5 @@
 var express = require('express');
 var _ = require('underscore');
-var uuid = require('node-uuid');
 var path = require('path');
 var app = require('express')();
 var http = require('http').Server(app);
@@ -24,17 +23,23 @@ var users = io.of('/users').on('connection', function(socket){
 
 	console.log(chalk.green('User connected with ID:', user.id));
 
-	/* 
-		Only join a room of one is open.
-		Later it would be nice if we just created a room.
-	*/
-	if(gameServer.getRooms()[0]) {
-		user.joinRoom(gameServer.getRooms()[0]);
-	} else {
-		console.log('No rooms avaiable');
-	}
+	socket.on('subscribeToBoard', function(roomName) {
+		socket.join('board-' + roomName);
+		console.log('Controller joined: ' + roomName);
+		var game = gameServer.getRoomFromName(roomName);
 
-	socket.emit('playerData', user.getUserData());
+		/* 
+			Only join a room of one is open.
+			Later it would be nice if we just created a room.
+		*/
+		if(game) {
+			user.joinRoom(game);
+		} else {
+			console.log('Room not avaiable');
+		}
+
+		socket.emit('playerData', user.getUserData());
+	});
 
 	socket.on('action', function(msg){
 		console.log(msg);
@@ -69,9 +74,7 @@ var board = io
 	.on('connection', function (socket) {
 		// Find room ID
 		console.log('ROOMS: ',gameServer.getRooms());
-
-		var endp = socket.request;
-    	console.log("query... ", socket.request);
+    	//console.log("query... ", socket.request);
 
 		socket.on('subscribeToBoard', function(roomName) {
 			socket.join('board-' + roomName);
@@ -91,11 +94,6 @@ var board = io
 			socket.on('killPlayer', function (userId) {
 	    		gameServer.users[userId].playerKilled();
 	    	});
-
-			setInterval(function () {
-	    		socket.broadcast.to('board-' + roomName).emit('test', 'I am ' +roomName + ' on ' + socket.id);
-	    		console.log('try to emit to SocketIOroom.... ', 'board-' + roomName);
-			}, 1000);
 
 			socket.on('gameover', function(){
 				room.messagePlayers('gameover', true);
