@@ -5,7 +5,7 @@ WebSocket messages is documented like `message [argument, argumet2]`
 
 ## Events
 
-### Client
+### Controller
 
 #### Send
 

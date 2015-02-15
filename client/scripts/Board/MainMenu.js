@@ -47,22 +47,49 @@ LifeSocks.MainMenu = function() {
   		delete onlinePlayers[player.id];
 
   		var pos = add.map(function(playerId) { 
-				return playerId; 
-			}).indexOf(player.id);
+			return playerId; 
+		}).indexOf(player.id);
 
-			add.splice(pos, 1);
-			nicknames.splice(pos, 1);
-			badges.splice(pos, 1);
+		add.splice(pos, 1);
+		nicknames.splice(pos, 1);
+		badges.splice(pos, 1);
   	});
 };
 
 LifeSocks.MainMenu.prototype = {
 	create: function() {
     	this.add.sprite(0, 0, 'screen-bg');
+    	this.backgroundAnimation();
 
     	avatars = this.add.group();
 
 		board.emit('boardReadyToPlay');
+	},
+
+	backgroundAnimation: function () {
+		var delay = 0;
+
+		for (var i = 0; i < 10; i++)
+	    {
+	        var sprite = this.add.sprite(-250, -100 + (this.world.randomY), 'semen', 'semen1');
+	        sprite.animations.add('move', ['semen1','semen2','semen3','semen4','semen5','semen6','semen7','semen6','semen5','semen4','semen3','semen2'], 16, true);
+			sprite.animations.play('move', 18, true);
+
+	        sprite.scale.set(this.rnd.realInRange(0.1, 0.6));
+	        sprite.angle = 90;
+	        sprite.alpha = this.rnd.realInRange(0.1, 0.2);
+
+	        var speed = this.rnd.between(20000, 30000);
+
+	        var tween = this.add.tween(sprite).to({ x: this.world.width + 250 }, speed, Phaser.Easing.Sinusoidal.InOut, true, delay, 1000, false);
+	        tween.onComplete.add(this.killSprite, this);
+
+	        delay += 1000;
+	    }
+	},
+
+	killSprite: function (sprite) {
+		sprite.kill();
 	},
 
 	update: function () {

@@ -13,12 +13,25 @@ LifeSocks.Preloader.prototype = {
 		
 		// Selection of possible assets
 		this.load.image('logotype', 'assets/logotype.png');
-		this.load.image('sock', 'assets/controller/sock.png');
 
 		// Headlines and text
+
+		// Headlines for intermediate screen
 		this.load.image('header-first-player', 'assets/controller/first-player-title.png');
 		this.load.image('header-are-you-ready', 'assets/controller/areyouready-headline.png');
 		this.load.atlas('text-waiting', 'assets/controller/waiting.png', 'assets/controller/waiting.json');	
+
+		// Headlines for result screen
+
+		// first for losers
+		this.load.image('header-you-lost', 'assets/controller/youlost-headline.png');
+		this.load.image('header-youre-a-stain', 'assets/controller/youlost-headline-2.png');
+		this.load.image('splashsperm', 'assets/controller/splashsperm.png');	
+
+		// then for the winner
+		this.load.image('header-you-won', 'assets/controller/winner-headline.png');
+		this.load.image('header-1-in-1000000', 'assets/controller/winner-headline-2.png');
+		this.load.image('sock', 'assets/controller/sock.png');
 
 		// Game controls
 		this.load.image('controller-bg', 'assets/controller/mobilbackground.png');
@@ -27,12 +40,7 @@ LifeSocks.Preloader.prototype = {
 		this.load.image('controller-start-button', 'assets/controller/startgamebutton.png');
 
 		// Player characters and labels
-		this.load.image('label-blue', 'assets/label-blue.png');
-		this.load.image('label-green', 'assets/label-green.png');
-		this.load.image('label-grey', 'assets/label-grey.png');
-		this.load.image('label-pink', 'assets/label-pink.png');
-		this.load.image('label-yellow', 'assets/label-yellow.png');
-		
+		this.load.atlas('labels', 'assets/labels.png', 'assets/labels.json');
 		this.load.atlas('semen', 'assets/semen.png', 'assets/semen.json');
 	},
 	create: function () {

@@ -5,8 +5,7 @@ LifeSocks.Play = function() {
 	var that = this;
 
 	controller.on('gameover', function () {
-   		console.log('gameover');
-   		that.restart();
+   		that.gameOver();
   	});
 };
 LifeSocks.Play.prototype = {
@@ -21,8 +20,8 @@ LifeSocks.Play.prototype = {
     var style = { font: "65px Arial", fill: "#00000", align: "center" };
     var t = this.add.text(this.world.centerX, 600, text, style);
 
-    	var badge = this.add.sprite(0, 700, LifeSocks.playerData.badge);
-    	badge.x = this.world.width / 2 - badge.width / 2;
+  	var badge = this.add.sprite(0, 700, 'labels', LifeSocks.playerData.badge);
+  	badge.x = this.world.width / 2 - badge.width / 2;
 
     t.x = this.world.width / 2 - t.width / 2;
     
@@ -53,8 +52,8 @@ LifeSocks.Play.prototype = {
 			this.rotateRight();
   	}
 	},
-	restart: function() {
-		this.game.state.start('MainMenu');
+	gameOver: function() {
+		this.game.state.start('Result');
 	},
 	rotateRight: function () {
 	    socket.emit('action', { rotateRight: true });
