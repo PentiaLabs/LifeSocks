@@ -93,7 +93,8 @@ LifeSocks.MainMenu.prototype = {
 	},
 
 	killSprite: function (sprite) {
-		sprite.kill();
+		sprite.destroy();
+		sprite = null;
 	},
 
 	update: function () {
@@ -129,6 +130,7 @@ LifeSocks.MainMenu.prototype = {
 
 	startGame: function() {
 		avatars.destroy();
+		avatars = null;
 		
 		document.querySelector('#qr').style.display = 'none';
 
