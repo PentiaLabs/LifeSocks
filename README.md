@@ -23,7 +23,7 @@ We got continuous integration running, useful for testing.
 
 ## Team
 
-- Allan Kimmer Jensen
+- [Allan Kimmer Jensen](https://github.com/Saturate)
 - Arash Sarfehjou
 - Brian Frisch
 - Dea Buus Marcussen
