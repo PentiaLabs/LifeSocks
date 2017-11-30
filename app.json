@@ -1,0 +1,13 @@
+{
+  "name": "LifeSocks",
+  "description": "A game about the beautiful start of life - and socks!",
+  "website": "https://github.com/PentiaLabs/LifeSocks",
+  "repository": "https://github.com/PentiaLabs/LifeSocks",
+  "logo": "https://github.com/PentiaLabs/LifeSocks/raw/master/client/assets/logotype_v01_1024.png?raw=true",
+  "keywords": [
+    "NGJ",
+    "Game",
+    "Phaser",
+    "WebSockets"
+  ]
+}
