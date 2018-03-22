@@ -9,8 +9,8 @@ We started working on this game at [Nordic Game Jame 2015](nordicgamejam.org). S
 
 ## Getting Started
 
-1. Install Github for Windows (You can also just install Git if you like.)
-2. Install nodejs
+1. Install [Github Desktop](https://desktop.github.com/) (You can also just install Git if you like.)
+2. Install [nodejs](https://nodejs.org/en/)
 3. Run `npm install` in the project folder.
 4. Run `npm start`
 5. Point browser to [http://localhost:3000/test.html](http://localhost:3000/test.html)
