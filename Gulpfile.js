@@ -20,20 +20,12 @@ gulp.task('scripts', function() {
 		);
 });
 
-gulp.task('lint', function () {
-	return gulp.src(['client/scripts/Board/**/*.js','client/scripts/Controller/**/*.js'])
-		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'))
-		.pipe(jshint.reporter('fail'));
-});
-
 gulp.task('html', function() {
 	gulp.src('client/**/*.html')
 		.pipe(
 			livereload()
 		);
 });
-
 
 // use default task to launch livereload and watch JS and SASS files
 gulp.task('default', ['watch'], function () {
