@@ -33,18 +33,18 @@
   },
   "homepage": "https://github.com/PentiaLabs/LifeSocks",
   "dependencies": {
-    "chalk": "^0.5.1",
+    "chalk": "^2.3.2",
+    "cors": "^2.5.3",
     "express": "^4.11.0",
     "gulp": "^3.8.10",
     "node-uuid": "^1.4.2",
-    "socket.io": "^1.2.1",
-    "underscore": "^1.7.0",
-    "cors": "^2.5.3"
+    "socket.io": "^2.0.4",
+    "underscore": "^1.7.0"
   },
   "devDependencies": {
-    "gulp-jshint": "^1.9.2",
+    "gulp-jshint": "^2.1.0",
     "gulp-livereload": "^3.4.0",
-    "gulp-nodemon": "^1.0.5",
-    "jshint-stylish": "^1.0.0"
+    "gulp-nodemon": "^2.2.1",
+    "jshint-stylish": "^2.2.1"
   }
 }
