@@ -1,14 +1,11 @@
 {
   "name": "LifeSocks",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A game about the beautiful start of life - and socks!",
   "main": "Gulpfile.js",
-  "engines": {
-    "node": "0.10.x"
-  },
   "scripts": {
     "start": "node server/start.js",
-    "test": "gulp test"
+    "test": "eslint ./**/*.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +24,7 @@
       "url": "http://AKJ.IO/"
     }
   ],
-  "license": "None",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/PentiaLabs/LifeSocks/issues"
   },
@@ -42,7 +39,7 @@
     "underscore": "^1.7.0"
   },
   "devDependencies": {
-    "gulp-jshint": "^2.1.0",
+    "eslint": "^4.19.1",
     "gulp-livereload": "^3.4.0",
     "gulp-nodemon": "^2.2.1",
     "jshint-stylish": "^2.2.1"
