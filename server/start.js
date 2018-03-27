@@ -1,5 +1,4 @@
 var express = require('express');
-var _ = require('underscore');
 var path = require('path');
 var app = require('express')();
 var http = require('http').Server(app);
@@ -8,7 +7,6 @@ var chalk = require('chalk');
 
 // Own odules
 var User = require('./user.js');
-var Room = require('./room.js');
 var gameServer = require('./gameServer.js');
 
 var config = {

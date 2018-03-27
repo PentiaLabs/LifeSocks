@@ -2,6 +2,7 @@ var numPlayers = 0;
 
 var spritePlayerOne;
 var spriteWaiting;
+var spriteAreYouReady;
 var startButton;
 
 LifeSocks.MainMenu = function() {
@@ -33,9 +34,9 @@ LifeSocks.MainMenu.prototype = {
 
 		startButton = this.add.button(750, 550, 'controller-start-button', this.startGame, this, null, null, null);
 
-    socket.on('gameStarted', function () {
-    	that.gameStarted();
-    });
+		socket.on('gameStarted', function () {
+			that.gameStarted();
+		});
 	},
 	update: function () {
 		spritePlayerOne.visible = false;

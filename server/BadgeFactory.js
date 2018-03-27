@@ -1,9 +1,9 @@
 var availableBadges = [
-    'label-blue', 
-    'label-green',
-    'label-grey', 
-    'label-pink', 
-    'label-yellow'
+	'label-blue', 
+	'label-green',
+	'label-grey', 
+	'label-pink', 
+	'label-yellow'
 ];
 
 // fill batch

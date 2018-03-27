@@ -22,54 +22,55 @@ LifeSocks.Score = function() {
 	var that = this;
 
 	board.on('resetGame', function (player) {
-     	console.log('resetGame', player);
-     	that.resetGame();
-    });
+		console.log('resetGame', player);
+		that.resetGame();
+	});
 };
 LifeSocks.Score.prototype = {
 	create: function() {
 		var winner;
 		var winnerNickname;
 		var crown;
+		var nicknames = [];
 		var game = this;
 
-	    this.add.sprite(0, 0, 'score-bg');
+		this.add.sprite(0, 0, 'score-bg');
 
-	    var semenSock = this.add.sprite(400, 100, 'semen-sock');
+		var semenSock = this.add.sprite(400, 100, 'semen-sock');
 
-	    this.add.sprite(0, 0, 'score-txt');
+		this.add.sprite(0, 0, 'score-txt');
 
-	    semenSock.animations.add('drip', [
-            'semen-sock1',
-            'semen-sock2',
-            'semen-sock3',
-            'semen-sock4',
-            'semen-sock5',
-            'semen-sock6'], 6, true);
+		semenSock.animations.add('drip', [
+			'semen-sock1',
+			'semen-sock2',
+			'semen-sock3',
+			'semen-sock4',
+			'semen-sock5',
+			'semen-sock6'], 6, true);
 
-	    semenSock.animations.play('drip');
-	   	
-	   	winner = this.add.sprite(397, 420, 'semen', 'ready3');
-	   	crown = this.add.sprite(397, 420, 'semen', 'crown');
+		semenSock.animations.play('drip');
 
-	   	winner.anchor.setTo(0.5, 0.5);
-	   	crown.anchor.setTo(0.5, 0.5);
+		winner = this.add.sprite(397, 420, 'semen', 'ready3');
+		crown = this.add.sprite(397, 420, 'semen', 'crown');
 
-	   	winner.angle = -90;
-	   	crown.angle = -90;
+		winner.anchor.setTo(0.5, 0.5);
+		crown.anchor.setTo(0.5, 0.5);
+
+		winner.angle = -90;
+		crown.angle = -90;
 
 		for (var i = 0; i < add.length; i++) {
-            if (onlinePlayers[add[i]].isAlive) {
-            	winnerNickname = nicknames[i];
-            } else {
-            	game.showLoser(nicknames[i]);
-            }
-        }
+			if (onlinePlayers[add[i]].isAlive) {
+				winnerNickname = nicknames[i];
+			} else {
+				game.showLoser(nicknames[i]);
+			}
+		}
 
-        var winnerLabel = this.add.text(197, 489, winnerNickname, { font: '60px Arial Black', fill: '#00000', align: 'center' });
-        winnerLabel.x = winnerLabel.x + winnerLabel.width / 2;
+		var winnerLabel = this.add.text(197, 489, winnerNickname, { font: '60px Arial Black', fill: '#00000', align: 'center' });
+		winnerLabel.x = winnerLabel.x + winnerLabel.width / 2;
 
-	    board.emit('gameover');
+		board.emit('gameover');
 	},
 
 	showLoser: function (nickname) {

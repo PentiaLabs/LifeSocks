@@ -1,5 +1,4 @@
 var _ = require('underscore');
-var User = require('./user.js');
 var Room = require('./room.js');
 
 var gameServer = {
@@ -7,24 +6,24 @@ var gameServer = {
 	users: {},
 	rooms: {},
 	createRoom: function(socket, name) {
-		var roomName = name || 'Nameless Room';
-		room = new Room(socket, roomName);
+		let roomName = name || 'Nameless Room';
+		let room = new Room(socket, roomName);
 		this.rooms[room.id] = room;
 		return room;
 	},
 	getRoom: function(id) {
-      return this.rooms[id] || false;
-    },
-    getRoomFromName: function(name) {
-	    return _.findWhere(this.rooms, { name: name });
-    },
-    getRooms: function() {
-        return _.values(this.rooms);
-    },
-    userCount: function() {
-    	return _(users).size();
-    },
-    getSocketFromSocketId: function(socketId) {
+		return this.rooms[id] || false;
+	},
+	getRoomFromName: function(name) {
+		return _.findWhere(this.rooms, { name: name });
+	},
+	getRooms: function() {
+		return _.values(this.rooms);
+	},
+	userCount: function() {
+		return _(gameServer.users).size();
+	},
+	getSocketFromSocketId: function(socketId) {
 		return this.userSockets[socketId];
 	}
 };

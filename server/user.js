@@ -1,8 +1,7 @@
-var _ = require('underscore');
 var uuid = require('node-uuid');
 var gameServer = require('./gameServer.js');
 
-var NameFactory = require('./NameFactory.js')
+var NameFactory = require('./NameFactory.js');
 var namefactory = new NameFactory();
 
 var BadgeFactory = require('./BadgeFactory.js');
